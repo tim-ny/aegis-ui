@@ -1,0 +1,16 @@
+{
+    "name": "aegis/ui-monorepo",
+    "description": "Monorepo workspace for Aegis UI package and docs",
+    "type": "project",
+    "license": "MIT",
+    "repositories": [
+        {
+            "type": "path",
+            "url": "packages/ui"
+        }
+    ],
+    "require": {},
+    "require-dev": {},
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

@@ -1,0 +1,30 @@
+@import "tailwindcss";
+@import "@ui/resources/css/ui.css";
+
+/* Docs App Custom Styling */
+body {
+    background-color: #0f172a;
+    color: #f8fafc;
+    font-family: var(--ui-font-sans);
+    min-height: 100vh;
+}
+
+.docs-card {
+    background: rgba(30, 41, 59, 0.7);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--ui-radius-lg);
+    padding: 1.5rem;
+}
+
+.docs-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.625rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border-radius: 9999px;
+    background: rgba(99, 102, 241, 0.15);
+    color: #818cf8;
+    border: 1px solid rgba(99, 102, 241, 0.3);
+}

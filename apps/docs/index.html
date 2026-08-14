@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aegis UI — Component Preview & Documentation</title>
+    <!-- Alpine.js Collapse Plugin -->
+    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
+    <!-- Alpine.js Core -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <!-- Tabler Icons CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
+    <link rel="stylesheet" href="/src/styles.css">
+    <style>
+        [x-cloak] { display: none !important; }
+    </style>
+</head>
+<body x-data="{ activeTab: 'all' }" class="p-6 md:p-10 max-w-7xl mx-auto space-y-10">
+
+    <!-- Header Banner -->
+    <header class="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-6 border-b border-slate-800">
+        <div>
+            <div class="flex items-center gap-3">
+                <span class="docs-badge">Aegis UI v1.0.0</span>
+                <span class="text-xs text-slate-400">Laravel 13 • Livewire 4 • Tailwind 4 • Alpine.js</span>
+            </div>
+            <h1 class="text-3xl md:text-4xl font-extrabold text-white mt-2 tracking-tight">Interactive Component Showcase</h1>
+            <p class="text-slate-400 mt-1">Live visual verification workspace for Aegis UI design system & components.</p>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <nav class="flex flex-wrap gap-2 p-1.5 bg-slate-900/80 rounded-xl border border-slate-800">
+            <button @click="activeTab = 'all'" :class="{ 'bg-indigo-600 text-white shadow-lg': activeTab === 'all', 'text-slate-400 hover:text-white': activeTab !== 'all' }" class="px-4 py-2 text-sm font-medium rounded-lg transition-all">All Components</button>
+            <button @click="activeTab = 'button'" :class="{ 'bg-indigo-600 text-white shadow-lg': activeTab === 'button', 'text-slate-400 hover:text-white': activeTab !== 'button' }" class="px-4 py-2 text-sm font-medium rounded-lg transition-all">Buttons</button>
+            <button @click="activeTab = 'input'" :class="{ 'bg-indigo-600 text-white shadow-lg': activeTab === 'input', 'text-slate-400 hover:text-white': activeTab !== 'input' }" class="px-4 py-2 text-sm font-medium rounded-lg transition-all">Inputs</button>
+            <button @click="activeTab = 'checkbox'" :class="{ 'bg-indigo-600 text-white shadow-lg': activeTab === 'checkbox', 'text-slate-400 hover:text-white': activeTab !== 'checkbox' }" class="px-4 py-2 text-sm font-medium rounded-lg transition-all">Checkboxes</button>
+            <button @click="activeTab = 'alert'" :class="{ 'bg-indigo-600 text-white shadow-lg': activeTab === 'alert', 'text-slate-400 hover:text-white': activeTab !== 'alert' }" class="px-4 py-2 text-sm font-medium rounded-lg transition-all">Alerts</button>
+            <button @click="activeTab = 'accordion'" :class="{ 'bg-indigo-600 text-white shadow-lg': activeTab === 'accordion', 'text-slate-400 hover:text-white': activeTab !== 'accordion' }" class="px-4 py-2 text-sm font-medium rounded-lg transition-all">Accordions</button>
+            <button @click="activeTab = 'spinner'" :class="{ 'bg-indigo-600 text-white shadow-lg': activeTab === 'spinner', 'text-slate-400 hover:text-white': activeTab !== 'spinner' }" class="px-4 py-2 text-sm font-medium rounded-lg transition-all">Spinners</button>
+            <button @click="activeTab = 'icon'" :class="{ 'bg-indigo-600 text-white shadow-lg': activeTab === 'icon', 'text-slate-400 hover:text-white': activeTab !== 'icon' }" class="px-4 py-2 text-sm font-medium rounded-lg transition-all">Icons</button>
+            <button @click="activeTab = 'formfield'" :class="{ 'bg-indigo-600 text-white shadow-lg': activeTab === 'formfield', 'text-slate-400 hover:text-white': activeTab !== 'formfield' }" class="px-4 py-2 text-sm font-medium rounded-lg transition-all">Form Fields</button>
+        </nav>
+    </header>
+
+    <!-- SECTION 1: BUTTONS -->
+    <section x-show="activeTab === 'all' || activeTab === 'button'" x-cloak class="space-y-6">
+        <div class="flex items-center justify-between">
+            <h2 class="text-2xl font-bold text-white flex items-center gap-2">
+                <i class="ti ti-click text-indigo-400"></i> Button Component (<code class="text-xs text-indigo-300 bg-indigo-950/80 px-2 py-1 rounded">&lt;x-button /&gt;</code>)
+            </h2>
+        </div>
+
+        <!-- Variants & Colors Preview -->
+        <div class="docs-card space-y-6">
+            <h3 class="text-sm font-semibold text-slate-300 uppercase tracking-wider">1. Variants & Color Themes</h3>
+            
+            <div class="space-y-4">
+                <!-- Solid Variant -->
+                <div>
+                    <span class="text-xs font-mono text-slate-400 block mb-2">variant="solid" (default)</span>
+                    <div class="flex flex-wrap items-center gap-3">
+                        <button type="button" class="ui-btn ui-btn--solid ui-btn--md ui-btn--primary">Primary Solid</button>
+                        <button type="button" class="ui-btn ui-btn--solid ui-btn--md ui-btn--danger">Danger Solid</button>
+                        <button type="button" class="ui-btn ui-btn--solid ui-btn--md ui-btn--success">Success Solid</button>
+                        <button type="button" class="ui-btn ui-btn--solid ui-btn--md ui-btn--warning">Warning Solid</button>
+                        <button type="button" class="ui-btn ui-btn--solid ui-btn--md ui-btn--neutral">Neutral Solid</button>
+                    </div>
+                </div>
+
+                <!-- Soft Variant -->
+                <div>
+                    <span class="text-xs font-mono text-slate-400 block mb-2">variant="soft"</span>
+                    <div class="flex flex-wrap items-center gap-3">
+                        <button type="button" class="ui-btn ui-btn--soft ui-btn--md ui-btn--primary">Primary Soft</button>
+                        <button type="button" class="ui-btn ui-btn--soft ui-btn--md ui-btn--danger">Danger Soft</button>
+                        <button type="button" class="ui-btn ui-btn--soft ui-btn--md ui-btn--success">Success Soft</button>
+                        <button type="button" class="ui-btn ui-btn--soft ui-btn--md ui-btn--warning">Warning Soft</button>
+                        <button type="button" class="ui-btn ui-btn--soft ui-btn--md ui-btn--neutral">Neutral Soft</button>
+                    </div>
+                </div>
+
+                <!-- Outline Variant -->
+                <div>
+                    <span class="text-xs font-mono text-slate-400 block mb-2">variant="outline"</span>
+                    <div class="flex flex-wrap items-center gap-3">
+                        <button type="button" class="ui-btn ui-btn--outline ui-btn--md ui-btn--primary">Primary Outline</button>
+                        <button type="button" class="ui-btn ui-btn--outline ui-btn--md ui-btn--danger">Danger Outline</button>
+                        <button type="button" class="ui-btn ui-btn--outline ui-btn--md ui-btn--success">Success Outline</button>
+                        <button type="button" class="ui-btn ui-btn--outline ui-btn--md ui-btn--warning">Warning Outline</button>
+                        <button type="button" class="ui-btn ui-btn--outline ui-btn--md ui-btn--neutral">Neutral Outline</button>
+                    </div>
+                </div>
+
+                <!-- Ghost Variant -->
+                <div>
+                    <span class="text-xs font-mono text-slate-400 block mb-2">variant="ghost"</span>
+                    <div class="flex flex-wrap items-center gap-3">
+                        <button type="button" class="ui-btn ui-btn--ghost ui-btn--md ui-btn--primary">Primary Ghost</button>
+                        <button type="button" class="ui-btn ui-btn--ghost ui-btn--md ui-btn--danger">Danger Ghost</button>
+                        <button type="button" class="ui-btn ui-btn--ghost ui-btn--md ui-btn--success">Success Ghost</button>
+                        <button type="button" class="ui-btn ui-btn--ghost ui-btn--md ui-btn--warning">Warning Ghost</button>
+                        <button type="button" class="ui-btn ui-btn--ghost ui-btn--md ui-btn--neutral">Neutral Ghost</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Button Sizes, Icons, Links & States -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Sizes Scale -->
+            <div class="docs-card space-y-4">
+                <h3 class="text-sm font-semibold text-slate-300 uppercase tracking-wider">2. Button Size Scale</h3>
+                <div class="flex flex-wrap items-center gap-3">
+                    <button type="button" class="ui-btn ui-btn--solid ui-btn--xs ui-btn--primary">Size XS</button>
+                    <button type="button" class="ui-btn ui-btn--solid ui-btn--sm ui-btn--primary">Size SM</button>
+                    <button type="button" class="ui-btn ui-btn--solid ui-btn--md ui-btn--primary">Size MD</button>
+                    <button type="button" class="ui-btn ui-btn--solid ui-btn--lg ui-btn--primary">Size LG</button>
+                    <button type="button" class="ui-btn ui-btn--solid ui-btn--xl ui-btn--primary">Size XL</button>
+                </div>
+            </div>
+
+            <!-- Icons, Links & States -->
+            <div class="docs-card space-y-4" x-data="{ isLoading: false }">
+                <h3 class="text-sm font-semibold text-slate-300 uppercase tracking-wider">3. Icons, Links & Loading States</h3>
+                <div class="flex flex-wrap items-center gap-3">
+                    <!-- Icon Buttons -->
+                    <button type="button" class="ui-btn ui-btn--solid ui-btn--md ui-btn--primary">
+                        <i class="ti ti-mail text-base"></i> Send Email
+                    </button>
+                    <button type="button" class="ui-btn ui-btn--soft ui-btn--md ui-btn--success">
+                        Check Out <i class="ti ti-arrow-right text-base"></i>
+                    </button>
+
+                    <!-- Link Tag (href + external) -->
+                    <a href="https://laravel.com" target="_blank" rel="noopener noreferrer" class="ui-btn ui-btn--outline ui-btn--md ui-btn--neutral">
+                        External Link <i class="ti ti-external-link text-base"></i>
+                    </a>
+
+                    <!-- Disabled State -->
+                    <button type="button" disabled class="ui-btn ui-btn--solid ui-btn--md ui-btn--primary ui-btn--disabled">Disabled</button>
+
+                    <!-- Dynamic Loading Toggle -->
+                    <button type="button" @click="isLoading = !isLoading" class="ui-btn ui-btn--solid ui-btn--md ui-btn--danger" :class="{ 'ui-btn--loading': isLoading }" :disabled="isLoading">
+                        <template x-if="isLoading">
+                            <i class="ti ti-loader-2 ui-spinner ui-spinner--sm" style="font-size: var(--ui-icon-size-sm)"></i>
+                        </template>
+                        <span x-text="isLoading ? 'Saving...' : 'Toggle Loading State'"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 2: INPUTS -->
+    <section x-show="activeTab === 'all' || activeTab === 'input'" x-cloak class="space-y-6">
+        <div class="flex items-center justify-between">
+            <h2 class="text-2xl font-bold text-white flex items-center gap-2">
+                <i class="ti ti-forms text-emerald-400"></i> Input Component (<code class="text-xs text-emerald-300 bg-emerald-950/80 px-2 py-1 rounded">&lt;x-input /&gt;</code>)
+            </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Standard & Password Input -->
+            <div class="docs-card space-y-6">
+                <h3 class="text-sm font-semibold text-slate-300 uppercase tracking-wider">1. Standard & Password Toggle Input</h3>
+                
+                <!-- Text Input with Label & Hint -->
+                <div class="ui-form-field">
+                    <label for="demo-email" class="ui-form-field__label">
+                        Email Address <span class="ui-form-field__required">*</span>
+                    </label>
+                    <div class="ui-input__wrapper">
+                        <div class="ui-input__leading"><i class="ti ti-mail"></i></div>
+                        <input id="demo-email" type="email" placeholder="john@example.com" class="ui-input ui-input--outline ui-input--md ui-input--primary">
+                    </div>
+                    <p class="ui-form-field__feedback ui-form-field__feedback--hint">We will send confirmation to this email.</p>
+                </div>
+
+                <!-- Password Input with Interactive Toggle -->
+                <div class="ui-form-field" x-data="{ showPass: false }">
+                    <label for="demo-pass" class="ui-form-field__label">Password</label>
+                    <div class="ui-input__wrapper">
+                        <div class="ui-input__leading"><i class="ti ti-lock"></i></div>
+                        <input id="demo-pass" :type="showPass ? 'text' : 'password'" placeholder="Enter your password" class="ui-input ui-input--outline ui-input--md ui-input--primary">
+                        <div class="ui-input__trailing">
+                            <button type="button" @click="showPass = !showPass" class="ui-input__password-toggle">
+                                <i class="ti" :class="showPass ? 'ti-eye-off' : 'ti-eye'"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Validation & Loading States -->
+            <div class="docs-card space-y-6">
+                <h3 class="text-sm font-semibold text-slate-300 uppercase tracking-wider">2. Validation & Network Loading States</h3>
+
+                <!-- Error Validation State -->
+                <div class="ui-form-field ui-field--error">
+                    <label for="demo-err" class="ui-form-field__label">Username</label>
+                    <div class="ui-input__wrapper">
+                        <input id="demo-err" type="text" value="invalid_username#" class="ui-input ui-input--outline ui-input--md ui-input--primary">
+                        <div class="ui-input__trailing">
+                            <i class="ti ti-alert-circle ui-input__trailing-icon--error"></i>
+                        </div>
+                    </div>
+                    <p role="alert" class="ui-form-field__feedback ui-form-field__feedback--error">Username can only contain alphanumeric characters.</p>
+                </div>
+
+                <!-- Valid Validation State -->
+                <div class="ui-form-field ui-field--valid">
+                    <label for="demo-valid" class="ui-form-field__label">Website URL</label>
+                    <div class="ui-input__wrapper">
+                        <input id="demo-valid" type="text" value="https://aegis-ui.dev" class="ui-input ui-input--outline ui-input--md ui-input--primary">
+                        <div class="ui-input__trailing">
+                            <i class="ti ti-circle-check ui-input__trailing-icon--valid"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Network Loading State -->
+                <div class="ui-form-field" x-data="{ searching: true }">
+                    <label class="ui-form-field__label flex justify-between">
+                        <span>Live Async Search</span>
+                        <button type="button" @click="searching = !searching" class="text-xs text-indigo-400 hover:underline">Toggle Spinner</button>
+                    </label>
+                    <div class="ui-input__wrapper">
+                        <input type="text" placeholder="Search database..." class="ui-input ui-input--outline ui-input--md ui-input--primary" :class="{ 'ui-input--loading': searching }">
+                        <div class="ui-input__trailing">
+                            <template x-if="searching">
+                                <i class="ti ti-loader-2 ui-spinner ui-spinner--xs" style="font-size: var(--ui-icon-size-xs)"></i>
+                            </template>
+                            <template x-if="!searching">
+                                <i class="ti ti-search"></i>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CHECKBOXES -->
+    <section x-show="activeTab === 'all' || activeTab === 'checkbox'" x-cloak class="space-y-6">
+        <div class="flex items-center justify-between">
+            <h2 class="text-2xl font-bold text-white flex items-center gap-2">
+                <i class="ti ti-square-check text-violet-400"></i> Checkbox Component (<code class="text-xs text-violet-300 bg-violet-950/80 px-2 py-1 rounded">&lt;x-checkbox /&gt;</code>)
+            </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Colors & Sizes -->
+            <div class="docs-card space-y-6">
+                <h3 class="text-sm font-semibold text-slate-300 uppercase tracking-wider">1. Colors & Sizes</h3>
+
+                <div class="space-y-6">
+                    <!-- Colors -->
+                    <div>
+                        <span class="text-xs font-mono text-slate-400 block mb-3">color="primary | danger | success | warning | neutral"</span>
+                        <div class="flex flex-wrap items-center gap-4">
+                            <div class="ui-form-field ui-form-field--inline">
+                                <div class="ui-checkbox__wrapper">
+                                    <input type="checkbox" id="demo-check-primary" checked class="ui-checkbox__input ui-checkbox ui-checkbox--md ui-checkbox--primary">
+                                    <label for="demo-check-primary" class="ui-checkbox__label">
+                                        <span class="ui-checkbox__box" aria-hidden="true">
+                                            <svg class="ui-checkbox__check" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+                                            <svg class="ui-checkbox__dash" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" d="M6 12h12" /></svg>
+                                        </span>
+                                        <span class="ui-checkbox__text">Primary</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="ui-form-field ui-form-field--inline">
+                                <div class="ui-checkbox__wrapper">
+                                    <input type="checkbox" id="demo-check-danger" checked class="ui-checkbox__input ui-checkbox ui-checkbox--md ui-checkbox--danger">
+                                    <label for="demo-check-danger" class="ui-checkbox__label">
+                                        <span class="ui-checkbox__box" aria-hidden="true">
+                                            <svg class="ui-checkbox__check" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+                                            <svg class="ui-checkbox__dash" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" d="M6 12h12" /></svg>
+                                        </span>
+                                        <span class="ui-checkbox__text">Danger</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="ui-form-field ui-form-field--inline">
+                                <div class="ui-checkbox__wrapper">
+                                    <input type="checkbox" id="demo-check-success" checked class="ui-checkbox__input ui-checkbox ui-checkbox--md ui-checkbox--success">
+                                    <label for="demo-check-success" class="ui-checkbox__label">
+                                        <span class="ui-checkbox__box" aria-hidden="true">
+                                            <svg class="ui-checkbox__check" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+                                            <svg class="ui-checkbox__dash" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" d="M6 12h12" /></svg>
+                                        </span>
+                                        <span class="ui-checkbox__text">Success</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="ui-form-field ui-form-field--inline">
+                                <div class="ui-checkbox__wrapper">
+                                    <input type="checkbox" id="demo-check-warning" checked class="ui-checkbox__input ui-checkbox ui-checkbox--md ui-checkbox--warning">
+                                    <label for="demo-check-warning" class="ui-checkbox__label">
+                                        <span class="ui-checkbox__box" aria-hidden="true">
+                                            <svg class="ui-checkbox__check" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+                                            <svg class="ui-checkbox__dash" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" d="M6 12h12" /></svg>
+                                        </span>
+                                        <span class="ui-checkbox__text">Warning</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="ui-form-field ui-form-field--inline">
+                                <div class="ui-checkbox__wrapper">
+                                    <input type="checkbox" id="demo-check-neutral" checked class="ui-checkbox__input ui-checkbox ui-checkbox--md ui-checkbox--neutral">
+                                    <label for="demo-check-neutral" class="ui-checkbox__label">
+                                        <span class="ui-checkbox__box" aria-hidden="true">
+                                            <svg class="ui-checkbox__check" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+                                            <svg class="ui-checkbox__dash" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" d="M6 12h12" /></svg>
+                                        </span>
+                                        <span class="ui-checkbox__text">Neutral</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sizes -->
+                    <div>
+                        <span class="text-xs font-mono text-slate-400 block mb-3">size="xs | sm | md | lg | xl"</span>
+                        <div class="flex flex-wrap items-center gap-6">
+                            <div class="ui-form-field ui-form-field--inline">
+                                <div class="ui-checkbox__wrapper">
+                                    <input type="checkbox" id="demo-check-xs" class="ui-checkbox__input ui-checkbox ui-checkbox--xs ui-checkbox--primary">
+                                    <label for="demo-check-xs" class="ui-checkbox__label">
+                                        <span class="ui-checkbox__box" aria-hidden="true">
+                                            <svg class="ui-checkbox__check" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+                                            <svg class="ui-checkbox__dash" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" d="M6 12h12" /></svg>
+                                        </span>
+                                        <span class="ui-checkbox__text">XS</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="ui-form-field ui-form-field--inline">
+                                <div class="ui-checkbox__wrapper">
+                                    <input type="checkbox" id="demo-check-sm" checked class="ui-checkbox__input ui-checkbox ui-checkbox--sm ui-checkbox--primary">
+                                    <label for="demo-check-sm" class="ui-checkbox__label">
+                                        <span class="ui-checkbox__box" aria-hidden="true">
+                                            <svg class="ui-checkbox__check" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+                                            <svg class="ui-checkbox__dash" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" d="M6 12h12" /></svg>
+                                        </span>
+                                        <span class="ui-checkbox__text">SM</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="ui-form-field ui-form-field--inline">
+                                <div class="ui-checkbox__wrapper">
+                                    <input type="checkbox" id="demo-check-md" checked class="ui-checkbox__input ui-checkbox ui-checkbox--md ui-checkbox--primary">
+                                    <label for="demo-check-md" class="ui-checkbox__label">
+                                        <span class="ui-checkbox__box" aria-hidden="true">
+                                            <svg class="ui-checkbox__check" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+                                            <svg class="ui-checkbox__dash" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" d="M6 12h12" /></svg>
+                                        </span>
+                                        <span class="ui-checkbox__text">MD</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="ui-form-field ui-form-field--inline">
+                                <div class="ui-checkbox__wrapper">
+                                    <input type="checkbox" id="demo-check-lg" checked class="ui-checkbox__input ui-checkbox ui-checkbox--lg ui-checkbox--primary">
+                                    <label for="demo-check-lg" class="ui-checkbox__label">
+                                        <span class="ui-checkbox__box" aria-hidden="true">
+                                            <svg class="ui-checkbox__check" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+                                            <svg class="ui-checkbox__dash" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" d="M6 12h12" /></svg>
+                                        </span>
+                                        <span class="ui-checkbox__text">LG</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="ui-form-field ui-form-field--inline">
+                                <div class="ui-checkbox__wrapper">
+                                    <input type="checkbox" id="demo-check-xl" class="ui-checkbox__input ui-checkbox ui-checkbox--xl ui-checkbox--primary">
+                                    <label for="demo-check-xl" class="ui-checkbox__label">
+                                        <span class="ui-checkbox__box" aria-hidden="true">
+                                            <svg class="ui-checkbox__check" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+                                            <svg class="ui-checkbox__dash" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" d="M6 12h12" /></svg>
+                                        </span>
+                                        <span class="ui-checkbox__text">XL</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Indeterminate -->
+                    <div>
+                        <span class="text-xs font-mono text-slate-400 block mb-3">indeterminate (set via Alpine x-init)</span>
+                        <div x-data>
+                            <div class="ui-form-field ui-form-field--inline">
+                                <div class="ui-checkbox__wrapper">
+                                    <input type="checkbox" id="demo-check-ind" class="ui-checkbox__input ui-checkbox ui-checkbox--md ui-checkbox--primary" x-init="$el.indeterminate = true">
+                                    <label for="demo-check-ind" class="ui-checkbox__label">
+                                        <span class="ui-checkbox__box" aria-hidden="true">
+                                            <svg class="ui-checkbox__check" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+                                            <svg class="ui-checkbox__dash" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" d="M6 12h12" /></svg>
+                                        </span>
+                                        <span class="ui-checkbox__text">Select all rows</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- States -->
+            <div class="docs-card space-y-6">
+                <h3 class="text-sm font-semibold text-slate-300 uppercase tracking-wider">2. States & Feedback</h3>
+
+                <!-- Required -->
+                <div class="ui-form-field ui-form-field--inline">
+                    <div class="ui-checkbox__wrapper">
+                        <input type="checkbox" id="demo-check-required" required class="ui-checkbox__input ui-checkbox ui-checkbox--md ui-checkbox--primary">
+                        <label for="demo-check-required" class="ui-checkbox__label">
+                            <span class="ui-checkbox__box" aria-hidden="true">
+                                <svg class="ui-checkbox__check" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+                                <svg class="ui-checkbox__dash" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" d="M6 12h12" /></svg>
+                            </span>
+                            <span class="ui-checkbox__text">I agree to the terms <span class="ui-form-field__required">*</span></span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Disabled -->
+                <div class="ui-form-field ui-form-field--inline">
+                    <div class="ui-checkbox__wrapper">
+                        <input type="checkbox" id="demo-check-disabled" checked disabled class="ui-checkbox__input ui-checkbox ui-checkbox--md ui-checkbox--primary ui-checkbox--disabled">
+                        <label for="demo-check-disabled" class="ui-checkbox__label">
+                            <span class="ui-checkbox__box" aria-hidden="true">
+                                <svg class="ui-checkbox__check" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+                                <svg class="ui-checkbox__dash" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" d="M6 12h12" /></svg>
+                            </span>
+                            <span class="ui-checkbox__text">Disabled (checked)</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Error -->
+                <div class="ui-form-field ui-form-field--inline ui-field--error">
+                    <div class="ui-checkbox__wrapper">
+                        <input type="checkbox" id="demo-check-error" class="ui-checkbox__input ui-checkbox ui-checkbox--md ui-checkbox--primary">
+                        <label for="demo-check-error" class="ui-checkbox__label">
+                            <span class="ui-checkbox__box" aria-hidden="true">
+                                <svg class="ui-checkbox__check" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+                                <svg class="ui-checkbox__dash" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" d="M6 12h12" /></svg>
+                            </span>
+                            <span class="ui-checkbox__text">Accept terms</span>
+                        </label>
+                    </div>
+                    <p id="demo-check-error-feedback" role="alert" class="ui-form-field__feedback ui-form-field__feedback--error">You must accept the terms before continuing.</p>
+                </div>
+
+                <!-- Hint -->
+                <div class="ui-form-field ui-form-field--inline">
+                    <div class="ui-checkbox__wrapper">
+                        <input type="checkbox" id="demo-check-hint" checked class="ui-checkbox__input ui-checkbox ui-checkbox--md ui-checkbox--primary">
+                        <label for="demo-check-hint" class="ui-checkbox__label">
+                            <span class="ui-checkbox__box" aria-hidden="true">
+                                <svg class="ui-checkbox__check" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+                                <svg class="ui-checkbox__dash" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" d="M6 12h12" /></svg>
+                            </span>
+                            <span class="ui-checkbox__text">Subscribe to newsletter</span>
+                        </label>
+                    </div>
+                    <p id="demo-check-hint-feedback" class="ui-form-field__feedback ui-form-field__feedback--hint">We email monthly — unsubscribe anytime.</p>
+                </div>
+            </div>
+
+            <!-- Radius -->
+            <div class="docs-card space-y-6">
+                <h3 class="text-sm font-semibold text-slate-300 uppercase tracking-wider">3. Radius Levels</h3>
+                <div class="flex flex-wrap items-center gap-6">
+                    <div class="ui-form-field ui-form-field--inline">
+                        <div class="ui-checkbox__wrapper">
+                            <input type="checkbox" id="demo-check-radius-none" checked class="ui-checkbox__input ui-checkbox ui-checkbox--md ui-checkbox--primary ui-checkbox--radius-none">
+                            <label for="demo-check-radius-none" class="ui-checkbox__label">
+                                <span class="ui-checkbox__box" aria-hidden="true">
+                                    <svg class="ui-checkbox__check" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+                                    <svg class="ui-checkbox__dash" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" d="M6 12h12" /></svg>
+                                </span>
+                                <span class="ui-checkbox__text">None</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="ui-form-field ui-form-field--inline">
+                        <div class="ui-checkbox__wrapper">
+                            <input type="checkbox" id="demo-check-radius-xs" checked class="ui-checkbox__input ui-checkbox ui-checkbox--md ui-checkbox--primary ui-checkbox--radius-xs">
+                            <label for="demo-check-radius-xs" class="ui-checkbox__label">
+                                <span class="ui-checkbox__box" aria-hidden="true">
+                                    <svg class="ui-checkbox__check" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+                                    <svg class="ui-checkbox__dash" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" d="M6 12h12" /></svg>
+                                </span>
+                                <span class="ui-checkbox__text">XS</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="ui-form-field ui-form-field--inline">
+                        <div class="ui-checkbox__wrapper">
+                            <input type="checkbox" id="demo-check-radius-sm" checked class="ui-checkbox__input ui-checkbox ui-checkbox--md ui-checkbox--primary ui-checkbox--radius-sm">
+                            <label for="demo-check-radius-sm" class="ui-checkbox__label">
+                                <span class="ui-checkbox__box" aria-hidden="true">
+                                    <svg class="ui-checkbox__check" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+                                    <svg class="ui-checkbox__dash" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" d="M6 12h12" /></svg>
+                                </span>
+                                <span class="ui-checkbox__text">SM (default)</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="ui-form-field ui-form-field--inline">
+                        <div class="ui-checkbox__wrapper">
+                            <input type="checkbox" id="demo-check-radius-md" checked class="ui-checkbox__input ui-checkbox ui-checkbox--md ui-checkbox--primary ui-checkbox--radius-md">
+                            <label for="demo-check-radius-md" class="ui-checkbox__label">
+                                <span class="ui-checkbox__box" aria-hidden="true">
+                                    <svg class="ui-checkbox__check" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+                                    <svg class="ui-checkbox__dash" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" d="M6 12h12" /></svg>
+                                </span>
+                                <span class="ui-checkbox__text">MD</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="ui-form-field ui-form-field--inline">
+                        <div class="ui-checkbox__wrapper">
+                            <input type="checkbox" id="demo-check-radius-lg" checked class="ui-checkbox__input ui-checkbox ui-checkbox--md ui-checkbox--primary ui-checkbox--radius-lg">
+                            <label for="demo-check-radius-lg" class="ui-checkbox__label">
+                                <span class="ui-checkbox__box" aria-hidden="true">
+                                    <svg class="ui-checkbox__check" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+                                    <svg class="ui-checkbox__dash" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" d="M6 12h12" /></svg>
+                                </span>
+                                <span class="ui-checkbox__text">LG</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="ui-form-field ui-form-field--inline">
+                        <div class="ui-checkbox__wrapper">
+                            <input type="checkbox" id="demo-check-radius-full" checked class="ui-checkbox__input ui-checkbox ui-checkbox--md ui-checkbox--primary ui-checkbox--radius-full">
+                            <label for="demo-check-radius-full" class="ui-checkbox__label">
+                                <span class="ui-checkbox__box" aria-hidden="true">
+                                    <svg class="ui-checkbox__check" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+                                    <svg class="ui-checkbox__dash" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" d="M6 12h12" /></svg>
+                                </span>
+                                <span class="ui-checkbox__text">Full (pill)</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Block / Card mode -->
+            <div class="docs-card space-y-6">
+                <h3 class="text-sm font-semibold text-slate-300 uppercase tracking-wider">4. Block / Card Mode</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="ui-form-field ui-form-field--inline">
+                        <div class="ui-checkbox__wrapper ui-checkbox__wrapper--block">
+                            <input type="checkbox" id="demo-check-block-1" checked class="ui-checkbox__input ui-checkbox ui-checkbox--md ui-checkbox--primary ui-checkbox--block">
+                            <label for="demo-check-block-1" class="ui-checkbox__label ui-checkbox__label--block">
+                                <span>
+                                    <span class="ui-checkbox__text block font-medium">Basic plan</span>
+                                    <span class="ui-checkbox__text block text-sm opacity-70">For individuals & small teams getting started.</span>
+                                </span>
+                                <span class="text-sm font-bold">$9/mo</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="ui-form-field ui-form-field--inline">
+                        <div class="ui-checkbox__wrapper ui-checkbox__wrapper--block">
+                            <input type="checkbox" id="demo-check-block-2" class="ui-checkbox__input ui-checkbox ui-checkbox--md ui-checkbox--success ui-checkbox--block">
+                            <label for="demo-check-block-2" class="ui-checkbox__label ui-checkbox__label--block">
+                                <span>
+                                    <span class="ui-checkbox__text block font-medium">Pro plan</span>
+                                    <span class="ui-checkbox__text block text-sm opacity-70">Advanced features for growing teams.</span>
+                                </span>
+                                <span class="text-sm font-bold">$29/mo</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="ui-form-field ui-form-field--inline">
+                        <div class="ui-checkbox__wrapper ui-checkbox__wrapper--block">
+                            <input type="checkbox" id="demo-check-block-3" class="ui-checkbox__input ui-checkbox ui-checkbox--md ui-checkbox--warning ui-checkbox--block">
+                            <label for="demo-check-block-3" class="ui-checkbox__label ui-checkbox__label--block">
+                                <span>
+                                    <span class="ui-checkbox__text block font-medium">Enterprise plan</span>
+                                    <span class="ui-checkbox__text block text-sm opacity-70">Custom onboarding, SSO & priority support.</span>
+                                </span>
+                                <span class="text-sm font-bold">$99/mo</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 3: ALERTS -->
+    <section x-show="activeTab === 'all' || activeTab === 'alert'" x-cloak class="space-y-6">
+        <div class="flex items-center justify-between">
+            <h2 class="text-2xl font-bold text-white flex items-center gap-2">
+                <i class="ti ti-bell text-amber-400"></i> Alert Component (<code class="text-xs text-amber-300 bg-amber-950/80 px-2 py-1 rounded">&lt;x-alert /&gt;</code>)
+            </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Soft & Solid Alerts -->
+            <div class="docs-card space-y-4">
+                <h3 class="text-sm font-semibold text-slate-300 uppercase tracking-wider">1. Color Themes (Soft & Solid)</h3>
+
+                <!-- Primary Soft Alert -->
+                <div class="ui-alert ui-alert--soft ui-alert--primary ui-alert--md" role="status">
+                    <div class="ui-alert__icon"><i class="ti ti-info-circle text-lg"></i></div>
+                    <div class="ui-alert__body">
+                        <h5 class="ui-alert__title">System Information</h5>
+                        <div class="ui-alert__message">A new update for Aegis UI is available.</div>
+                    </div>
+                </div>
+
+                <!-- Success Soft Alert -->
+                <div class="ui-alert ui-alert--soft ui-alert--success ui-alert--md" role="status">
+                    <div class="ui-alert__icon"><i class="ti ti-circle-check text-lg"></i></div>
+                    <div class="ui-alert__body">
+                        <h5 class="ui-alert__title">Changes Saved</h5>
+                        <div class="ui-alert__message">Your profile settings have been updated successfully.</div>
+                    </div>
+                </div>
+
+                <!-- Warning Solid Alert -->
+                <div class="ui-alert ui-alert--solid ui-alert--warning ui-alert--md" role="alert">
+                    <div class="ui-alert__icon"><i class="ti ti-alert-triangle text-lg"></i></div>
+                    <div class="ui-alert__body">
+                        <h5 class="ui-alert__title">Storage Limit Warning</h5>
+                        <div class="ui-alert__message">You have used 85% of your allocated disk quota.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Outline & Dismissible Alerts -->
+            <div class="docs-card space-y-4">
+                <h3 class="text-sm font-semibold text-slate-300 uppercase tracking-wider">2. Outline & Interactive Dismissible Alerts</h3>
+
+                <!-- Danger Outline Dismissible Alert -->
+                <div class="ui-alert ui-alert--outline ui-alert--danger ui-alert--md" role="alert" x-data="{ show: true }" x-show="show" x-transition.opacity>
+                    <div class="ui-alert__icon"><i class="ti ti-alert-circle text-lg"></i></div>
+                    <div class="ui-alert__body">
+                        <h5 class="ui-alert__title">Payment Failed</h5>
+                        <div class="ui-alert__message">Could not process your credit card. Please verify your details.</div>
+                    </div>
+                    <button type="button" class="ui-alert__dismiss" @click="show = false" aria-label="Dismiss alert"><i class="ti ti-x text-lg"></i></button>
+                </div>
+
+                <!-- Neutral Outline Dismissible Alert -->
+                <div class="ui-alert ui-alert--outline ui-alert--neutral ui-alert--md" role="status" x-data="{ show: true }" x-show="show" x-transition.opacity>
+                    <div class="ui-alert__icon"><i class="ti ti-info-circle text-lg"></i></div>
+                    <div class="ui-alert__body">
+                        <h5 class="ui-alert__title">Dismissible Note</h5>
+                        <div class="ui-alert__message">Click the 'X' button on the right to dismiss this alert component.</div>
+                    </div>
+                    <button type="button" class="ui-alert__dismiss" @click="show = false" aria-label="Dismiss alert"><i class="ti ti-x text-lg"></i></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 4: ACCORDIONS -->
+    <section x-show="activeTab === 'all' || activeTab === 'accordion'" x-cloak class="space-y-6">
+        <div class="flex items-center justify-between">
+            <h2 class="text-2xl font-bold text-white flex items-center gap-2">
+                <i class="ti ti-layout-accordion text-purple-400"></i> Accordion Component (<code class="text-xs text-purple-300 bg-purple-950/80 px-2 py-1 rounded">&lt;x-accordion /&gt;</code>)
+            </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Single Open Accordion -->
+            <div class="docs-card space-y-4">
+                <h3 class="text-sm font-semibold text-slate-300 uppercase tracking-wider">1. Single Panel Expand (Outline Variant)</h3>
+
+                <div x-data="{
+                    active: 'acc-1',
+                    toggle(id) { this.active = (this.active === id) ? null : id; },
+                    isOpen(id) { return this.active === id; }
+                }" class="ui-accordion ui-accordion--outline ui-accordion--md ui-accordion--neutral">
+                    
+                    <div class="ui-accordion__item">
+                        <button type="button" @click="toggle('acc-1')" :aria-expanded="isOpen('acc-1')" class="ui-accordion__trigger">
+                            <span class="ui-accordion__trigger-left">
+                                <i class="ti ti-help-circle ui-accordion__icon--leading"></i>
+                                <span>What is Aegis UI?</span>
+                            </span>
+                            <i class="ti ti-chevron-down ui-accordion__chevron" :class="{ 'ui-accordion__chevron--open': isOpen('acc-1') }"></i>
+                        </button>
+                        <div x-show="isOpen('acc-1')" x-collapse x-cloak class="ui-accordion__panel">
+                            <div class="ui-accordion__content">
+                                Aegis UI is an unstyled & token-driven Blade + Livewire component package built specifically for Laravel 13, Livewire 4, Alpine.js 3, and Tailwind CSS 4.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ui-accordion__item">
+                        <button type="button" @click="toggle('acc-2')" :aria-expanded="isOpen('acc-2')" class="ui-accordion__trigger">
+                            <span class="ui-accordion__trigger-left">
+                                <i class="ti ti-box ui-accordion__icon--leading"></i>
+                                <span>How do I install the package?</span>
+                            </span>
+                            <i class="ti ti-chevron-down ui-accordion__chevron" :class="{ 'ui-accordion__chevron--open': isOpen('acc-2') }"></i>
+                        </button>
+                        <div x-show="isOpen('acc-2')" x-collapse x-cloak class="ui-accordion__panel">
+                            <div class="ui-accordion__content">
+                                Require the package via Composer using <code>composer require aegis/ui</code> and publish the custom CSS design tokens.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ui-accordion__item">
+                        <button type="button" @click="toggle('acc-3')" :aria-expanded="isOpen('acc-3')" class="ui-accordion__trigger">
+                            <span class="ui-accordion__trigger-left">
+                                <i class="ti ti-palette ui-accordion__icon--leading"></i>
+                                <span>Can I customize design tokens?</span>
+                            </span>
+                            <i class="ti ti-chevron-down ui-accordion__chevron" :class="{ 'ui-accordion__chevron--open': isOpen('acc-3') }"></i>
+                        </button>
+                        <div x-show="isOpen('acc-3')" x-collapse x-cloak class="ui-accordion__panel">
+                            <div class="ui-accordion__content">
+                                Absolutely! Every visual value references a <code>--ui-*</code> custom property defined inside the <code>@theme {}</code> CSS block.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Multiple Panels Expand -->
+            <div class="docs-card space-y-4">
+                <h3 class="text-sm font-semibold text-slate-300 uppercase tracking-wider">2. Multi-Expand Mode (Soft Variant)</h3>
+
+                <div x-data="{
+                    active: ['multi-1', 'multi-2'],
+                    toggle(id) {
+                        this.active = this.active.includes(id) ? this.active.filter(i => i !== id) : [...this.active, id];
+                    },
+                    isOpen(id) { return this.active.includes(id); }
+                }" class="ui-accordion ui-accordion--soft ui-accordion--md ui-accordion--neutral">
+                    
+                    <div class="ui-accordion__item">
+                        <button type="button" @click="toggle('multi-1')" :aria-expanded="isOpen('multi-1')" class="ui-accordion__trigger">
+                            <span class="ui-accordion__trigger-left">
+                                <span>Multi-Expand Panel 1</span>
+                            </span>
+                            <i class="ti ti-chevron-down ui-accordion__chevron" :class="{ 'ui-accordion__chevron--open': isOpen('multi-1') }"></i>
+                        </button>
+                        <div x-show="isOpen('multi-1')" x-collapse x-cloak class="ui-accordion__panel">
+                            <div class="ui-accordion__content">
+                                Multiple panels can stay open simultaneously when <code>multiple="true"</code> is enabled on the accordion container.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ui-accordion__item">
+                        <button type="button" @click="toggle('multi-2')" :aria-expanded="isOpen('multi-2')" class="ui-accordion__trigger">
+                            <span class="ui-accordion__trigger-left">
+                                <span>Multi-Expand Panel 2</span>
+                            </span>
+                            <i class="ti ti-chevron-down ui-accordion__chevron" :class="{ 'ui-accordion__chevron--open': isOpen('multi-2') }"></i>
+                        </button>
+                        <div x-show="isOpen('multi-2')" x-collapse x-cloak class="ui-accordion__panel">
+                            <div class="ui-accordion__content">
+                                Smooth height expansion animations are powered by Alpine's <code>x-collapse</code> directive.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 5: SPINNERS -->
+    <section x-show="activeTab === 'all' || activeTab === 'spinner'" x-cloak class="space-y-6">
+        <div class="flex items-center justify-between">
+            <h2 class="text-2xl font-bold text-white flex items-center gap-2">
+                <i class="ti ti-loader-2 text-cyan-400"></i> Spinner Component (<code class="text-xs text-cyan-300 bg-cyan-950/80 px-2 py-1 rounded">&lt;x-spinner /&gt;</code>)
+            </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Size Scale -->
+            <div class="docs-card space-y-4">
+                <h3 class="text-sm font-semibold text-slate-300 uppercase tracking-wider">1. Size Scale</h3>
+                <div class="flex flex-wrap items-center gap-x-6 gap-y-4">
+                    <div class="flex flex-col items-center gap-2">
+                        <span class="text-xs font-mono text-slate-400">size="xs"</span>
+                        <i class="ti ti-loader-2 ui-spinner ui-spinner--xs" style="font-size: var(--ui-icon-size-xs)"></i>
+                    </div>
+                    <div class="flex flex-col items-center gap-2">
+                        <span class="text-xs font-mono text-slate-400">size="sm"</span>
+                        <i class="ti ti-loader-2 ui-spinner ui-spinner--sm" style="font-size: var(--ui-icon-size-sm)"></i>
+                    </div>
+                    <div class="flex flex-col items-center gap-2">
+                        <span class="text-xs font-mono text-slate-400">size="md" (default)</span>
+                        <i class="ti ti-loader-2 ui-spinner ui-spinner--md" style="font-size: var(--ui-icon-size-md)"></i>
+                    </div>
+                    <div class="flex flex-col items-center gap-2">
+                        <span class="text-xs font-mono text-slate-400">size="lg"</span>
+                        <i class="ti ti-loader-2 ui-spinner ui-spinner--lg" style="font-size: var(--ui-icon-size-lg)"></i>
+                    </div>
+                    <div class="flex flex-col items-center gap-2">
+                        <span class="text-xs font-mono text-slate-400">size="xl"</span>
+                        <i class="ti ti-loader-2 ui-spinner ui-spinner--xl" style="font-size: var(--ui-icon-size-xl)"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Color Themes -->
+            <div class="docs-card space-y-4">
+                <h3 class="text-sm font-semibold text-slate-300 uppercase tracking-wider">2. Color Themes</h3>
+                <div class="flex flex-wrap items-center gap-x-6 gap-y-4">
+                    <div class="flex flex-col items-center gap-2">
+                        <span class="text-xs font-mono text-slate-400">color="primary"</span>
+                        <i class="ti ti-loader-2 ui-spinner ui-spinner--md" style="color: var(--ui-color-primary); font-size: var(--ui-icon-size-md)"></i>
+                    </div>
+                    <div class="flex flex-col items-center gap-2">
+                        <span class="text-xs font-mono text-slate-400">color="danger"</span>
+                        <i class="ti ti-loader-2 ui-spinner ui-spinner--md" style="color: var(--ui-color-danger); font-size: var(--ui-icon-size-md)"></i>
+                    </div>
+                    <div class="flex flex-col items-center gap-2">
+                        <span class="text-xs font-mono text-slate-400">color="success"</span>
+                        <i class="ti ti-loader-2 ui-spinner ui-spinner--md" style="color: var(--ui-color-success); font-size: var(--ui-icon-size-md)"></i>
+                    </div>
+                    <div class="flex flex-col items-center gap-2">
+                        <span class="text-xs font-mono text-slate-400">color="warning"</span>
+                        <i class="ti ti-loader-2 ui-spinner ui-spinner--md" style="color: var(--ui-color-warning); font-size: var(--ui-icon-size-md)"></i>
+                    </div>
+                    <div class="flex flex-col items-center gap-2">
+                        <span class="text-xs font-mono text-slate-400">color="neutral"</span>
+                        <i class="ti ti-loader-2 ui-spinner ui-spinner--md" style="color: var(--ui-color-text); font-size: var(--ui-icon-size-md)"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- In Context -->
+        <div class="docs-card space-y-4" x-data="{ submitting: false }">
+            <h3 class="text-sm font-semibold text-slate-300 uppercase tracking-wider">3. In Context</h3>
+            <div class="flex flex-wrap items-center gap-3">
+                <button type="button" class="ui-btn ui-btn--solid ui-btn--md ui-btn--primary" :class="{ 'ui-btn--loading': submitting }" :disabled="submitting" @click="submitting = !submitting">
+                    <template x-if="submitting">
+                        <i class="ti ti-loader-2 ui-spinner ui-spinner--sm" style="font-size: var(--ui-icon-size-sm)"></i>
+                    </template>
+                    <span x-text="submitting ? 'Processing...' : 'Submit Payment'"></span>
+                </button>
+                <span class="text-xs text-slate-400">Tip: click the button to toggle the loading state. The spinner renders the <code class="text-cyan-300">ti-loader-2</code> icon by default and inherits <code class="text-cyan-300">currentColor</code>. Override via <code class="text-cyan-300">config('aegis-ui.loading.icon')</code>.</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 6: ICONS -->
+    <section x-show="activeTab === 'all' || activeTab === 'icon'" x-cloak class="space-y-6">
+        <div class="flex items-center justify-between">
+            <h2 class="text-2xl font-bold text-white flex items-center gap-2">
+                <i class="ti ti-icons text-sky-400"></i> Icon Component (<code class="text-xs text-sky-300 bg-sky-950/80 px-2 py-1 rounded">&lt;x-icon /&gt;</code>)
+            </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Size Scale -->
+            <div class="docs-card space-y-4">
+                <h3 class="text-sm font-semibold text-slate-300 uppercase tracking-wider">1. Size Scale</h3>
+                <div class="flex flex-wrap items-center gap-x-6 gap-y-4">
+                    <div class="flex flex-col items-center gap-2">
+                        <span class="text-xs font-mono text-slate-400">size="xs"</span>
+                        <i class="ui-icon ui-icon--xs ti ti-user" style="font-size: var(--ui-icon-size-xs)"></i>
+                    </div>
+                    <div class="flex flex-col items-center gap-2">
+                        <span class="text-xs font-mono text-slate-400">size="sm"</span>
+                        <i class="ui-icon ui-icon--sm ti ti-user" style="font-size: var(--ui-icon-size-sm)"></i>
+                    </div>
+                    <div class="flex flex-col items-center gap-2">
+                        <span class="text-xs font-mono text-slate-400">size="md" (default)</span>
+                        <i class="ui-icon ui-icon--md ti ti-user" style="font-size: var(--ui-icon-size-md)"></i>
+                    </div>
+                    <div class="flex flex-col items-center gap-2">
+                        <span class="text-xs font-mono text-slate-400">size="lg"</span>
+                        <i class="ui-icon ui-icon--lg ti ti-user" style="font-size: var(--ui-icon-size-lg)"></i>
+                    </div>
+                    <div class="flex flex-col items-center gap-2">
+                        <span class="text-xs font-mono text-slate-400">size="xl"</span>
+                        <i class="ui-icon ui-icon--xl ti ti-user" style="font-size: var(--ui-icon-size-xl)"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Color Themes -->
+            <div class="docs-card space-y-4">
+                <h3 class="text-sm font-semibold text-slate-300 uppercase tracking-wider">2. Color Themes</h3>
+                <div class="flex flex-wrap items-center gap-x-6 gap-y-4">
+                    <div class="flex flex-col items-center gap-2">
+                        <span class="text-xs font-mono text-slate-400">color="primary"</span>
+                        <i class="ui-icon ui-icon--lg ti ti-mail" style="color: var(--ui-color-primary); font-size: var(--ui-icon-size-lg)"></i>
+                    </div>
+                    <div class="flex flex-col items-center gap-2">
+                        <span class="text-xs font-mono text-slate-400">color="danger"</span>
+                        <i class="ui-icon ui-icon--lg ti ti-alert-triangle" style="color: var(--ui-color-danger); font-size: var(--ui-icon-size-lg)"></i>
+                    </div>
+                    <div class="flex flex-col items-center gap-2">
+                        <span class="text-xs font-mono text-slate-400">color="success"</span>
+                        <i class="ui-icon ui-icon--lg ti ti-circle-check" style="color: var(--ui-color-success); font-size: var(--ui-icon-size-lg)"></i>
+                    </div>
+                    <div class="flex flex-col items-center gap-2">
+                        <span class="text-xs font-mono text-slate-400">color="warning"</span>
+                        <i class="ui-icon ui-icon--lg ti ti-alert-circle" style="color: var(--ui-color-warning); font-size: var(--ui-icon-size-lg)"></i>
+                    </div>
+                    <div class="flex flex-col items-center gap-2">
+                        <span class="text-xs font-mono text-slate-400">color="neutral"</span>
+                        <i class="ui-icon ui-icon--lg ti ti-info-circle" style="color: var(--ui-color-text-muted); font-size: var(--ui-icon-size-lg)"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Common Icons -->
+        <div class="docs-card space-y-4">
+            <h3 class="text-sm font-semibold text-slate-300 uppercase tracking-wider">3. Common Icons Library</h3>
+            <div class="grid grid-cols-4 sm:grid-cols-6 lg:grid-cols-8 gap-6">
+                <div class="flex flex-col items-center gap-2"><i class="ui-icon ui-icon--md ti ti-mail" style="font-size: var(--ui-icon-size-md)"></i><span class="text-[10px] text-slate-500">mail</span></div>
+                <div class="flex flex-col items-center gap-2"><i class="ui-icon ui-icon--md ti ti-user" style="font-size: var(--ui-icon-size-md)"></i><span class="text-[10px] text-slate-500">user</span></div>
+                <div class="flex flex-col items-center gap-2"><i class="ui-icon ui-icon--md ti ti-lock" style="font-size: var(--ui-icon-size-md)"></i><span class="text-[10px] text-slate-500">lock</span></div>
+                <div class="flex flex-col items-center gap-2"><i class="ui-icon ui-icon--md ti ti-search" style="font-size: var(--ui-icon-size-md)"></i><span class="text-[10px] text-slate-500">search</span></div>
+                <div class="flex flex-col items-center gap-2"><i class="ui-icon ui-icon--md ti ti-settings" style="font-size: var(--ui-icon-size-md)"></i><span class="text-[10px] text-slate-500">settings</span></div>
+                <div class="flex flex-col items-center gap-2"><i class="ui-icon ui-icon--md ti ti-bell" style="font-size: var(--ui-icon-size-md)"></i><span class="text-[10px] text-slate-500">bell</span></div>
+                <div class="flex flex-col items-center gap-2"><i class="ui-icon ui-icon--md ti ti-download" style="font-size: var(--ui-icon-size-md)"></i><span class="text-[10px] text-slate-500">download</span></div>
+                <div class="flex flex-col items-center gap-2"><i class="ui-icon ui-icon--md ti ti-upload" style="font-size: var(--ui-icon-size-md)"></i><span class="text-[10px] text-slate-500">upload</span></div>
+                <div class="flex flex-col items-center gap-2"><i class="ui-icon ui-icon--md ti ti-trash" style="font-size: var(--ui-icon-size-md)"></i><span class="text-[10px] text-slate-500">trash</span></div>
+                <div class="flex flex-col items-center gap-2"><i class="ui-icon ui-icon--md ti ti-edit" style="font-size: var(--ui-icon-size-md)"></i><span class="text-[10px] text-slate-500">edit</span></div>
+                <div class="flex flex-col items-center gap-2"><i class="ui-icon ui-icon--md ti ti-check" style="font-size: var(--ui-icon-size-md)"></i><span class="text-[10px] text-slate-500">check</span></div>
+                <div class="flex flex-col items-center gap-2"><i class="ui-icon ui-icon--md ti ti-arrow-right" style="font-size: var(--ui-icon-size-md)"></i><span class="text-[10px] text-slate-500">arrow-right</span></div>
+                <div class="flex flex-col items-center gap-2"><i class="ui-icon ui-icon--md ti ti-chevron-down" style="font-size: var(--ui-icon-size-md)"></i><span class="text-[10px] text-slate-500">chevron-down</span></div>
+                <div class="flex flex-col items-center gap-2"><i class="ui-icon ui-icon--md ti ti-external-link" style="font-size: var(--ui-icon-size-md)"></i><span class="text-[10px] text-slate-500">external-link</span></div>
+                <div class="flex flex-col items-center gap-2"><i class="ui-icon ui-icon--md ti ti-help-circle" style="font-size: var(--ui-icon-size-md)"></i><span class="text-[10px] text-slate-500">help-circle</span></div>
+                <div class="flex flex-col items-center gap-2"><i class="ui-icon ui-icon--md ti ti-clock" style="font-size: var(--ui-icon-size-md)"></i><span class="text-[10px] text-slate-500">clock</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 7: FORM FIELDS -->
+    <section x-show="activeTab === 'all' || activeTab === 'formfield'" x-cloak class="space-y-6">
+        <div class="flex items-center justify-between">
+            <h2 class="text-2xl font-bold text-white flex items-center gap-2">
+                <i class="ti ti-forms text-emerald-400"></i> Form Field Component (<code class="text-xs text-emerald-300 bg-emerald-950/80 px-2 py-1 rounded">&lt;x-form-field /&gt;</code>)
+            </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Label + Required + Hint -->
+            <div class="docs-card space-y-6">
+                <h3 class="text-sm font-semibold text-slate-300 uppercase tracking-wider">1. Label, Required & Hint</h3>
+
+                <div class="ui-form-field">
+                    <label for="ff-email" class="ui-form-field__label">Email Address <span class="ui-form-field__required" aria-hidden="true">*</span></label>
+                    <input id="ff-email" type="email" placeholder="john@example.com" class="ui-input ui-input--outline ui-input--md ui-input--primary">
+                    <p class="ui-form-field__feedback ui-form-field__feedback--hint">We will send confirmation to this email.</p>
+                </div>
+
+                <div class="ui-form-field">
+                    <label for="ff-name" class="ui-form-field__label">Full Name</label>
+                    <input id="ff-name" type="text" placeholder="Jane Doe" class="ui-input ui-input--soft ui-input--md ui-input--primary">
+                    <p class="ui-form-field__feedback ui-form-field__feedback--hint">No feedback is shown when only a hint is absent.</p>
+                </div>
+            </div>
+
+            <!-- Error + Valid Feedback -->
+            <div class="docs-card space-y-6">
+                <h3 class="text-sm font-semibold text-slate-300 uppercase tracking-wider">2. Error & Valid Feedback</h3>
+
+                <div class="ui-form-field ui-field--error">
+                    <label for="ff-err" class="ui-form-field__label">Username</label>
+                    <input id="ff-err" type="text" value="invalid_username#" class="ui-input ui-input--outline ui-input--md ui-input--primary">
+                    <p id="ff-err-feedback" role="alert" aria-live="polite" class="ui-form-field__feedback ui-form-field__feedback--error">Username can only contain alphanumeric characters.</p>
+                </div>
+
+                <div class="ui-form-field ui-field--valid">
+                    <label for="ff-valid" class="ui-form-field__label">Website URL</label>
+                    <input id="ff-valid" type="text" value="https://aegis-ui.dev" class="ui-input ui-input--outline ui-input--md ui-input--primary">
+                    <p class="ui-form-field__feedback ui-form-field__feedback--hint">Looks good — this URL is reachable.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Input Size Scale -->
+        <div class="docs-card space-y-4">
+            <h3 class="text-sm font-semibold text-slate-300 uppercase tracking-wider">3. Input Size Scale</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="ui-form-field">
+                    <label for="ff-xs" class="ui-form-field__label">Extra Small</label>
+                    <input id="ff-xs" type="text" placeholder="ui-input--xs" class="ui-input ui-input--outline ui-input--xs ui-input--primary">
+                </div>
+                <div class="ui-form-field">
+                    <label for="ff-sm" class="ui-form-field__label">Small</label>
+                    <input id="ff-sm" type="text" placeholder="ui-input--sm" class="ui-input ui-input--outline ui-input--sm ui-input--primary">
+                </div>
+                <div class="ui-form-field">
+                    <label for="ff-md" class="ui-form-field__label">Medium (default)</label>
+                    <input id="ff-md" type="text" placeholder="ui-input--md" class="ui-input ui-input--outline ui-input--md ui-input--primary">
+                </div>
+                <div class="ui-form-field">
+                    <label for="ff-lg" class="ui-form-field__label">Large</label>
+                    <input id="ff-lg" type="text" placeholder="ui-input--lg" class="ui-input ui-input--outline ui-input--lg ui-input--primary">
+                </div>
+                <div class="ui-form-field">
+                    <label for="ff-xl" class="ui-form-field__label">Extra Large</label>
+                    <input id="ff-xl" type="text" placeholder="ui-input--xl" class="ui-input ui-input--outline ui-input--xl ui-input--primary">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="pt-6 border-t border-slate-800 text-center text-xs text-slate-500">
+        Aegis UI Package Development Environment • Prepared for local browser visual verification
+    </footer>
+
+</body>
+</html>
