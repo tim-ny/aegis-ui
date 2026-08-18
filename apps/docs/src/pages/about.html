@@ -1,0 +1,102 @@
+<section>
+
+          <h1 class="text-3xl font-extrabold tracking-tight">About Aegis UI</h1>
+          <p class="mt-2 text-muted-foreground">
+            The story, the stack and the principles behind the library.
+          </p>
+
+          <div class="docs-prose mt-8">
+            <h3>What it is</h3>
+            <p>
+              Aegis UI is a <strong>component library for Laravel</strong> built
+              as a Composer package. It ships pre-styled Blade components driven
+              entirely by CSS custom properties (<code class="inline-code"
+                >--ui-*</code
+              >), so the look is yours to own from day one — every color,
+              radius, spacing value and state can be overridden in a single
+              token layer.
+            </p>
+
+            <h3>Why it exists</h3>
+            <p>
+              Most component kits either lock you into a design, or force you to
+              write every class by hand. Aegis UI sits in the middle: it ships a
+              complete, accessible, tested design system as plain Blade + CSS,
+              but keeps the <strong>design tokens</strong> as the only source of
+              truth for visuals.
+            </p>
+
+            <h3>The stack</h3>
+            <ul>
+              <li>
+                <strong>Laravel 13</strong> — Blade components, config and
+                service providers.
+              </li>
+              <li>
+                <strong>Livewire 4</strong> — optional
+                <code class="inline-code">wire:model</code> support via hidden
+                inputs.
+              </li>
+              <li>
+                <strong>Alpine.js 3</strong> — popovers, calendars, accordions
+                and toggle state.
+              </li>
+              <li>
+                <strong>Tailwind CSS 4</strong> —
+                <code class="inline-code">@theme</code> tokens power the package
+                CSS.
+              </li>
+              <li>
+                <strong>Tabler Icons</strong> — iconography through
+                <code class="inline-code">&lt;x-icon&gt;</code>.
+              </li>
+            </ul>
+
+            <h3>Design principles</h3>
+            <ul>
+              <li>
+                <strong>Token-driven, not hardcoded.</strong> No hex values live
+                in component styles — only
+                <code class="inline-code">var(--ui-…)</code>.
+              </li>
+              <li>
+                <strong>BEM class names.</strong>
+                <code class="inline-code">ui-btn--solid</code>,
+                <code class="inline-code">ui-datepicker__cell--selected</code>…
+                predictable and tree-shakeable.
+              </li>
+              <li>
+                <strong>Configurable defaults.</strong> Inline props beat
+                <code class="inline-code">config/aegis-ui.php</code> defaults,
+                which beat package defaults.
+              </li>
+              <li>
+                <strong>Unstyled when you need it.</strong> An
+                <code class="inline-code">unstyled</code> prop strips wrapper
+                chrome so you own the layout.
+              </li>
+            </ul>
+
+            <h3>Repository layout</h3>
+            <pre
+              class="code-block mt-3"
+            ><code x-text="uiDocs.aboutLayout"></code></pre>
+          </div>
+        
+</section>
+
+<script>
+
+      window.uiDocs = {
+        aboutLayout: [
+          'aegis-ui/',
+          '├── packages/ui/',
+          '│   ├── config/aegis-ui.php        # app-wide defaults & prefix',
+          '│   ├── resources/css/ui.css       # design tokens + component styles',
+          '│   ├── resources/views/components # Blade views',
+          '│   └── src/Components             # PHP component classes',
+          '├── apps/docs/                     # this documentation site',
+          '└── AGENT.md                       # engineering ground rules',
+        ].join('\n'),
+      }
+    </script>

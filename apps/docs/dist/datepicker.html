@@ -1,0 +1,1379 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Date Picker — Aegis UI Docs</title>
+    <meta name="description" content="Date Picker component: 7 modes, formats, presets, week numbers, disabled dates and ranges." />
+
+    <!-- Alpine.js Collapse Plugin -->
+    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
+    <!-- Alpine.js Core -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <!-- Tabler Icons CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+    <!-- Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" crossorigin href="/assets/styles-BsWVk94R.css">
+  </head>
+
+  <body x-data="{ sidebarOpen: false }" class="bg-background text-foreground antialiased">
+    <!-- ───────────────────────── Mobile sidebar overlay ───────────────────────── -->
+    <div x-show="sidebarOpen" x-cloak class="fixed inset-0 z-50 lg:hidden">
+      <div class="absolute inset-0 bg-black/40" @click="sidebarOpen = false"></div>
+      <aside class="absolute inset-y-0 left-0 flex w-72 flex-col overflow-y-auto border-r border-border bg-background">
+        
+          <div class="flex h-14 items-center gap-2 border-b border-border px-5">
+            <span class="flex h-7 w-7 items-center justify-center rounded-md bg-primary text-primary-foreground">
+              <i class="ti ti-shield text-sm"></i>
+            </span>
+            <span class="text-sm font-bold tracking-tight">Aegis UI</span>
+          </div>
+        <nav class="flex-1 overflow-y-auto px-4 py-6">
+          <p class="px-2 pb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">Getting Started</p>
+            <a href="index.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-home text-base"></i> Home</a>
+            <a href="about.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-info-circle text-base"></i> About</a>
+            <a href="installation.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-terminal text-base"></i> Installation</a>
+            <a href="theming.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-palette text-base"></i> Theming & Customization</a>
+
+            <p class="px-2 pb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground pt-6">Components</p>
+            <a href="components.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-components text-base"></i> Overview</a>
+            <a href="button.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-click text-base"></i> Button</a>
+            <a href="input.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-forms text-base"></i> Input</a>
+            <a href="checkbox.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-square-check text-base"></i> Checkbox</a>
+            <a href="datepicker.html" aria-current="page" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors bg-muted text-foreground font-medium"><i class="ti ti-calendar text-base"></i> Date Picker</a>
+            <a href="alert.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-bell text-base"></i> Alert</a>
+            <a href="accordion.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-layout-accordion text-base"></i> Accordion</a>
+            <a href="spinner.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-loader-2 text-base"></i> Spinner</a>
+            <a href="icon.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-icons text-base"></i> Icon</a>
+            <a href="form-field.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-list-check text-base"></i> Form Field</a>
+        </nav>
+      </aside>
+    </div>
+
+    <div class="lg:pl-64">
+      <!-- ───────────────────────── Desktop sidebar ───────────────────────── -->
+      <aside class="fixed inset-y-0 left-0 z-40 hidden w-64 flex-col border-r border-border bg-background lg:flex">
+        
+          <a href="index.html" class="flex h-14 items-center gap-2 border-b border-border px-5">
+            <span class="flex h-7 w-7 items-center justify-center rounded-md bg-primary text-primary-foreground">
+              <i class="ti ti-shield text-sm"></i>
+            </span>
+            <span class="text-sm font-bold tracking-tight">Aegis UI</span>
+          </a>
+        <nav class="flex-1 overflow-y-auto px-4 py-6">
+          <p class="px-2 pb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">Getting Started</p>
+            <a href="index.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-home text-base"></i> Home</a>
+            <a href="about.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-info-circle text-base"></i> About</a>
+            <a href="installation.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-terminal text-base"></i> Installation</a>
+            <a href="theming.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-palette text-base"></i> Theming & Customization</a>
+
+            <p class="px-2 pb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground pt-6">Components</p>
+            <a href="components.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-components text-base"></i> Overview</a>
+            <a href="button.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-click text-base"></i> Button</a>
+            <a href="input.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-forms text-base"></i> Input</a>
+            <a href="checkbox.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-square-check text-base"></i> Checkbox</a>
+            <a href="datepicker.html" aria-current="page" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors bg-muted text-foreground font-medium"><i class="ti ti-calendar text-base"></i> Date Picker</a>
+            <a href="alert.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-bell text-base"></i> Alert</a>
+            <a href="accordion.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-layout-accordion text-base"></i> Accordion</a>
+            <a href="spinner.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-loader-2 text-base"></i> Spinner</a>
+            <a href="icon.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-icons text-base"></i> Icon</a>
+            <a href="form-field.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-list-check text-base"></i> Form Field</a>
+        </nav>
+      </aside>
+
+      <!-- ───────────────────────── Top header ───────────────────────── -->
+      <header class="sticky top-0 z-30 flex h-14 items-center justify-between border-b border-border bg-background/80 px-4 backdrop-blur sm:px-6">
+        <div class="flex items-center gap-3">
+          <button
+            type="button"
+            @click="sidebarOpen = true"
+            class="flex h-9 w-9 items-center justify-center rounded-md border border-border text-muted-foreground transition-colors hover:text-foreground lg:hidden"
+            aria-label="Open navigation"
+          >
+            <i class="ti ti-menu-2 text-lg"></i>
+          </button>
+          <span class="text-sm font-medium text-muted-foreground lg:hidden">Aegis UI</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="version-chip"><i class="ti ti-shield text-xs text-foreground"></i> v1.0.0</span>
+          <span class="hidden sm:inline-flex text-xs text-muted-foreground">Laravel 13 · Livewire 4 · Tailwind 4 · Alpine 3</span>
+        </div>
+      </header>
+
+      <!-- ───────────────────────── Main content ───────────────────────── -->
+      <main class="mx-auto w-full max-w-7xl px-4 py-10 sm:px-6">
+        <section>
+
+          <div class="flex items-center gap-3">
+            <h1 class="text-3xl font-extrabold tracking-tight">Date Picker</h1>
+            <span class="inline-code">&lt;x-datepicker /&gt;</span>
+          </div>
+          <p class="mt-2 text-muted-foreground">
+            Alpine-powered calendar with single, range, multiple, month and year
+            selection, presets, week numbers, disabled dates and multi-month
+            views.
+          </p>
+
+          <div class="docs-card mt-8" aria-label="On this page">
+            <span class="docs-card__label">On this page</span>
+            <nav class="flex flex-wrap gap-2">
+              <a href="#usage" class="rounded-md border border-border px-2.5 py-1 text-xs font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground">Usage</a>
+              <a href="#modes-and-formats" class="rounded-md border border-border px-2.5 py-1 text-xs font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground">Modes &amp; formats</a>
+              <a href="#props" class="rounded-md border border-border px-2.5 py-1 text-xs font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground">Props</a>
+              <a href="#single-date" class="rounded-md border border-border px-2.5 py-1 text-xs font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground">Single date</a>
+              <a href="#display-formats" class="rounded-md border border-border px-2.5 py-1 text-xs font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground">Display formats</a>
+              <a href="#range-with-presets" class="rounded-md border border-border px-2.5 py-1 text-xs font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground">Range with presets</a>
+              <a href="#multiple-dates" class="rounded-md border border-border px-2.5 py-1 text-xs font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground">Multiple dates</a>
+              <a href="#month-and-year-pickers" class="rounded-md border border-border px-2.5 py-1 text-xs font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground">Month &amp; year pickers</a>
+              <a href="#week-numbers-and-fixed-weeks" class="rounded-md border border-border px-2.5 py-1 text-xs font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground">Week numbers &amp; fixed weeks</a>
+              <a href="#multiple-months" class="rounded-md border border-border px-2.5 py-1 text-xs font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground">Multiple months</a>
+              <a href="#disabled-dates-and-bounds" class="rounded-md border border-border px-2.5 py-1 text-xs font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground">Disabled dates &amp; bounds</a>
+              <a href="#sizes" class="rounded-md border border-border px-2.5 py-1 text-xs font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground">Sizes</a>
+              <a href="#colors" class="rounded-md border border-border px-2.5 py-1 text-xs font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground">Colors</a>
+              <a href="#states" class="rounded-md border border-border px-2.5 py-1 text-xs font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground">States</a>
+            </nav>
+          </div>
+
+          <h2 class="mt-10 text-xl font-bold tracking-tight scroll-mt-20" id="usage">Usage</h2>
+          <pre
+            class="code-block mt-3"
+          ><code x-text="uiDocs.datepickerUsage"></code></pre>
+
+          <h2 class="mt-10 text-xl font-bold tracking-tight scroll-mt-20" id="modes-and-formats">
+            Modes &amp; formats
+          </h2>
+          <p class="mt-2 text-sm text-muted-foreground">
+            The <code class="inline-code">mode</code> prop drives granularity
+            and selection type.
+          </p>
+          <table class="prop-table mt-3">
+            <thead>
+              <tr>
+                <th>Mode</th>
+                <th>Granularity</th>
+                <th>Selection</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>single</td>
+                <td>day</td>
+                <td>single</td>
+                <td>One date.</td>
+              </tr>
+              <tr>
+                <td>range</td>
+                <td>day</td>
+                <td>range</td>
+                <td>Start + end date.</td>
+              </tr>
+              <tr>
+                <td>multiple</td>
+                <td>day</td>
+                <td>multiple</td>
+                <td>Any set of dates.</td>
+              </tr>
+              <tr>
+                <td>month</td>
+                <td>month</td>
+                <td>single</td>
+                <td>One month.</td>
+              </tr>
+              <tr>
+                <td>month-range</td>
+                <td>month</td>
+                <td>range</td>
+                <td>Start + end month.</td>
+              </tr>
+              <tr>
+                <td>year</td>
+                <td>year</td>
+                <td>single</td>
+                <td>One year.</td>
+              </tr>
+              <tr>
+                <td>year-range</td>
+                <td>year</td>
+                <td>range</td>
+                <td>Start + end year.</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h2 class="mt-10 text-xl font-bold tracking-tight scroll-mt-20" id="props">Props</h2>
+          <table class="prop-table mt-3">
+            <thead>
+              <tr>
+                <th>Prop</th>
+                <th>Type / Options</th>
+                <th>Default</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>mode</td>
+                <td>
+                  single, range, multiple, month, month-range, year, year-range
+                </td>
+                <td>single</td>
+                <td>Selection behaviour.</td>
+              </tr>
+              <tr>
+                <td>format</td>
+                <td>
+                  M d, Y · MM-DD-YYYY · DD-MM-YYYY · YYYY-MM-DD · D d M, Y ·
+                  MMMM d, Y
+                </td>
+                <td>M d, Y</td>
+                <td>Display format.</td>
+              </tr>
+              <tr>
+                <td>size</td>
+                <td>xs, sm, md, lg, xl</td>
+                <td>md</td>
+                <td>Trigger height.</td>
+              </tr>
+              <tr>
+                <td>color</td>
+                <td>primary, danger, success, warning, neutral</td>
+                <td>primary</td>
+                <td>Focus / selection color.</td>
+              </tr>
+              <tr>
+                <td>value</td>
+                <td>string / array</td>
+                <td>null</td>
+                <td>
+                  Initial value. Ranges accept
+                  <code class="inline-code">"A - B"</code>, arrays or objects.
+                </td>
+              </tr>
+              <tr>
+                <td>label / hint / error / valid</td>
+                <td>…</td>
+                <td>—</td>
+                <td>Form-field text + validation state.</td>
+              </tr>
+              <tr>
+                <td>required / readonly / disabled</td>
+                <td>bool</td>
+                <td>false</td>
+                <td>Field states.</td>
+              </tr>
+              <tr>
+                <td>weekNumbers</td>
+                <td>bool</td>
+                <td>false</td>
+                <td>Show ISO week numbers in the day grid.</td>
+              </tr>
+              <tr>
+                <td>presets</td>
+                <td>bool / array</td>
+                <td>false</td>
+                <td>
+                  <code class="inline-code">true</code> builds server defaults;
+                  an array passes your own shortcuts.
+                </td>
+              </tr>
+              <tr>
+                <td>disabledDates</td>
+                <td>array</td>
+                <td>[]</td>
+                <td>
+                  ISO date keys (<code class="inline-code">Y-m-d</code>) to
+                  disable.
+                </td>
+              </tr>
+              <tr>
+                <td>min / max</td>
+                <td>string</td>
+                <td>null</td>
+                <td>Inclusive ISO bounds.</td>
+              </tr>
+              <tr>
+                <td>firstDayOfWeek</td>
+                <td>0, 1</td>
+                <td>0</td>
+                <td>Week starts on Sunday or Monday.</td>
+              </tr>
+              <tr>
+                <td>numberOfMonths</td>
+                <td>int</td>
+                <td>1</td>
+                <td>Months shown side by side.</td>
+              </tr>
+              <tr>
+                <td>fixedWeeks</td>
+                <td>bool</td>
+                <td>false</td>
+                <td>Always show 6-week grid.</td>
+              </tr>
+              <tr>
+                <td>clearable</td>
+                <td>bool</td>
+                <td>false</td>
+                <td>Shows a clear button in the trigger.</td>
+              </tr>
+              <tr>
+                <td>viewControl / monthControls / yearControls</td>
+                <td>bool</td>
+                <td>true</td>
+                <td>Toggle view drilling and nav arrows.</td>
+              </tr>
+              <tr>
+                <td>placeholder / id / name</td>
+                <td>string</td>
+                <td>—</td>
+                <td>Native input attributes.</td>
+              </tr>
+              <tr>
+                <td>wireModel</td>
+                <td>string</td>
+                <td>null</td>
+                <td>Livewire property bound via a hidden input.</td>
+              </tr>
+              <tr>
+                <td>unstyled</td>
+                <td>bool</td>
+                <td>false</td>
+                <td>Removes wrapper styles.</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h2 class="mt-10 text-xl font-bold tracking-tight scroll-mt-20" id="single-date">Single date</h2>
+          <div class="docs-card mt-4 pb-44">
+            <span class="docs-card__label"
+              >mode="single" · format="M d, Y"</span
+            >
+            <div
+              x-data="uiDatePicker({ mode: 'single', selected: '2026-08-14' })"
+              x-html="calendarHtml"
+              @click.outside="open = false"
+              @keydown.escape.window="open = false"
+              class="ui-datepicker ui-datepicker--md ui-datepicker--primary ui-datepicker--single"
+            ></div>
+          </div>
+          <pre
+            class="code-block mt-3"
+          ><code x-text="uiDocs.datepickerSingle"></code></pre>
+
+          <h2 class="mt-10 text-xl font-bold tracking-tight scroll-mt-20" id="display-formats">
+            Display formats
+          </h2>
+          <div class="docs-card mt-4 grid gap-8 pb-44 sm:grid-cols-2">
+            <div>
+              <span class="docs-card__label">format="MM-DD-YYYY"</span>
+              <div
+                x-data="uiDatePicker({ mode: 'single', format: 'MM-DD-YYYY', selected: '2026-08-14' })"
+                x-html="calendarHtml"
+                @click.outside="open = false"
+                @keydown.escape.window="open = false"
+                class="ui-datepicker ui-datepicker--md ui-datepicker--primary ui-datepicker--single"
+              ></div>
+            </div>
+            <div>
+              <span class="docs-card__label">format="DD-MM-YYYY"</span>
+              <div
+                x-data="uiDatePicker({ mode: 'single', format: 'DD-MM-YYYY', selected: '2026-08-14' })"
+                x-html="calendarHtml"
+                @click.outside="open = false"
+                @keydown.escape.window="open = false"
+                class="ui-datepicker ui-datepicker--md ui-datepicker--primary ui-datepicker--single"
+              ></div>
+            </div>
+            <div>
+              <span class="docs-card__label">format="YYYY-MM-DD"</span>
+              <div
+                x-data="uiDatePicker({ mode: 'single', format: 'YYYY-MM-DD', selected: '2026-08-14' })"
+                x-html="calendarHtml"
+                @click.outside="open = false"
+                @keydown.escape.window="open = false"
+                class="ui-datepicker ui-datepicker--md ui-datepicker--primary ui-datepicker--single"
+              ></div>
+            </div>
+            <div>
+              <span class="docs-card__label">format="MMMM d, Y"</span>
+              <div
+                x-data="uiDatePicker({ mode: 'single', format: 'MMMM d, Y', selected: '2026-08-14' })"
+                x-html="calendarHtml"
+                @click.outside="open = false"
+                @keydown.escape.window="open = false"
+                class="ui-datepicker ui-datepicker--md ui-datepicker--primary ui-datepicker--single"
+              ></div>
+            </div>
+          </div>
+          <pre
+            class="code-block mt-3"
+          ><code x-text="uiDocs.datepickerFormats"></code></pre>
+
+          <h2 class="mt-10 text-xl font-bold tracking-tight scroll-mt-20" id="range-with-presets">
+            Range with presets
+          </h2>
+          <div class="docs-card mt-4 pb-60">
+            <span class="docs-card__label">mode="range" · presets</span>
+            <div
+              x-data="uiDatePicker({ mode: 'range', selected: '2026-08-01 - 2026-08-14', clearable: true, presets: [
+                        { label: 'Today', start: '2026-08-14', end: '2026-08-14' },
+                        { label: 'Last 7 days', start: '2026-08-08', end: '2026-08-14' },
+                        { label: 'This month', start: '2026-08-01', end: '2026-08-31' }
+                    ] })"
+              x-html="calendarHtml"
+              @click.outside="open = false"
+              @keydown.escape.window="open = false"
+              class="ui-datepicker ui-datepicker--md ui-datepicker--primary ui-datepicker--range"
+            ></div>
+          </div>
+          <pre
+            class="code-block mt-3"
+          ><code x-text="uiDocs.datepickerRange"></code></pre>
+
+          <h2 class="mt-10 text-xl font-bold tracking-tight scroll-mt-20" id="multiple-dates">Multiple dates</h2>
+          <div class="docs-card mt-4 pb-44">
+            <span class="docs-card__label">mode="multiple"</span>
+            <div
+              x-data="uiDatePicker({ mode: 'multiple', selected: ['2026-08-05', '2026-08-12', '2026-08-19'] })"
+              x-html="calendarHtml"
+              @click.outside="open = false"
+              @keydown.escape.window="open = false"
+              class="ui-datepicker ui-datepicker--md ui-datepicker--primary ui-datepicker--multiple"
+            ></div>
+          </div>
+          <pre
+            class="code-block mt-3"
+          ><code x-text="uiDocs.datepickerMultiple"></code></pre>
+
+          <h2 class="mt-10 text-xl font-bold tracking-tight scroll-mt-20" id="month-and-year-pickers">
+            Month &amp; year pickers
+          </h2>
+          <div class="docs-card mt-4 grid gap-8 pb-48 sm:grid-cols-2">
+            <div>
+              <span class="docs-card__label">mode="month"</span>
+              <div
+                x-data="uiDatePicker({ mode: 'month', selected: '2026-08' })"
+                x-html="calendarHtml"
+                @click.outside="open = false"
+                @keydown.escape.window="open = false"
+                class="ui-datepicker ui-datepicker--md ui-datepicker--primary ui-datepicker--month"
+              ></div>
+            </div>
+            <div>
+              <span class="docs-card__label">mode="year"</span>
+              <div
+                x-data="uiDatePicker({ mode: 'year', selected: '2026' })"
+                x-html="calendarHtml"
+                @click.outside="open = false"
+                @keydown.escape.window="open = false"
+                class="ui-datepicker ui-datepicker--md ui-datepicker--primary ui-datepicker--year"
+              ></div>
+            </div>
+          </div>
+          <pre
+            class="code-block mt-3"
+          ><code x-text="uiDocs.datepickerMonthYear"></code></pre>
+
+          <h2 class="mt-10 text-xl font-bold tracking-tight scroll-mt-20" id="week-numbers-and-fixed-weeks">
+            Week numbers &amp; fixed weeks
+          </h2>
+          <div class="docs-card mt-4 pb-56">
+            <span class="docs-card__label"
+              >weekNumbers · fixedWeeks · firstDayOfWeek="1"</span
+            >
+            <div
+              x-data="uiDatePicker({ mode: 'single', weekNumbers: true, fixedWeeks: true, firstDayOfWeek: 1, selected: '2026-08-14' })"
+              x-html="calendarHtml"
+              @click.outside="open = false"
+              @keydown.escape.window="open = false"
+              class="ui-datepicker ui-datepicker--md ui-datepicker--primary ui-datepicker--single"
+            ></div>
+          </div>
+          <pre
+            class="code-block mt-3"
+          ><code x-text="uiDocs.datepickerWeeks"></code></pre>
+
+          <h2 class="mt-10 text-xl font-bold tracking-tight scroll-mt-20" id="multiple-months">
+            Multiple months
+          </h2>
+          <div class="docs-card mt-4 pb-52">
+            <span class="docs-card__label">numberOfMonths="2"</span>
+            <div
+              x-data="uiDatePicker({ mode: 'single', numberOfMonths: 2, selected: '2026-09-10' })"
+              x-html="calendarHtml"
+              @click.outside="open = false"
+              @keydown.escape.window="open = false"
+              class="ui-datepicker ui-datepicker--md ui-datepicker--primary ui-datepicker--single"
+            ></div>
+          </div>
+          <pre
+            class="code-block mt-3"
+          ><code x-text="uiDocs.datepickerMonths"></code></pre>
+
+          <h2 class="mt-10 text-xl font-bold tracking-tight scroll-mt-20" id="disabled-dates-and-bounds">
+            Disabled dates &amp; bounds
+          </h2>
+          <div class="docs-card mt-4 pb-56">
+            <span class="docs-card__label">disabledDates · min · max</span>
+            <div
+              x-data="uiDatePicker({ mode: 'single', selected: '2026-08-14', min: '2026-08-01', max: '2026-08-28', disabledDates: ['2026-08-07', '2026-08-08', '2026-08-09', '2026-08-21'] })"
+              x-html="calendarHtml"
+              @click.outside="open = false"
+              @keydown.escape.window="open = false"
+              class="ui-datepicker ui-datepicker--md ui-datepicker--primary ui-datepicker--single"
+            ></div>
+          </div>
+          <pre
+            class="code-block mt-3"
+          ><code x-text="uiDocs.datepickerDisabled"></code></pre>
+
+          <h2 class="mt-10 text-xl font-bold tracking-tight scroll-mt-20" id="sizes">Sizes</h2>
+          <div class="docs-card mt-4 grid gap-8 pb-52 sm:grid-cols-2">
+            <div>
+              <span class="docs-card__label">size="xs"</span>
+              <div
+                x-data="uiDatePicker({ mode: 'single' })"
+                x-html="calendarHtml"
+                @click.outside="open = false"
+                @keydown.escape.window="open = false"
+                class="ui-datepicker ui-datepicker--xs ui-datepicker--primary ui-datepicker--single"
+              ></div>
+            </div>
+            <div>
+              <span class="docs-card__label">size="sm"</span>
+              <div
+                x-data="uiDatePicker({ mode: 'single' })"
+                x-html="calendarHtml"
+                @click.outside="open = false"
+                @keydown.escape.window="open = false"
+                class="ui-datepicker ui-datepicker--sm ui-datepicker--primary ui-datepicker--single"
+              ></div>
+            </div>
+            <div>
+              <span class="docs-card__label">size="lg"</span>
+              <div
+                x-data="uiDatePicker({ mode: 'single' })"
+                x-html="calendarHtml"
+                @click.outside="open = false"
+                @keydown.escape.window="open = false"
+                class="ui-datepicker ui-datepicker--lg ui-datepicker--primary ui-datepicker--single"
+              ></div>
+            </div>
+            <div>
+              <span class="docs-card__label">size="xl"</span>
+              <div
+                x-data="uiDatePicker({ mode: 'single' })"
+                x-html="calendarHtml"
+                @click.outside="open = false"
+                @keydown.escape.window="open = false"
+                class="ui-datepicker ui-datepicker--xl ui-datepicker--primary ui-datepicker--single"
+              ></div>
+            </div>
+          </div>
+          <pre
+            class="code-block mt-3"
+          ><code x-text="uiDocs.datepickerSizes"></code></pre>
+
+          <h2 class="mt-10 text-xl font-bold tracking-tight scroll-mt-20" id="colors">Colors</h2>
+          <div class="docs-card mt-4 grid gap-8 pb-52 sm:grid-cols-2">
+            <div>
+              <span class="docs-card__label">color="primary"</span>
+              <div
+                x-data="uiDatePicker({ mode: 'single' })"
+                x-html="calendarHtml"
+                @click.outside="open = false"
+                @keydown.escape.window="open = false"
+                class="ui-datepicker ui-datepicker--md ui-datepicker--primary ui-datepicker--single"
+              ></div>
+            </div>
+            <div>
+              <span class="docs-card__label">color="danger"</span>
+              <div
+                x-data="uiDatePicker({ mode: 'single' })"
+                x-html="calendarHtml"
+                @click.outside="open = false"
+                @keydown.escape.window="open = false"
+                class="ui-datepicker ui-datepicker--md ui-datepicker--danger ui-datepicker--single"
+              ></div>
+            </div>
+            <div>
+              <span class="docs-card__label">color="success"</span>
+              <div
+                x-data="uiDatePicker({ mode: 'single' })"
+                x-html="calendarHtml"
+                @click.outside="open = false"
+                @keydown.escape.window="open = false"
+                class="ui-datepicker ui-datepicker--md ui-datepicker--success ui-datepicker--single"
+              ></div>
+            </div>
+            <div>
+              <span class="docs-card__label">color="warning"</span>
+              <div
+                x-data="uiDatePicker({ mode: 'single' })"
+                x-html="calendarHtml"
+                @click.outside="open = false"
+                @keydown.escape.window="open = false"
+                class="ui-datepicker ui-datepicker--md ui-datepicker--warning ui-datepicker--single"
+              ></div>
+            </div>
+          </div>
+          <pre
+            class="code-block mt-3"
+          ><code x-text="uiDocs.datepickerColors"></code></pre>
+
+          <h2 class="mt-10 text-xl font-bold tracking-tight scroll-mt-20" id="states">States</h2>
+          <div class="docs-card mt-4 grid gap-8 pb-48 sm:grid-cols-2">
+            <div class="ui-form-field">
+              <span class="docs-card__label">clearable</span>
+              <div
+                x-data="uiDatePicker({ mode: 'single', selected: '2026-08-14', clearable: true })"
+                x-html="calendarHtml"
+                @click.outside="open = false"
+                @keydown.escape.window="open = false"
+                class="ui-datepicker ui-datepicker--md ui-datepicker--primary ui-datepicker--single"
+              ></div>
+            </div>
+            <div class="ui-form-field ui-field--error">
+              <span class="docs-card__label">error</span>
+              <div
+                x-data="uiDatePicker({ mode: 'single', selected: '2026-08-14' })"
+                x-html="calendarHtml"
+                @click.outside="open = false"
+                @keydown.escape.window="open = false"
+                class="ui-datepicker ui-datepicker--md ui-datepicker--primary ui-datepicker--single"
+              ></div>
+              <p
+                role="alert"
+                class="ui-form-field__feedback ui-form-field__feedback--error"
+              >
+                A departure date is required.
+              </p>
+            </div>
+            <div class="ui-form-field ui-field--valid">
+              <span class="docs-card__label">valid</span>
+              <div
+                x-data="uiDatePicker({ mode: 'single', selected: '2026-08-14' })"
+                x-html="calendarHtml"
+                @click.outside="open = false"
+                @keydown.escape.window="open = false"
+                class="ui-datepicker ui-datepicker--md ui-datepicker--primary ui-datepicker--single"
+              ></div>
+            </div>
+            <div class="grid gap-4">
+              <div>
+                <span class="docs-card__label">disabled</span>
+                <div
+                  x-data="uiDatePicker({ mode: 'single', disabled: true })"
+                  x-html="calendarHtml"
+                  @click.outside="open = false"
+                  @keydown.escape.window="open = false"
+                  class="ui-datepicker ui-datepicker--md ui-datepicker--primary ui-datepicker--single"
+                ></div>
+              </div>
+              <div>
+                <span class="docs-card__label">readonly</span>
+                <div
+                  x-data="uiDatePicker({ mode: 'single', readonly: true })"
+                  x-html="calendarHtml"
+                  @click.outside="open = false"
+                  @keydown.escape.window="open = false"
+                  class="ui-datepicker ui-datepicker--md ui-datepicker--primary ui-datepicker--single"
+                ></div>
+              </div>
+            </div>
+          </div>
+          <pre
+            class="code-block mt-3"
+          ><code x-text="uiDocs.datepickerStates"></code></pre>
+        
+</section>
+
+
+      </main>
+    </div>
+
+    <script>
+
+      window.uiDocs = {
+        datepickerUsage: [
+          '<x-datepicker label="Start date" />',
+          '',
+          '<x-datepicker mode="range" label="Trip dates"',
+          '    :presets="true" clearable wireModel="trip" />',
+        ].join('\n'),
+
+        datepickerSingle: [
+          '<x-datepicker label="Start date" value="2026-08-14" />',
+        ].join('\n'),
+
+        datepickerFormats: [
+          '<x-datepicker format="MM-DD-YYYY" />',
+          '<x-datepicker format="DD-MM-YYYY" />',
+          '<x-datepicker format="YYYY-MM-DD" />',
+          '<x-datepicker format="MMMM d, Y" />',
+        ].join('\n'),
+
+        datepickerRange: [
+          '<x-datepicker mode="range" label="Report period"',
+          '    value="2026-08-01 - 2026-08-14"',
+          '    clearable',
+          '    :presets="true" />',
+          '',
+          '{{-- custom presets --}}',
+          '<x-datepicker mode="range" :presets="[',
+          "    ['label' => 'This month', 'start' => now()->startOfMonth()->toDateString(), 'end' => now()->toDateString()],",
+          ']" />',
+        ].join('\n'),
+
+        datepickerMultiple: [
+          '<x-datepicker mode="multiple"',
+          "    :value=\"['2026-08-05', '2026-08-12']\" />",
+        ].join('\n'),
+
+        datepickerMonthYear: [
+          '<x-datepicker mode="month" value="2026-08" />',
+          '<x-datepicker mode="year" value="2026" />',
+          '<x-datepicker mode="month-range" />',
+          '<x-datepicker mode="year-range" />',
+        ].join('\n'),
+
+        datepickerWeeks: [
+          '<x-datepicker weekNumbers fixedWeeks firstDayOfWeek="1" />',
+        ].join('\n'),
+
+        datepickerMonths: ['<x-datepicker numberOfMonths="2" />'].join('\n'),
+
+        datepickerDisabled: [
+          '<x-datepicker',
+          '    min="2026-08-01"',
+          '    max="2026-08-28"',
+          "    :disabledDates=\"['2026-08-07', '2026-08-08', '2026-08-09', '2026-08-21']\" />",
+        ].join('\n'),
+
+        datepickerSizes: [
+          '<x-datepicker size="xs" />',
+          '<x-datepicker size="sm" />',
+          '<x-datepicker size="md" />',
+          '<x-datepicker size="lg" />',
+          '<x-datepicker size="xl" />',
+        ].join('\n'),
+
+        datepickerColors: [
+          '<x-datepicker color="primary" />',
+          '<x-datepicker color="danger" />',
+          '<x-datepicker color="success" />',
+          '<x-datepicker color="warning" />',
+          '<x-datepicker color="neutral" />',
+        ].join('\n'),
+
+        datepickerStates: [
+          '<x-datepicker clearable />',
+          '<x-datepicker error="A departure date is required." />',
+          '<x-datepicker valid />',
+          '<x-datepicker disabled />',
+          '<x-datepicker readonly />',
+        ].join('\n'),
+      }
+
+      // ─────────────────────────────────────────────────────────────────────
+      // Shared interactive Date Picker factory for docs demos.
+      // Mirrors the Alpine data object in datepicker.blade.php so demos stay
+      // in sync with the real component.
+      // ─────────────────────────────────────────────────────────────────────
+      function uiDatePickerCalendarHtml(config) {
+        var presets =
+          config.presets && config.presets.length
+            ? '<div class="ui-datepicker__presets">' +
+              '<template x-for="(p, i) in presets" :key="i">' +
+              '<button type="button" class="ui-datepicker__preset" :class="{ \'ui-datepicker__preset--active\': isPresetActive(p) }" @click="applyPreset(p)" x-text="p.label"></button>' +
+              '</template>' +
+              '</div>'
+            : ''
+        var clearBtn = config.clearable
+          ? '<button type="button" class="ui-datepicker__clear" @click.stop="clear()" tabindex="-1" aria-label="Clear date"><i class="ti ti-x" aria-hidden="true"></i></button>'
+          : ''
+        return (
+          '<div class="ui-datepicker__trigger" @click="toggle()">' +
+          '<i class="ui-datepicker__icon ti ti-calendar" aria-hidden="true"></i>' +
+          '<input type="text" readonly :value="displayValue" class="ui-datepicker__input" aria-haspopup="dialog" :aria-expanded="open ? \'true\' : \'false\'">' +
+          clearBtn +
+          '<i class="ui-datepicker__chevron ti ti-chevron-down" aria-hidden="true"></i>' +
+          '</div>' +
+          '<div x-show="open" x-cloak x-transition.opacity class="ui-datepicker__popover" role="dialog" aria-label="Date picker">' +
+          '<div class="ui-datepicker__popover-inner">' +
+          presets +
+          '<div class="ui-datepicker__calendar">' +
+          '<div class="ui-datepicker__header">' +
+          '<button type="button" class="ui-datepicker__nav" @click="previous()" x-show="monthControls || view === \'year\'" aria-label="Previous"><i class="ti ti-chevron-left" aria-hidden="true"></i></button>' +
+          '<button type="button" class="ui-datepicker__heading" @click="cycleView()" :disabled="!viewControl" x-show="view !== \'year\'">' +
+          '<template x-if="view === \'day\'"><span><span x-text="monthNames[viewMonth]" class="ui-datepicker__heading-label"></span><span x-text="viewYear" class="ui-datepicker__heading-label ui-datepicker__heading-label--year"></span></span></template>' +
+          '<span x-show="view === \'month\'" x-text="viewYear"></span>' +
+          '</button>' +
+          '<button type="button" class="ui-datepicker__heading" @click="cycleView()" :disabled="!viewControl" x-show="view === \'year\'"><span x-text="yearPageStart + \' - \' + (yearPageStart + 11)"></span></button>' +
+          '<button type="button" class="ui-datepicker__nav" @click="next()" x-show="monthControls || view === \'year\'" aria-label="Next"><i class="ti ti-chevron-right" aria-hidden="true"></i></button>' +
+          '</div>' +
+          '<template x-if="view === \'day\'"><div class="ui-datepicker__months">' +
+          '<template x-for="(page, i) in pages" :key="i"><div class="ui-datepicker__month">' +
+          '<div class="ui-datepicker__weekdays"><div class="ui-datepicker__weeknum-head" x-show="weekNumbers"></div><template x-for="(d, j) in weekdayHeader" :key="j"><div class="ui-datepicker__weekday" x-text="d"></div></template></div>' +
+          '<template x-for="(row, ri) in page.rows" :key="ri"><div class="ui-datepicker__row">' +
+          '<div class="ui-datepicker__weeknum" x-show="weekNumbers" x-text="row.week"></div>' +
+          '<template x-for="(cell, ci) in row.days" :key="ci">' +
+          '<template x-if="cell"><button type="button" class="ui-datepicker__cell" :class="cellClass(cell)" @click="selectCell(cell.key)" :disabled="isDisabled(cell.key)" x-text="cell.day" tabindex="-1"></button></template>' +
+          '<template x-if="!cell"><span class="ui-datepicker__cell ui-datepicker__cell--blank"></span></template>' +
+          '</template>' +
+          '</div></template>' +
+          '</div></template>' +
+          '</div></template>' +
+          '<template x-if="view === \'month\'"><div class="ui-datepicker__grid ui-datepicker__grid--month">' +
+          '<template x-for="(mname, m) in monthNames" :key="m"><button type="button" class="ui-datepicker__cell" :class="monthCellClass(m)" @click="clickMonth(m)" :disabled="isMonthGran() ? isDisabled(isoMonth(viewYear, m)) : false" x-text="shortMonths[m]" tabindex="-1"></button></template>' +
+          '</div></template>' +
+          '<template x-if="view === \'year\'"><div class="ui-datepicker__grid ui-datepicker__grid--year">' +
+          '<template x-for="(y, i) in yearCells" :key="i"><button type="button" class="ui-datepicker__cell" :class="yearCellClass(y)" @click="clickYear(y)" :disabled="isYearGran() ? isDisabled(String(y)) : false" x-text="y" tabindex="-1"></button></template>' +
+          '</div></template>' +
+          '</div>' +
+          '</div>' +
+          '</div>' +
+          '</div>'
+        )
+      }
+
+      window.uiDatePicker = function (config) {
+        config = config || {}
+        var mode = config.mode || 'single'
+        var granularity =
+          config.granularity ||
+          (['month', 'month-range'].indexOf(mode) !== -1
+            ? 'month'
+            : ['year', 'year-range'].indexOf(mode) !== -1
+              ? 'year'
+              : 'day')
+        var selectType =
+          config.selectType ||
+          (['range', 'month-range', 'year-range'].indexOf(mode) !== -1
+            ? 'range'
+            : mode === 'multiple'
+              ? 'multiple'
+              : 'single')
+
+        var selected = config.selected === undefined ? null : config.selected
+        if (selectType === 'range') {
+          if (Array.isArray(selected))
+            selected = { start: selected[0] || null, end: selected[1] || null }
+          else if (
+            typeof selected === 'string' &&
+            selected.indexOf(' - ') !== -1
+          ) {
+            var parts = selected.split(' - ')
+            selected = { start: parts[0], end: parts[1] }
+          } else if (typeof selected === 'object' && selected !== null) {
+            selected = {
+              start: selected.start || null,
+              end: selected.end || null,
+            }
+          } else {
+            selected = null
+          }
+        } else if (selectType === 'multiple') {
+          selected =
+            typeof selected === 'string'
+              ? selected.split(',').filter(Boolean)
+              : Array.isArray(selected)
+                ? selected
+                : []
+        }
+
+        var firstKey =
+          selectType === 'range'
+            ? selected && selected.start
+            : selectType === 'multiple'
+              ? selected.length
+                ? selected[0]
+                : null
+              : selected
+        var today = new Date()
+        var viewYear = today.getFullYear()
+        var viewMonth = today.getMonth()
+        if (firstKey) {
+          var p = String(firstKey).split('-').map(Number)
+          viewYear = p[0]
+          viewMonth = (p[1] || 1) - 1
+        }
+
+        return {
+          mode: mode,
+          format: config.format || 'M d, Y',
+          granularity: granularity,
+          selectType: selectType,
+          weekNumbers: !!config.weekNumbers,
+          firstDayOfWeek: config.firstDayOfWeek || 0,
+          numberOfMonths: config.numberOfMonths || 1,
+          fixedWeeks: !!config.fixedWeeks,
+          viewControl: config.viewControl !== false,
+          monthControls: config.monthControls !== false,
+          yearControls: config.yearControls !== false,
+          clearable: !!config.clearable,
+          min: config.min || null,
+          max: config.max || null,
+          disabledDates: config.disabledDates || [],
+          presets: config.presets || [],
+          readonly: !!config.readonly,
+          disabled: !!config.disabled,
+
+          calendarHtml: uiDatePickerCalendarHtml(config),
+
+          open: false,
+          view: 'day',
+          viewMonth: viewMonth,
+          viewYear: viewYear,
+          selected: selected,
+          monthNames: [
+            'January',
+            'February',
+            'March',
+            'April',
+            'May',
+            'June',
+            'July',
+            'August',
+            'September',
+            'October',
+            'November',
+            'December',
+          ],
+          shortMonths: [
+            'Jan',
+            'Feb',
+            'Mar',
+            'Apr',
+            'May',
+            'Jun',
+            'Jul',
+            'Aug',
+            'Sep',
+            'Oct',
+            'Nov',
+            'Dec',
+          ],
+          weekDayNames: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+
+          pad: function (n) {
+            return n < 10 ? '0' + n : '' + n
+          },
+          iso: function (y, m, d) {
+            return y + '-' + this.pad(m + 1) + '-' + this.pad(d)
+          },
+          isoMonth: function (y, m) {
+            return y + '-' + this.pad(m + 1)
+          },
+          todayIso: function () {
+            var t = new Date()
+            return this.iso(t.getFullYear(), t.getMonth(), t.getDate())
+          },
+          parseKey: function (key) {
+            if (key === null || key === undefined || key === '') return null
+            var parts = String(key).split('-').map(Number)
+            return { y: parts[0], m: (parts[1] || 1) - 1, d: parts[2] || 1 }
+          },
+          isDayGran: function () {
+            return this.granularity === 'day'
+          },
+          isMonthGran: function () {
+            return this.granularity === 'month'
+          },
+          isYearGran: function () {
+            return this.granularity === 'year'
+          },
+          isRange: function () {
+            return this.selectType === 'range'
+          },
+          isMultiple: function () {
+            return this.selectType === 'multiple'
+          },
+
+          toggle: function () {
+            if (this.readonly || this.disabled) return
+            this.open = !this.open
+            if (this.open) this.resetToSelection()
+          },
+          resetToSelection: function () {
+            var key = this.firstSelectedKey()
+            if (key) {
+              var p = this.parseKey(key)
+              this.viewYear = p.y
+              this.viewMonth = p.m
+            }
+          },
+          firstSelectedKey: function () {
+            if (this.isRange())
+              return this.selected && this.selected.start
+                ? this.selected.start
+                : null
+            if (this.isMultiple())
+              return Array.isArray(this.selected) && this.selected.length
+                ? this.selected[0]
+                : null
+            return this.selected || null
+          },
+
+          cycleView: function () {
+            if (!this.viewControl || !this.isDayGran()) return
+            this.view =
+              this.view === 'day'
+                ? 'month'
+                : this.view === 'month'
+                  ? 'year'
+                  : 'day'
+          },
+          previous: function () {
+            if (this.view === 'year') {
+              this.viewYear -= 12
+              return
+            }
+            if (this.view === 'month') {
+              this.viewYear -= 1
+              return
+            }
+            var m = this.viewMonth - this.numberOfMonths
+            var y = this.viewYear
+            while (m < 0) {
+              m += 12
+              y -= 1
+            }
+            this.viewMonth = m
+            this.viewYear = y
+          },
+          next: function () {
+            if (this.view === 'year') {
+              this.viewYear += 12
+              return
+            }
+            if (this.view === 'month') {
+              this.viewYear += 1
+              return
+            }
+            var m = this.viewMonth + this.numberOfMonths
+            var y = this.viewYear
+            while (m > 11) {
+              m -= 12
+              y += 1
+            }
+            this.viewMonth = m
+            this.viewYear = y
+          },
+
+          get pages() {
+            var pages = []
+            for (var i = 0; i < this.numberOfMonths; i++) {
+              var m = this.viewMonth + i
+              var y = this.viewYear
+              while (m > 11) {
+                m -= 12
+                y += 1
+              }
+              pages.push(this.monthPage(y, m))
+            }
+            return pages
+          },
+          monthPage: function (y, m) {
+            var firstDow = new Date(y, m, 1).getDay()
+            var blanks = (firstDow - this.firstDayOfWeek + 7) % 7
+            var total = new Date(y, m + 1, 0).getDate()
+            var cells = []
+            for (var i = 0; i < blanks; i++) cells.push(null)
+            for (var d = 1; d <= total; d++)
+              cells.push({ key: this.iso(y, m, d), day: d })
+            if (this.fixedWeeks) {
+              while (cells.length % 7 !== 0) cells.push(null)
+            }
+            var rows = []
+            for (var i = 0; i < cells.length; i += 7) {
+              var days = cells.slice(i, i + 7)
+              var first = null
+              for (var j = 0; j < days.length; j++) {
+                if (days[j]) {
+                  first = days[j]
+                  break
+                }
+              }
+              rows.push({
+                days: days,
+                week:
+                  this.weekNumbers && first ? this.isoWeek(first.key) : null,
+              })
+            }
+            return { year: y, month: m, rows: rows }
+          },
+          isoWeek: function (key) {
+            var p = this.parseKey(key)
+            var date = new Date(Date.UTC(p.y, p.m, p.d))
+            var dayNum = date.getUTCDay() || 7
+            date.setUTCDate(date.getUTCDate() + 4 - dayNum)
+            var yearStart = new Date(Date.UTC(date.getUTCFullYear(), 0, 1))
+            return Math.ceil(((date - yearStart) / 86400000 + 1) / 7)
+          },
+          get weekdayHeader() {
+            return this.weekDayNames
+              .slice(this.firstDayOfWeek)
+              .concat(this.weekDayNames.slice(0, this.firstDayOfWeek))
+          },
+          get yearPageStart() {
+            return Math.floor(this.viewYear / 12) * 12
+          },
+          get yearCells() {
+            var arr = []
+            var s = this.yearPageStart
+            for (var i = 0; i < 12; i++) arr.push(s + i)
+            return arr
+          },
+
+          isDisabled: function (key) {
+            if (key === null || key === undefined) return true
+            if (
+              Array.isArray(this.disabledDates) &&
+              this.disabledDates.indexOf(key) !== -1
+            )
+              return true
+            if (this.min && key < this.min) return true
+            if (this.max && key > this.max) return true
+            return false
+          },
+          isSelected: function (key) {
+            if (this.isMultiple())
+              return (
+                Array.isArray(this.selected) &&
+                this.selected.indexOf(key) !== -1
+              )
+            if (this.isRange())
+              return !!(
+                this.selected &&
+                (this.selected.start === key || this.selected.end === key)
+              )
+            return this.selected === key
+          },
+          isInRange: function (key) {
+            if (
+              !this.isRange() ||
+              !this.selected ||
+              !this.selected.start ||
+              !this.selected.end
+            )
+              return false
+            return key > this.selected.start && key < this.selected.end
+          },
+          selectCell: function (key) {
+            if (this.isDisabled(key)) return
+            if (this.isMultiple()) {
+              this.selected =
+                (this.selected || []).indexOf(key) !== -1
+                  ? this.selected.filter(function (k) {
+                      return k !== key
+                    })
+                  : (this.selected || []).concat([key])
+              return
+            }
+            if (this.isRange()) {
+              if (!this.selected) this.selected = { start: null, end: null }
+              if (!this.selected.start) {
+                this.selected = { start: key, end: null }
+                return
+              }
+              if (!this.selected.end) {
+                this.selected =
+                  key < this.selected.start
+                    ? { start: key, end: this.selected.start }
+                    : { start: this.selected.start, end: key }
+                this.open = false
+                return
+              }
+              this.selected = { start: key, end: null }
+              return
+            }
+            this.selected = key
+            this.open = false
+          },
+          clickMonth: function (m) {
+            if (this.isDayGran()) {
+              this.viewMonth = m
+              this.view = 'day'
+              return
+            }
+            var key = this.isoMonth(this.viewYear, m)
+            if (this.isDisabled(key)) return
+            this.selectCell(key)
+            if (
+              this.isRange() &&
+              this.selected &&
+              this.selected.start &&
+              this.selected.end
+            )
+              this.open = false
+          },
+          clickYear: function (y) {
+            if (!this.isYearGran()) {
+              this.viewYear = y
+              this.view = 'month'
+              return
+            }
+            var key = String(y)
+            if (this.isDisabled(key)) return
+            this.selectCell(key)
+            if (
+              this.isRange() &&
+              this.selected &&
+              this.selected.start &&
+              this.selected.end
+            )
+              this.open = false
+          },
+          cellClass: function (cell) {
+            var classes = ['ui-datepicker__cell']
+            if (this.isSelected(cell.key))
+              classes.push('ui-datepicker__cell--selected')
+            else if (this.isInRange(cell.key))
+              classes.push('ui-datepicker__cell--in-range')
+            if (cell.key === this.todayIso())
+              classes.push('ui-datepicker__cell--today')
+            if (this.isDisabled(cell.key))
+              classes.push('ui-datepicker__cell--disabled')
+            return classes.join(' ')
+          },
+          monthCellClass: function (m) {
+            var key = this.isoMonth(this.viewYear, m)
+            var classes = ['ui-datepicker__cell']
+            if (this.isSelected(key))
+              classes.push('ui-datepicker__cell--selected')
+            else if (this.isInRange(key))
+              classes.push('ui-datepicker__cell--in-range')
+            if (this.isMonthGran() && this.isDisabled(key))
+              classes.push('ui-datepicker__cell--disabled')
+            return classes.join(' ')
+          },
+          yearCellClass: function (y) {
+            var key = String(y)
+            var classes = ['ui-datepicker__cell']
+            if (this.isSelected(key))
+              classes.push('ui-datepicker__cell--selected')
+            else if (this.isInRange(key))
+              classes.push('ui-datepicker__cell--in-range')
+            if (this.isYearGran() && this.isDisabled(key))
+              classes.push('ui-datepicker__cell--disabled')
+            return classes.join(' ')
+          },
+
+          applyPreset: function (p) {
+            if (this.isRange()) {
+              this.selected = { start: p.start || null, end: p.end || null }
+            } else if (this.isMultiple()) {
+              this.selected = p.dates || this.expandRange(p.start, p.end)
+            } else {
+              this.selected = p.value || p.start || null
+            }
+            if (!this.isMultiple()) this.open = false
+          },
+          expandRange: function (start, end) {
+            if (!start || !end) return []
+            var s = this.parseKey(start)
+            var e = this.parseKey(end)
+            var list = []
+            var cur = new Date(s.y, s.m, s.d)
+            var last = new Date(e.y, e.m, e.d)
+            while (cur <= last) {
+              list.push(
+                this.iso(cur.getFullYear(), cur.getMonth(), cur.getDate()),
+              )
+              cur.setDate(cur.getDate() + 1)
+            }
+            return list
+          },
+          isPresetActive: function (p) {
+            if (this.isRange())
+              return !!(
+                this.selected &&
+                this.selected.start === p.start &&
+                this.selected.end === p.end
+              )
+            if (this.isMultiple()) {
+              return (
+                Array.isArray(this.selected) &&
+                Array.isArray(p.dates) &&
+                this.selected.length === p.dates.length &&
+                p.dates.every(
+                  function (k) {
+                    return this.selected.indexOf(k) !== -1
+                  }.bind(this),
+                )
+              )
+            }
+            return this.selected === (p.value || p.start || null)
+          },
+
+          clear: function () {
+            if (this.isRange()) this.selected = { start: null, end: null }
+            else if (this.isMultiple()) this.selected = []
+            else this.selected = null
+            if (!this.isRange() && !this.isMultiple()) this.open = false
+          },
+
+          formatKey: function (key) {
+            if (!key) return ''
+            if (this.isYearGran()) return String(key)
+            var p = this.parseKey(key)
+            if (this.isMonthGran()) return this.monthNames[p.m] + ' ' + p.y
+            return this.tokenFormat(p.y, p.m, p.d)
+          },
+          tokenFormat: function (y, m, d) {
+            var date = new Date(y, m, d)
+            var s = this.format
+            var mm = this.pad(m + 1)
+            var dd = this.pad(d)
+            var shortMonth = this.monthNames[m].slice(0, 3)
+            var dayName = this.weekDayNames[date.getDay()]
+            s = s.replace(/YYYY/g, String(y))
+            s = s.replace(/MMMM/g, this.monthNames[m])
+            s = s.replace(/MM/g, mm)
+            s = s.replace(/DD/g, dd)
+            s = s.replace(/M/g, shortMonth)
+            s = s.replace(/D/g, dayName)
+            s = s.replace(/d/g, String(d))
+            return s
+          },
+          get displayValue() {
+            if (this.isRange()) {
+              var s = this.selected ? this.selected.start : null
+              var e = this.selected ? this.selected.end : null
+              if (s && e) return this.formatKey(s) + ' - ' + this.formatKey(e)
+              if (s) return this.formatKey(s)
+              return ''
+            }
+            if (this.isMultiple()) {
+              return (this.selected || [])
+                .map(
+                  function (k) {
+                    return this.formatKey(k)
+                  }.bind(this),
+                )
+                .join(', ')
+            }
+            return this.formatKey(this.selected)
+          },
+          get wireValue() {
+            if (this.isRange()) {
+              var s = this.selected ? this.selected.start : null
+              var e = this.selected ? this.selected.end : null
+              if (s && e) return s + ' - ' + e
+              return s || ''
+            }
+            if (this.isMultiple()) return (this.selected || []).join(',')
+            return this.selected || ''
+          },
+        }
+      }
+
+      // ─────────────────────────────────────────────────────────────────────
+    </script>
+
+  </body>
+</html>

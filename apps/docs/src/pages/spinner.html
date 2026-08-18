@@ -1,0 +1,197 @@
+<section>
+
+          <div class="flex items-center gap-3">
+            <h1 class="text-3xl font-extrabold tracking-tight">Spinner</h1>
+            <span class="inline-code">&lt;x-spinner /&gt;</span>
+          </div>
+          <p class="mt-2 text-muted-foreground">
+            The shared loading indicator used by every loading state in the
+            package.
+          </p>
+
+          <h2 class="mt-10 text-xl font-bold tracking-tight">Usage</h2>
+          <pre
+            class="code-block mt-3"
+          ><code x-text="uiDocs.spinnerUsage"></code></pre>
+
+          <h2 class="mt-10 text-xl font-bold tracking-tight">Props</h2>
+          <table class="prop-table mt-3">
+            <thead>
+              <tr>
+                <th>Prop</th>
+                <th>Type / Options</th>
+                <th>Default</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>size</td>
+                <td>xs, sm, md, lg, xl</td>
+                <td>md</td>
+                <td>Scale.</td>
+              </tr>
+              <tr>
+                <td>color</td>
+                <td>primary, danger, success, warning, neutral</td>
+                <td>inherit</td>
+                <td>
+                  Overrides the inherited
+                  <code class="inline-code">currentColor</code>.
+                </td>
+              </tr>
+              <tr>
+                <td>label</td>
+                <td>string</td>
+                <td>Loading</td>
+                <td>Screen-reader text.</td>
+              </tr>
+              <tr>
+                <td>icon</td>
+                <td>string</td>
+                <td>loader-2</td>
+                <td>
+                  Tabler icon name (config default:
+                  <code class="inline-code">aegis-ui.loading.icon</code>).
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h2 class="mt-10 text-xl font-bold tracking-tight">Sizes</h2>
+          <div class="docs-card mt-4">
+            <div class="flex flex-wrap items-center gap-x-8 gap-y-4">
+              <div class="flex flex-col items-center gap-2">
+                <span class="text-xs font-mono text-muted-foreground">xs</span
+                ><i
+                  class="ti ti-loader-2 ui-spinner ui-spinner--xs"
+                  style="font-size: var(--ui-icon-size-xs)"
+                ></i>
+              </div>
+              <div class="flex flex-col items-center gap-2">
+                <span class="text-xs font-mono text-muted-foreground">sm</span
+                ><i
+                  class="ti ti-loader-2 ui-spinner ui-spinner--sm"
+                  style="font-size: var(--ui-icon-size-sm)"
+                ></i>
+              </div>
+              <div class="flex flex-col items-center gap-2">
+                <span class="text-xs font-mono text-muted-foreground"
+                  >md (default)</span
+                ><i
+                  class="ti ti-loader-2 ui-spinner ui-spinner--md"
+                  style="font-size: var(--ui-icon-size-md)"
+                ></i>
+              </div>
+              <div class="flex flex-col items-center gap-2">
+                <span class="text-xs font-mono text-muted-foreground">lg</span
+                ><i
+                  class="ti ti-loader-2 ui-spinner ui-spinner--lg"
+                  style="font-size: var(--ui-icon-size-lg)"
+                ></i>
+              </div>
+              <div class="flex flex-col items-center gap-2">
+                <span class="text-xs font-mono text-muted-foreground">xl</span
+                ><i
+                  class="ti ti-loader-2 ui-spinner ui-spinner--xl"
+                  style="font-size: var(--ui-icon-size-xl)"
+                ></i>
+              </div>
+            </div>
+          </div>
+          <pre
+            class="code-block mt-3"
+          ><code x-text="uiDocs.spinnerSizes"></code></pre>
+
+          <h2 class="mt-10 text-xl font-bold tracking-tight">Colors</h2>
+          <div class="docs-card mt-4">
+            <div class="flex flex-wrap items-center gap-x-8 gap-y-4">
+              <div class="flex flex-col items-center gap-2">
+                <span class="text-xs font-mono text-muted-foreground"
+                  >primary</span
+                ><i
+                  class="ti ti-loader-2 ui-spinner ui-spinner--md"
+                  style="
+                    color: var(--ui-color-primary);
+                    font-size: var(--ui-icon-size-md);
+                  "
+                ></i>
+              </div>
+              <div class="flex flex-col items-center gap-2">
+                <span class="text-xs font-mono text-muted-foreground"
+                  >danger</span
+                ><i
+                  class="ti ti-loader-2 ui-spinner ui-spinner--md"
+                  style="
+                    color: var(--ui-color-danger);
+                    font-size: var(--ui-icon-size-md);
+                  "
+                ></i>
+              </div>
+              <div class="flex flex-col items-center gap-2">
+                <span class="text-xs font-mono text-muted-foreground"
+                  >success</span
+                ><i
+                  class="ti ti-loader-2 ui-spinner ui-spinner--md"
+                  style="
+                    color: var(--ui-color-success);
+                    font-size: var(--ui-icon-size-md);
+                  "
+                ></i>
+              </div>
+              <div class="flex flex-col items-center gap-2">
+                <span class="text-xs font-mono text-muted-foreground"
+                  >warning</span
+                ><i
+                  class="ti ti-loader-2 ui-spinner ui-spinner--md"
+                  style="
+                    color: var(--ui-color-warning);
+                    font-size: var(--ui-icon-size-md);
+                  "
+                ></i>
+              </div>
+              <div class="flex flex-col items-center gap-2">
+                <span class="text-xs font-mono text-muted-foreground"
+                  >neutral</span
+                ><i
+                  class="ti ti-loader-2 ui-spinner ui-spinner--md"
+                  style="
+                    color: var(--ui-color-text);
+                    font-size: var(--ui-icon-size-md);
+                  "
+                ></i>
+              </div>
+            </div>
+          </div>
+          <pre
+            class="code-block mt-3"
+          ><code x-text="uiDocs.spinnerColors"></code></pre>
+        
+</section>
+
+<script>
+
+      window.uiDocs = {
+        spinnerUsage: [
+          '<x-spinner />',
+          '<x-spinner size="lg" color="danger" />',
+          '<x-button loading>Processing</x-button>  {{-- uses <x-spinner> internally --}}',
+        ].join('\n'),
+
+        spinnerSizes: [
+          '<x-spinner size="xs" />',
+          '<x-spinner size="sm" />',
+          '<x-spinner size="md" />',
+          '<x-spinner size="lg" />',
+          '<x-spinner size="xl" />',
+        ].join('\n'),
+
+        spinnerColors: [
+          '<x-spinner color="primary" />',
+          '<x-spinner color="danger" />',
+          '<x-spinner color="success" />',
+          '<x-spinner color="warning" />',
+          '<x-spinner color="neutral" />',
+        ].join('\n'),
+      }
+    </script>

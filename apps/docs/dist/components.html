@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Components — Aegis UI Docs</title>
+    <meta name="description" content="Every component page documents each prop and customization option." />
+
+    <!-- Alpine.js Collapse Plugin -->
+    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
+    <!-- Alpine.js Core -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <!-- Tabler Icons CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+    <!-- Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" crossorigin href="/assets/styles-BsWVk94R.css">
+  </head>
+
+  <body x-data="{ sidebarOpen: false }" class="bg-background text-foreground antialiased">
+    <!-- ───────────────────────── Mobile sidebar overlay ───────────────────────── -->
+    <div x-show="sidebarOpen" x-cloak class="fixed inset-0 z-50 lg:hidden">
+      <div class="absolute inset-0 bg-black/40" @click="sidebarOpen = false"></div>
+      <aside class="absolute inset-y-0 left-0 flex w-72 flex-col overflow-y-auto border-r border-border bg-background">
+        
+          <div class="flex h-14 items-center gap-2 border-b border-border px-5">
+            <span class="flex h-7 w-7 items-center justify-center rounded-md bg-primary text-primary-foreground">
+              <i class="ti ti-shield text-sm"></i>
+            </span>
+            <span class="text-sm font-bold tracking-tight">Aegis UI</span>
+          </div>
+        <nav class="flex-1 overflow-y-auto px-4 py-6">
+          <p class="px-2 pb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">Getting Started</p>
+            <a href="index.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-home text-base"></i> Home</a>
+            <a href="about.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-info-circle text-base"></i> About</a>
+            <a href="installation.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-terminal text-base"></i> Installation</a>
+            <a href="theming.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-palette text-base"></i> Theming & Customization</a>
+
+            <p class="px-2 pb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground pt-6">Components</p>
+            <a href="components.html" aria-current="page" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors bg-muted text-foreground font-medium"><i class="ti ti-components text-base"></i> Overview</a>
+            <a href="button.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-click text-base"></i> Button</a>
+            <a href="input.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-forms text-base"></i> Input</a>
+            <a href="checkbox.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-square-check text-base"></i> Checkbox</a>
+            <a href="datepicker.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-calendar text-base"></i> Date Picker</a>
+            <a href="alert.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-bell text-base"></i> Alert</a>
+            <a href="accordion.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-layout-accordion text-base"></i> Accordion</a>
+            <a href="spinner.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-loader-2 text-base"></i> Spinner</a>
+            <a href="icon.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-icons text-base"></i> Icon</a>
+            <a href="form-field.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-list-check text-base"></i> Form Field</a>
+        </nav>
+      </aside>
+    </div>
+
+    <div class="lg:pl-64">
+      <!-- ───────────────────────── Desktop sidebar ───────────────────────── -->
+      <aside class="fixed inset-y-0 left-0 z-40 hidden w-64 flex-col border-r border-border bg-background lg:flex">
+        
+          <a href="index.html" class="flex h-14 items-center gap-2 border-b border-border px-5">
+            <span class="flex h-7 w-7 items-center justify-center rounded-md bg-primary text-primary-foreground">
+              <i class="ti ti-shield text-sm"></i>
+            </span>
+            <span class="text-sm font-bold tracking-tight">Aegis UI</span>
+          </a>
+        <nav class="flex-1 overflow-y-auto px-4 py-6">
+          <p class="px-2 pb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">Getting Started</p>
+            <a href="index.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-home text-base"></i> Home</a>
+            <a href="about.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-info-circle text-base"></i> About</a>
+            <a href="installation.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-terminal text-base"></i> Installation</a>
+            <a href="theming.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-palette text-base"></i> Theming & Customization</a>
+
+            <p class="px-2 pb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground pt-6">Components</p>
+            <a href="components.html" aria-current="page" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors bg-muted text-foreground font-medium"><i class="ti ti-components text-base"></i> Overview</a>
+            <a href="button.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-click text-base"></i> Button</a>
+            <a href="input.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-forms text-base"></i> Input</a>
+            <a href="checkbox.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-square-check text-base"></i> Checkbox</a>
+            <a href="datepicker.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-calendar text-base"></i> Date Picker</a>
+            <a href="alert.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-bell text-base"></i> Alert</a>
+            <a href="accordion.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-layout-accordion text-base"></i> Accordion</a>
+            <a href="spinner.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-loader-2 text-base"></i> Spinner</a>
+            <a href="icon.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-icons text-base"></i> Icon</a>
+            <a href="form-field.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-list-check text-base"></i> Form Field</a>
+        </nav>
+      </aside>
+
+      <!-- ───────────────────────── Top header ───────────────────────── -->
+      <header class="sticky top-0 z-30 flex h-14 items-center justify-between border-b border-border bg-background/80 px-4 backdrop-blur sm:px-6">
+        <div class="flex items-center gap-3">
+          <button
+            type="button"
+            @click="sidebarOpen = true"
+            class="flex h-9 w-9 items-center justify-center rounded-md border border-border text-muted-foreground transition-colors hover:text-foreground lg:hidden"
+            aria-label="Open navigation"
+          >
+            <i class="ti ti-menu-2 text-lg"></i>
+          </button>
+          <span class="text-sm font-medium text-muted-foreground lg:hidden">Aegis UI</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="version-chip"><i class="ti ti-shield text-xs text-foreground"></i> v1.0.0</span>
+          <span class="hidden sm:inline-flex text-xs text-muted-foreground">Laravel 13 · Livewire 4 · Tailwind 4 · Alpine 3</span>
+        </div>
+      </header>
+
+      <!-- ───────────────────────── Main content ───────────────────────── -->
+      <main class="mx-auto w-full max-w-7xl px-4 py-10 sm:px-6">
+        <section>
+
+          <h1 class="text-3xl font-extrabold tracking-tight">Components</h1>
+          <p class="mt-2 text-muted-foreground">
+            Everything in one place. Each page documents every prop and
+            customization option.
+          </p>
+          <div class="mt-8 grid gap-3 sm:grid-cols-2">
+            <a href="button.html"
+              class="rounded-lg border border-border bg-card p-5 text-left transition-colors hover:bg-muted"
+            >
+              <i class="ti ti-click text-xl"></i>
+              <h3 class="mt-2 text-sm font-semibold">Button</h3>
+              <p class="mt-1 text-sm text-muted-foreground">
+                4 variants, 5 sizes, 5 colors, icons, links, loading &amp;
+                block.
+              </p>
+            </a>
+            <a href="input.html"
+              class="rounded-lg border border-border bg-card p-5 text-left transition-colors hover:bg-muted"
+            >
+              <i class="ti ti-forms text-xl"></i>
+              <h3 class="mt-2 text-sm font-semibold">Input</h3>
+              <p class="mt-1 text-sm text-muted-foreground">
+                5 variants, leading/trailing icons, password toggle, validation
+                &amp; loading.
+              </p>
+            </a>
+            <a href="checkbox.html"
+              class="rounded-lg border border-border bg-card p-5 text-left transition-colors hover:bg-muted"
+            >
+              <i class="ti ti-square-check text-xl"></i>
+              <h3 class="mt-2 text-sm font-semibold">Checkbox</h3>
+              <p class="mt-1 text-sm text-muted-foreground">
+                6 radius levels, sizes, colors, indeterminate &amp; block/card
+                mode.
+              </p>
+            </a>
+            <a href="datepicker.html"
+              class="rounded-lg border border-border bg-card p-5 text-left transition-colors hover:bg-muted"
+            >
+              <i class="ti ti-calendar text-xl"></i>
+              <h3 class="mt-2 text-sm font-semibold">Date Picker</h3>
+              <p class="mt-1 text-sm text-muted-foreground">
+                7 modes, 6 formats, presets, week numbers, disabled dates &amp;
+                ranges.
+              </p>
+            </a>
+            <a href="alert.html"
+              class="rounded-lg border border-border bg-card p-5 text-left transition-colors hover:bg-muted"
+            >
+              <i class="ti ti-bell text-xl"></i>
+              <h3 class="mt-2 text-sm font-semibold">Alert</h3>
+              <p class="mt-1 text-sm text-muted-foreground">
+                4 variants, 5 colors, auto icons, dismissible &amp; sizes.
+              </p>
+            </a>
+            <a href="accordion.html"
+              class="rounded-lg border border-border bg-card p-5 text-left transition-colors hover:bg-muted"
+            >
+              <i class="ti ti-layout-accordion text-xl"></i>
+              <h3 class="mt-2 text-sm font-semibold">Accordion</h3>
+              <p class="mt-1 text-sm text-muted-foreground">
+                Single or multi-open, 4 variants, leading icons &amp; disabled
+                items.
+              </p>
+            </a>
+            <a href="spinner.html"
+              class="rounded-lg border border-border bg-card p-5 text-left transition-colors hover:bg-muted"
+            >
+              <i class="ti ti-loader-2 text-xl"></i>
+              <h3 class="mt-2 text-sm font-semibold">Spinner</h3>
+              <p class="mt-1 text-sm text-muted-foreground">
+                5 sizes, inherits color, used by every loading state.
+              </p>
+            </a>
+            <a href="icon.html"
+              class="rounded-lg border border-border bg-card p-5 text-left transition-colors hover:bg-muted"
+            >
+              <i class="ti ti-icons text-xl"></i>
+              <h3 class="mt-2 text-sm font-semibold">Icon</h3>
+              <p class="mt-1 text-sm text-muted-foreground">
+                Any Tabler icon, 5 sizes, color &amp; aria labels.
+              </p>
+            </a>
+            <a href="form-field.html"
+              class="rounded-lg border border-border bg-card p-5 text-left transition-colors hover:bg-muted sm:col-span-2"
+            >
+              <i class="ti ti-list-check text-xl"></i>
+              <h3 class="mt-2 text-sm font-semibold">Form Field</h3>
+              <p class="mt-1 text-sm text-muted-foreground">
+                Label, required marker, hint, error &amp; valid feedback
+                wrapper.
+              </p>
+            </a>
+          </div>
+        
+</section>
+
+
+      </main>
+    </div>
+
+    
+  </body>
+</html>

@@ -1089,6 +1089,7 @@ All components use a flat, hyphenated tag. The default is no prefix — each com
 | Textarea      | `<x-textarea />`       | Blade    |
 | Select        | `<x-select />`         | Blade    |
 | Checkbox      | `<x-checkbox />`       | Blade    |
+| DatePicker    | `<x-datepicker />`     | Blade    |
 | Radio         | `<x-radio />`          | Blade    |
 | Toggle        | `<x-toggle />`         | Blade    |
 | Icon          | `<x-icon />`           | Blade    |
@@ -1932,6 +1933,112 @@ For every form input component, the Feature tests must cover:
 - `readonly` renders HTML `readonly` attribute and muted class.
 - `required` renders `required` attribute, `aria-required="true"`, and the `*` indicator.
 - `id` auto-generates from `label` when not set.
+
+---
+
+## 22a. DatePicker component — Alpine-driven calendar
+
+Blade component at `src/Components/DatePicker.php`, view at
+`resources/views/components/datepicker.blade.php`. Tag: `<x-datepicker />`.
+
+### Overview
+
+The calendar is 100% Alpine — opening, navigating, and selecting never round-trip to the
+server. The display `<input>` is `readonly`; the real value is carried by a hidden input
+(rendered only when `wireModel` is set) that dispatches native `input`/`change` events on
+every selection change so `wire:model` keeps working. Selection state is a list of ISO cell
+keys (`YYYY-MM-DD`, `YYYY-MM`, or `YYYY` depending on granularity), so all range logic is
+shared across day / month / year granularities.
+
+### Modes, granularity, and select type
+
+| Mode           | Granularity | Select type | Value produced                       |
+|----------------|-------------|-------------|--------------------------------------|
+| `single`       | day         | single      | `2026-08-14`                         |
+| `range`        | day         | range       | `2026-08-01 - 2026-08-14`            |
+| `multiple`     | day         | multiple    | `2026-08-01,2026-08-14`              |
+| `month`        | month       | single      | `2026-08`                            |
+| `month-range`  | month       | range       | `2026-01 - 2026-08`                  |
+| `year`         | year        | single      | `2026`                               |
+| `year-range`   | year        | range       | `2020 - 2026`                        |
+
+`granularity()` derives `day` | `month` | `year` from the mode; `selectType()` derives
+`single` | `range` | `multiple`. Range/multiple values are normalized from either an array
+(`['2026-08-01', '2026-08-14']`) or a delimited string (`-` / `to` for ranges, `,` for
+multiples). Invalid `mode`/`format` values throw `InvalidArgumentException` listing the
+allowed values.
+
+### Allowed formats
+
+`M d, Y` (default), `MM-DD-YYYY`, `DD-MM-YYYY`, `YYYY-MM-DD`, `D d M, Y`, `MMMM d, Y`.
+Tokens: `YYYY`/`MM`/`DD` are zero-padded numeric; `M` short month; `MMMM` full month;
+`D` weekday name; `d` unpadded day. Formatting is client-side via `tokenFormat()`.
+
+### Props
+
+| Prop                | Type          | Default     | Notes                                                              |
+|---------------------|---------------|-------------|--------------------------------------------------------------------|
+| `mode`              | `string`      | `'single'`  | One of the 7 modes above.                                          |
+| `format`            | `string`      | `'M d, Y'`  | One of the 6 allowed formats.                                      |
+| `size`              | `string`      | `'md'`      | HasSize levels (`xs`…`xl`).                                        |
+| `color`             | `string`      | `'primary'` | HasColor levels.                                                   |
+| `value`             | `mixed`       | `null`      | ISO key, array, or delimited string. Used for initial view + value.|
+| `label`             | `?string`     | `null`      | Renders `<label for>` above the trigger.                           |
+| `hint` / `error`    | `?string`     | `null`      | HasValidation feedback; error wins.                                |
+| `valid`             | `bool`        | `false`     | HasValidation valid state.                                         |
+| `required`          | `bool`        | `false`     | `required` + `aria-required` + `*` indicator.                      |
+| `readonly`          | `bool`        | `false`     | Trigger does not open; muted state.                                |
+| `disabled`          | `bool`        | `false`     | Trigger input gets `disabled`; block state.                        |
+| `weekNumbers`       | `bool`        | `false`     | ISO-8601 week numbers via `isoWeek()` (UTC-based).                 |
+| `presets`           | `bool\|array` | `false`    | `true` → server-built defaults; array passes through as-is.        |
+| `disabledDates`     | `array`       | `[]`        | ISO keys that cannot be selected.                                  |
+| `min` / `max`       | `?string`     | `null`      | Inclusive ISO key bounds, compared as strings.                     |
+| `firstDayOfWeek`    | `int`         | `0`         | `0`=Sun … `6`=Sat; reorders weekday header + grid blanks.          |
+| `numberOfMonths`    | `int`         | `1`         | Months shown side-by-side in day view.                             |
+| `fixedWeeks`        | `bool`        | `false`     | Pads each month grid to a full 6-week block.                       |
+| `clearable`         | `bool`        | `false`     | Shows a × clear button in the trigger.                             |
+| `viewControl`       | `bool`        | `true`      | Enables heading click to cycle day → month → year views.           |
+| `monthControls`     | `bool`        | `true`      | Shows prev/next chevrons in day/month views.                       |
+| `yearControls`      | `bool`        | `true`      | Shows prev/next chevrons in year view.                             |
+| `placeholder`       | `?string`     | `null`      | Defaults to `'Select date'`.                                       |
+| `id` / `name`       | `?string`     | `null`      | HasValidation auto-generation from `label`.                        |
+| `unstyled`          | `bool`        | `false`     | Strips `ui-form-field` + `ui-datepicker` classes.                  |
+| `wireModel`         | `?string`     | `null`      | Renders the hidden input bound via `wire:model`.                   |
+| `wireModelModifier` | `?string`     | `null`      | Appended to `wire:model` (e.g. `defer`).                           |
+
+### Config defaults
+
+```php
+// config/aegis-ui.php
+'datepicker' => [
+    'mode'   => 'single',
+    'format' => 'M d, Y',
+    'size'   => 'md',
+    'color'  => 'primary',
+],
+```
+
+### Structural notes
+
+- Root is `.ui-form-field`; the trigger + popover live inside it. `classes()` adds
+  `ui-datepicker--{size|color|mode}` plus `--week-numbers`, `--disabled`, `--readonly`.
+- Popover uses `x-show="open"` + `x-cloak` + `x-transition.opacity`. Root closes on
+  `@click.outside` and `@keydown.escape.window`. The docs-site demo roots must add these
+  same handlers since they rebuild the calendar via `x-html`.
+- Month/year views: clicking a month/year in a day-granularity picker navigates down to the
+  day view; in month/year granularity it selects. `previous()`/`next()` jump 12 years in
+  year view, 1 year in month view, `numberOfMonths` in day view.
+- Range select: first click sets start, second click sets end (auto-swapping if reversed),
+  then closes. A third click restarts the range. `multiple` toggles keys in/out; all other
+  modes close after one click.
+- Livewire: hidden input carries `wireValue` (ISO string, `"start - end"`, or comma-joined)
+  and `x-effect` re-syncs `$refs.hiddenInput.value` + dispatches `change`/`input`.
+- Presets: when `presets=true`, `defaultPresets()` builds Today / Yesterday / Last 7 & 14 &
+  30 days / This month / This year. `applyPreset` fills `{start,end}` for ranges, expands a
+  start/end range into the date list for `multiple`, else uses `value`.
+- Tests: `tests/Unit/DatePickerTest.php` + `tests/Feature/DatePickerRenderTest.php` cover
+  mode/format validation, config defaults, allowed values, render classes, `$errors` bag,
+  aria attributes, disabled/readonly/clearable, presets, and wire model attributes.
 
 ---
 

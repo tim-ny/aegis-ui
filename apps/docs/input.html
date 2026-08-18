@@ -1,0 +1,517 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Input — Aegis UI Docs</title>
+    <meta name="description" content="Input component: variants, sizes, leading/trailing icons, validation and loading." />
+
+    <!-- Alpine.js Collapse Plugin -->
+    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
+    <!-- Alpine.js Core -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <!-- Tabler Icons CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+    <!-- Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/src/styles.css" />
+  </head>
+
+  <body x-data="{ sidebarOpen: false }" class="bg-background text-foreground antialiased">
+    <!-- ───────────────────────── Mobile sidebar overlay ───────────────────────── -->
+    <div x-show="sidebarOpen" x-cloak class="fixed inset-0 z-50 lg:hidden">
+      <div class="absolute inset-0 bg-black/40" @click="sidebarOpen = false"></div>
+      <aside class="absolute inset-y-0 left-0 flex w-72 flex-col overflow-y-auto border-r border-border bg-background">
+        
+          <div class="flex h-14 items-center gap-2 border-b border-border px-5">
+            <span class="flex h-7 w-7 items-center justify-center rounded-md bg-primary text-primary-foreground">
+              <i class="ti ti-shield text-sm"></i>
+            </span>
+            <span class="text-sm font-bold tracking-tight">Aegis UI</span>
+          </div>
+        <nav class="flex-1 overflow-y-auto px-4 py-6">
+          <p class="px-2 pb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">Getting Started</p>
+            <a href="index.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-home text-base"></i> Home</a>
+            <a href="about.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-info-circle text-base"></i> About</a>
+            <a href="installation.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-terminal text-base"></i> Installation</a>
+            <a href="theming.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-palette text-base"></i> Theming & Customization</a>
+
+            <p class="px-2 pb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground pt-6">Components</p>
+            <a href="components.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-components text-base"></i> Overview</a>
+            <a href="button.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-click text-base"></i> Button</a>
+            <a href="input.html" aria-current="page" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors bg-muted text-foreground font-medium"><i class="ti ti-forms text-base"></i> Input</a>
+            <a href="checkbox.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-square-check text-base"></i> Checkbox</a>
+            <a href="datepicker.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-calendar text-base"></i> Date Picker</a>
+            <a href="alert.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-bell text-base"></i> Alert</a>
+            <a href="accordion.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-layout-accordion text-base"></i> Accordion</a>
+            <a href="spinner.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-loader-2 text-base"></i> Spinner</a>
+            <a href="icon.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-icons text-base"></i> Icon</a>
+            <a href="form-field.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-list-check text-base"></i> Form Field</a>
+        </nav>
+      </aside>
+    </div>
+
+    <div class="lg:pl-64">
+      <!-- ───────────────────────── Desktop sidebar ───────────────────────── -->
+      <aside class="fixed inset-y-0 left-0 z-40 hidden w-64 flex-col border-r border-border bg-background lg:flex">
+        
+          <a href="index.html" class="flex h-14 items-center gap-2 border-b border-border px-5">
+            <span class="flex h-7 w-7 items-center justify-center rounded-md bg-primary text-primary-foreground">
+              <i class="ti ti-shield text-sm"></i>
+            </span>
+            <span class="text-sm font-bold tracking-tight">Aegis UI</span>
+          </a>
+        <nav class="flex-1 overflow-y-auto px-4 py-6">
+          <p class="px-2 pb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">Getting Started</p>
+            <a href="index.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-home text-base"></i> Home</a>
+            <a href="about.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-info-circle text-base"></i> About</a>
+            <a href="installation.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-terminal text-base"></i> Installation</a>
+            <a href="theming.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-palette text-base"></i> Theming & Customization</a>
+
+            <p class="px-2 pb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground pt-6">Components</p>
+            <a href="components.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-components text-base"></i> Overview</a>
+            <a href="button.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-click text-base"></i> Button</a>
+            <a href="input.html" aria-current="page" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors bg-muted text-foreground font-medium"><i class="ti ti-forms text-base"></i> Input</a>
+            <a href="checkbox.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-square-check text-base"></i> Checkbox</a>
+            <a href="datepicker.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-calendar text-base"></i> Date Picker</a>
+            <a href="alert.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-bell text-base"></i> Alert</a>
+            <a href="accordion.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-layout-accordion text-base"></i> Accordion</a>
+            <a href="spinner.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-loader-2 text-base"></i> Spinner</a>
+            <a href="icon.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-icons text-base"></i> Icon</a>
+            <a href="form-field.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-list-check text-base"></i> Form Field</a>
+        </nav>
+      </aside>
+
+      <!-- ───────────────────────── Top header ───────────────────────── -->
+      <header class="sticky top-0 z-30 flex h-14 items-center justify-between border-b border-border bg-background/80 px-4 backdrop-blur sm:px-6">
+        <div class="flex items-center gap-3">
+          <button
+            type="button"
+            @click="sidebarOpen = true"
+            class="flex h-9 w-9 items-center justify-center rounded-md border border-border text-muted-foreground transition-colors hover:text-foreground lg:hidden"
+            aria-label="Open navigation"
+          >
+            <i class="ti ti-menu-2 text-lg"></i>
+          </button>
+          <span class="text-sm font-medium text-muted-foreground lg:hidden">Aegis UI</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="version-chip"><i class="ti ti-shield text-xs text-foreground"></i> v1.0.0</span>
+          <span class="hidden sm:inline-flex text-xs text-muted-foreground">Laravel 13 · Livewire 4 · Tailwind 4 · Alpine 3</span>
+        </div>
+      </header>
+
+      <!-- ───────────────────────── Main content ───────────────────────── -->
+      <main class="mx-auto w-full max-w-7xl px-4 py-10 sm:px-6">
+        <section>
+
+          <div class="flex items-center gap-3">
+            <h1 class="text-3xl font-extrabold tracking-tight">Input</h1>
+            <span class="inline-code">&lt;x-input /&gt;</span>
+          </div>
+          <p class="mt-2 text-muted-foreground">
+            Text input with variants, icons, validation and loading states.
+          </p>
+
+          <div class="docs-card mt-8" aria-label="On this page">
+            <span class="docs-card__label">On this page</span>
+            <nav class="flex flex-wrap gap-2">
+              <a href="#usage" class="rounded-md border border-border px-2.5 py-1 text-xs font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground">Usage</a>
+              <a href="#props" class="rounded-md border border-border px-2.5 py-1 text-xs font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground">Props</a>
+              <a href="#variants" class="rounded-md border border-border px-2.5 py-1 text-xs font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground">Variants</a>
+              <a href="#sizes" class="rounded-md border border-border px-2.5 py-1 text-xs font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground">Sizes</a>
+              <a href="#icons-and-password-toggle" class="rounded-md border border-border px-2.5 py-1 text-xs font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground">Icons &amp; password toggle</a>
+              <a href="#validation-and-loading" class="rounded-md border border-border px-2.5 py-1 text-xs font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground">Validation &amp; loading</a>
+            </nav>
+          </div>
+
+          <h2 class="mt-10 text-xl font-bold tracking-tight scroll-mt-20" id="usage">Usage</h2>
+          <pre
+            class="code-block mt-3"
+          ><code x-text="uiDocs.inputUsage"></code></pre>
+
+          <h2 class="mt-10 text-xl font-bold tracking-tight scroll-mt-20" id="props">Props</h2>
+          <table class="prop-table mt-3">
+            <thead>
+              <tr>
+                <th>Prop</th>
+                <th>Type / Options</th>
+                <th>Default</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>type</td>
+                <td>text, password, email, …</td>
+                <td>text</td>
+                <td>
+                  Native input type.
+                  <code class="inline-code">password</code> adds an Alpine eye
+                  toggle.
+                </td>
+              </tr>
+              <tr>
+                <td>variant</td>
+                <td>outline, soft, subtle, ghost, none</td>
+                <td>outline</td>
+                <td>Field visual style.</td>
+              </tr>
+              <tr>
+                <td>size</td>
+                <td>xs, sm, md, lg, xl</td>
+                <td>md</td>
+                <td>Height scale.</td>
+              </tr>
+              <tr>
+                <td>color</td>
+                <td>primary, danger, success, warning, neutral</td>
+                <td>primary</td>
+                <td>Focus/theme color.</td>
+              </tr>
+              <tr>
+                <td>leadingIcon</td>
+                <td>string</td>
+                <td>null</td>
+                <td>Icon rendered inside the left edge.</td>
+              </tr>
+              <tr>
+                <td>trailingIcon</td>
+                <td>string</td>
+                <td>null</td>
+                <td>Icon rendered inside the right edge.</td>
+              </tr>
+              <tr>
+                <td>label / hint / error</td>
+                <td>string</td>
+                <td>null</td>
+                <td>Form-field text (see Form Field).</td>
+              </tr>
+              <tr>
+                <td>valid</td>
+                <td>bool</td>
+                <td>false</td>
+                <td>Shows the success state.</td>
+              </tr>
+              <tr>
+                <td>required / readonly / disabled</td>
+                <td>bool</td>
+                <td>false</td>
+                <td>Native states with themed styling.</td>
+              </tr>
+              <tr>
+                <td>loading</td>
+                <td>bool</td>
+                <td>false</td>
+                <td>Replaces the trailing icon with a spinner.</td>
+              </tr>
+              <tr>
+                <td>block</td>
+                <td>bool</td>
+                <td>false</td>
+                <td>Full-width control.</td>
+              </tr>
+              <tr>
+                <td>placeholder / autocomplete / autofocus / maxlength</td>
+                <td>string / bool / int</td>
+                <td>—</td>
+                <td>Passed to the native input.</td>
+              </tr>
+              <tr>
+                <td>wireModel / wireModelModifier</td>
+                <td>string</td>
+                <td>null</td>
+                <td>Livewire binding.</td>
+              </tr>
+              <tr>
+                <td>unstyled</td>
+                <td>bool</td>
+                <td>false</td>
+                <td>Removes wrapper + field styles.</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h2 class="mt-10 text-xl font-bold tracking-tight scroll-mt-20" id="variants">Variants</h2>
+          <div class="docs-card mt-4 grid gap-6 sm:grid-cols-2">
+            <div class="ui-form-field">
+              <label for="in-v-outline" class="ui-form-field__label"
+                >Outline (default)</label
+              >
+              <input
+                id="in-v-outline"
+                type="text"
+                placeholder="ui-input--outline"
+                class="ui-input ui-input--outline ui-input--md ui-input--primary"
+              />
+            </div>
+            <div class="ui-form-field">
+              <label for="in-v-soft" class="ui-form-field__label">Soft</label>
+              <input
+                id="in-v-soft"
+                type="text"
+                placeholder="ui-input--soft"
+                class="ui-input ui-input--soft ui-input--md ui-input--primary"
+              />
+            </div>
+            <div class="ui-form-field">
+              <label for="in-v-subtle" class="ui-form-field__label"
+                >Subtle</label
+              >
+              <input
+                id="in-v-subtle"
+                type="text"
+                placeholder="ui-input--subtle"
+                class="ui-input ui-input--subtle ui-input--md ui-input--primary"
+              />
+            </div>
+            <div class="ui-form-field">
+              <label for="in-v-ghost" class="ui-form-field__label">Ghost</label>
+              <input
+                id="in-v-ghost"
+                type="text"
+                placeholder="ui-input--ghost"
+                class="ui-input ui-input--ghost ui-input--md ui-input--primary"
+              />
+            </div>
+          </div>
+          <pre
+            class="code-block mt-3"
+          ><code x-text="uiDocs.inputVariants"></code></pre>
+
+          <h2 class="mt-10 text-xl font-bold tracking-tight scroll-mt-20" id="sizes">Sizes</h2>
+          <div class="docs-card mt-4 grid gap-4 sm:grid-cols-2">
+            <div class="ui-form-field">
+              <label for="in-s-xs" class="ui-form-field__label"
+                >Extra Small</label
+              ><input
+                id="in-s-xs"
+                type="text"
+                placeholder="size xs"
+                class="ui-input ui-input--outline ui-input--xs ui-input--primary"
+              />
+            </div>
+            <div class="ui-form-field">
+              <label for="in-s-sm" class="ui-form-field__label">Small</label
+              ><input
+                id="in-s-sm"
+                type="text"
+                placeholder="size sm"
+                class="ui-input ui-input--outline ui-input--sm ui-input--primary"
+              />
+            </div>
+            <div class="ui-form-field">
+              <label for="in-s-md" class="ui-form-field__label"
+                >Medium (default)</label
+              ><input
+                id="in-s-md"
+                type="text"
+                placeholder="size md"
+                class="ui-input ui-input--outline ui-input--md ui-input--primary"
+              />
+            </div>
+            <div class="ui-form-field">
+              <label for="in-s-lg" class="ui-form-field__label">Large</label
+              ><input
+                id="in-s-lg"
+                type="text"
+                placeholder="size lg"
+                class="ui-input ui-input--outline ui-input--lg ui-input--primary"
+              />
+            </div>
+            <div class="ui-form-field">
+              <label for="in-s-xl" class="ui-form-field__label"
+                >Extra Large</label
+              ><input
+                id="in-s-xl"
+                type="text"
+                placeholder="size xl"
+                class="ui-input ui-input--outline ui-input--xl ui-input--primary"
+              />
+            </div>
+          </div>
+          <pre
+            class="code-block mt-3"
+          ><code x-text="uiDocs.inputSizes"></code></pre>
+
+          <h2 class="mt-10 text-xl font-bold tracking-tight scroll-mt-20" id="icons-and-password-toggle">
+            Icons &amp; password toggle
+          </h2>
+          <div class="docs-card mt-4 grid gap-6 sm:grid-cols-2">
+            <div class="ui-form-field">
+              <label for="in-i-email" class="ui-form-field__label">Email</label>
+              <div class="ui-input__wrapper">
+                <div class="ui-input__leading"><i class="ti ti-mail"></i></div>
+                <input
+                  id="in-i-email"
+                  type="email"
+                  placeholder="john@example.com"
+                  class="ui-input ui-input--outline ui-input--md ui-input--primary"
+                />
+              </div>
+            </div>
+            <div class="ui-form-field" x-data="{ showPass: false }">
+              <label for="in-i-pass" class="ui-form-field__label"
+                >Password</label
+              >
+              <div class="ui-input__wrapper">
+                <div class="ui-input__leading"><i class="ti ti-lock"></i></div>
+                <input
+                  id="in-i-pass"
+                  :type="showPass ? 'text' : 'password'"
+                  placeholder="Enter your password"
+                  class="ui-input ui-input--outline ui-input--md ui-input--primary"
+                />
+                <div class="ui-input__trailing">
+                  <button
+                    type="button"
+                    @click="showPass = !showPass"
+                    class="ui-input__password-toggle"
+                    aria-label="Toggle password visibility"
+                  >
+                    <i
+                      class="ti"
+                      :class="showPass ? 'ti-eye-off' : 'ti-eye'"
+                    ></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <pre
+            class="code-block mt-3"
+          ><code x-text="uiDocs.inputIcons"></code></pre>
+
+          <h2 class="mt-10 text-xl font-bold tracking-tight scroll-mt-20" id="validation-and-loading">
+            Validation &amp; loading
+          </h2>
+          <div class="docs-card mt-4 grid gap-6 sm:grid-cols-2">
+            <div class="ui-form-field ui-field--error">
+              <label for="in-e-err" class="ui-form-field__label"
+                >Username</label
+              >
+              <div class="ui-input__wrapper">
+                <input
+                  id="in-e-err"
+                  type="text"
+                  value="invalid_username#"
+                  class="ui-input ui-input--outline ui-input--md ui-input--primary"
+                />
+                <div class="ui-input__trailing">
+                  <i
+                    class="ti ti-alert-circle ui-input__trailing-icon--error"
+                  ></i>
+                </div>
+              </div>
+              <p
+                role="alert"
+                class="ui-form-field__feedback ui-form-field__feedback--error"
+              >
+                Username can only contain alphanumeric characters.
+              </p>
+            </div>
+            <div class="ui-form-field ui-field--valid">
+              <label for="in-e-valid" class="ui-form-field__label"
+                >Website URL</label
+              >
+              <div class="ui-input__wrapper">
+                <input
+                  id="in-e-valid"
+                  type="text"
+                  value="https://aegis-ui.dev"
+                  class="ui-input ui-input--outline ui-input--md ui-input--primary"
+                />
+                <div class="ui-input__trailing">
+                  <i
+                    class="ti ti-circle-check ui-input__trailing-icon--valid"
+                  ></i>
+                </div>
+              </div>
+            </div>
+            <div class="ui-form-field" x-data="{ searching: true }">
+              <label class="ui-form-field__label flex justify-between">
+                <span>Live Async Search</span>
+                <button
+                  type="button"
+                  @click="searching = !searching"
+                  class="text-xs text-muted-foreground underline"
+                >
+                  Toggle Spinner
+                </button>
+              </label>
+              <div class="ui-input__wrapper">
+                <input
+                  type="text"
+                  placeholder="Search database..."
+                  class="ui-input ui-input--outline ui-input--md ui-input--primary"
+                  :class="{ 'ui-input--loading': searching }"
+                />
+                <div class="ui-input__trailing">
+                  <template x-if="searching"
+                    ><i
+                      class="ti ti-loader-2 ui-spinner ui-spinner--xs"
+                      style="font-size: var(--ui-icon-size-xs)"
+                    ></i
+                  ></template>
+                  <template x-if="!searching"
+                    ><i class="ti ti-search"></i
+                  ></template>
+                </div>
+              </div>
+            </div>
+          </div>
+          <pre
+            class="code-block mt-3"
+          ><code x-text="uiDocs.inputValidation"></code></pre>
+        
+</section>
+
+
+      </main>
+    </div>
+
+    <script>
+
+      window.uiDocs = {
+        inputUsage: [
+          '<x-input label="Email" type="email" placeholder="john@example.com" required',
+          '    leadingIcon="mail" hint="We will send a confirmation."',
+          '    wireModel="email" />',
+          '',
+          '<x-input type="password" label="Password" />',
+        ].join('\n'),
+
+        inputVariants: [
+          '<x-input variant="outline" />  {{-- default --}}',
+          '<x-input variant="soft" />',
+          '<x-input variant="subtle" />',
+          '<x-input variant="ghost" />',
+          '<x-input variant="none" />',
+        ].join('\n'),
+
+        inputSizes: [
+          '<x-input size="xs" placeholder="size xs" />',
+          '<x-input size="sm" placeholder="size sm" />',
+          '<x-input size="md" placeholder="size md" />',
+          '<x-input size="lg" placeholder="size lg" />',
+          '<x-input size="xl" placeholder="size xl" />',
+        ].join('\n'),
+
+        inputIcons: [
+          '<x-input leadingIcon="mail" placeholder="john@example.com" />',
+          '<x-input type="password" leadingIcon="lock" />  {{-- Alpine eye toggle --}}',
+          '<x-input trailingIcon="search" />',
+        ].join('\n'),
+
+        inputValidation: [
+          '<x-input label="Username" error="Username can only contain alphanumeric characters." />',
+          '<x-input label="Website URL" value="https://aegis-ui.dev" valid />',
+          '<x-input loading />  {{-- trailing spinner --}}',
+        ].join('\n'),
+      }
+    </script>
+
+  </body>
+</html>

@@ -1,0 +1,534 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Button — Aegis UI Docs</title>
+    <meta name="description" content="Button component: variants, sizes, colors, icons, links, loading and block." />
+
+    <!-- Alpine.js Collapse Plugin -->
+    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
+    <!-- Alpine.js Core -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <!-- Tabler Icons CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+    <!-- Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/src/styles.css" />
+  </head>
+
+  <body x-data="{ sidebarOpen: false }" class="bg-background text-foreground antialiased">
+    <!-- ───────────────────────── Mobile sidebar overlay ───────────────────────── -->
+    <div x-show="sidebarOpen" x-cloak class="fixed inset-0 z-50 lg:hidden">
+      <div class="absolute inset-0 bg-black/40" @click="sidebarOpen = false"></div>
+      <aside class="absolute inset-y-0 left-0 flex w-72 flex-col overflow-y-auto border-r border-border bg-background">
+        
+          <div class="flex h-14 items-center gap-2 border-b border-border px-5">
+            <span class="flex h-7 w-7 items-center justify-center rounded-md bg-primary text-primary-foreground">
+              <i class="ti ti-shield text-sm"></i>
+            </span>
+            <span class="text-sm font-bold tracking-tight">Aegis UI</span>
+          </div>
+        <nav class="flex-1 overflow-y-auto px-4 py-6">
+          <p class="px-2 pb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">Getting Started</p>
+            <a href="index.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-home text-base"></i> Home</a>
+            <a href="about.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-info-circle text-base"></i> About</a>
+            <a href="installation.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-terminal text-base"></i> Installation</a>
+            <a href="theming.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-palette text-base"></i> Theming & Customization</a>
+
+            <p class="px-2 pb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground pt-6">Components</p>
+            <a href="components.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-components text-base"></i> Overview</a>
+            <a href="button.html" aria-current="page" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors bg-muted text-foreground font-medium"><i class="ti ti-click text-base"></i> Button</a>
+            <a href="input.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-forms text-base"></i> Input</a>
+            <a href="checkbox.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-square-check text-base"></i> Checkbox</a>
+            <a href="datepicker.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-calendar text-base"></i> Date Picker</a>
+            <a href="alert.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-bell text-base"></i> Alert</a>
+            <a href="accordion.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-layout-accordion text-base"></i> Accordion</a>
+            <a href="spinner.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-loader-2 text-base"></i> Spinner</a>
+            <a href="icon.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-icons text-base"></i> Icon</a>
+            <a href="form-field.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-list-check text-base"></i> Form Field</a>
+        </nav>
+      </aside>
+    </div>
+
+    <div class="lg:pl-64">
+      <!-- ───────────────────────── Desktop sidebar ───────────────────────── -->
+      <aside class="fixed inset-y-0 left-0 z-40 hidden w-64 flex-col border-r border-border bg-background lg:flex">
+        
+          <a href="index.html" class="flex h-14 items-center gap-2 border-b border-border px-5">
+            <span class="flex h-7 w-7 items-center justify-center rounded-md bg-primary text-primary-foreground">
+              <i class="ti ti-shield text-sm"></i>
+            </span>
+            <span class="text-sm font-bold tracking-tight">Aegis UI</span>
+          </a>
+        <nav class="flex-1 overflow-y-auto px-4 py-6">
+          <p class="px-2 pb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">Getting Started</p>
+            <a href="index.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-home text-base"></i> Home</a>
+            <a href="about.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-info-circle text-base"></i> About</a>
+            <a href="installation.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-terminal text-base"></i> Installation</a>
+            <a href="theming.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-palette text-base"></i> Theming & Customization</a>
+
+            <p class="px-2 pb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground pt-6">Components</p>
+            <a href="components.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-components text-base"></i> Overview</a>
+            <a href="button.html" aria-current="page" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors bg-muted text-foreground font-medium"><i class="ti ti-click text-base"></i> Button</a>
+            <a href="input.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-forms text-base"></i> Input</a>
+            <a href="checkbox.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-square-check text-base"></i> Checkbox</a>
+            <a href="datepicker.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-calendar text-base"></i> Date Picker</a>
+            <a href="alert.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-bell text-base"></i> Alert</a>
+            <a href="accordion.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-layout-accordion text-base"></i> Accordion</a>
+            <a href="spinner.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-loader-2 text-base"></i> Spinner</a>
+            <a href="icon.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-icons text-base"></i> Icon</a>
+            <a href="form-field.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-list-check text-base"></i> Form Field</a>
+        </nav>
+      </aside>
+
+      <!-- ───────────────────────── Top header ───────────────────────── -->
+      <header class="sticky top-0 z-30 flex h-14 items-center justify-between border-b border-border bg-background/80 px-4 backdrop-blur sm:px-6">
+        <div class="flex items-center gap-3">
+          <button
+            type="button"
+            @click="sidebarOpen = true"
+            class="flex h-9 w-9 items-center justify-center rounded-md border border-border text-muted-foreground transition-colors hover:text-foreground lg:hidden"
+            aria-label="Open navigation"
+          >
+            <i class="ti ti-menu-2 text-lg"></i>
+          </button>
+          <span class="text-sm font-medium text-muted-foreground lg:hidden">Aegis UI</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="version-chip"><i class="ti ti-shield text-xs text-foreground"></i> v1.0.0</span>
+          <span class="hidden sm:inline-flex text-xs text-muted-foreground">Laravel 13 · Livewire 4 · Tailwind 4 · Alpine 3</span>
+        </div>
+      </header>
+
+      <!-- ───────────────────────── Main content ───────────────────────── -->
+      <main class="mx-auto w-full max-w-7xl px-4 py-10 sm:px-6">
+        <section>
+
+          <div class="flex items-center gap-3">
+            <h1 class="text-3xl font-extrabold tracking-tight">Button</h1>
+            <span class="inline-code">&lt;x-button /&gt;</span>
+          </div>
+          <p class="mt-2 text-muted-foreground">
+            Triggers an action. Renders a
+            <code class="inline-code">&lt;button&gt;</code> or an
+            <code class="inline-code">&lt;a&gt;</code>.
+          </p>
+
+          <div class="docs-card mt-8" aria-label="On this page">
+            <span class="docs-card__label">On this page</span>
+            <nav class="flex flex-wrap gap-2">
+              <a href="#usage" class="rounded-md border border-border px-2.5 py-1 text-xs font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground">Usage</a>
+              <a href="#props" class="rounded-md border border-border px-2.5 py-1 text-xs font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground">Props</a>
+              <a href="#variants-and-colors" class="rounded-md border border-border px-2.5 py-1 text-xs font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground">Variants &amp; colors</a>
+              <a href="#sizes" class="rounded-md border border-border px-2.5 py-1 text-xs font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground">Sizes</a>
+              <a href="#icons-links-and-states" class="rounded-md border border-border px-2.5 py-1 text-xs font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground">Icons, links &amp; states</a>
+            </nav>
+          </div>
+
+          <h2 class="mt-10 text-xl font-bold tracking-tight scroll-mt-20" id="usage">Usage</h2>
+          <pre
+            class="code-block mt-3"
+          ><code x-text="uiDocs.buttonUsage"></code></pre>
+
+          <h2 class="mt-10 text-xl font-bold tracking-tight scroll-mt-20" id="props">Props</h2>
+          <table class="prop-table mt-3">
+            <thead>
+              <tr>
+                <th>Prop</th>
+                <th>Type / Options</th>
+                <th>Default</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>variant</td>
+                <td>solid, soft, outline, ghost</td>
+                <td>solid</td>
+                <td>Visual style of the button.</td>
+              </tr>
+              <tr>
+                <td>size</td>
+                <td>xs, sm, md, lg, xl</td>
+                <td>md</td>
+                <td>Height scale.</td>
+              </tr>
+              <tr>
+                <td>color</td>
+                <td>primary, danger, success, warning, neutral</td>
+                <td>primary</td>
+                <td>Color theme.</td>
+              </tr>
+              <tr>
+                <td>as</td>
+                <td>button, a</td>
+                <td>button</td>
+                <td>Root element override.</td>
+              </tr>
+              <tr>
+                <td>href</td>
+                <td>string</td>
+                <td>null</td>
+                <td>Renders an anchor when set.</td>
+              </tr>
+              <tr>
+                <td>target</td>
+                <td>string</td>
+                <td>null</td>
+                <td>Link target.</td>
+              </tr>
+              <tr>
+                <td>external</td>
+                <td>bool</td>
+                <td>false</td>
+                <td>
+                  Shortcut for <code class="inline-code">target="_blank"</code>.
+                </td>
+              </tr>
+              <tr>
+                <td>type</td>
+                <td>button, submit, reset</td>
+                <td>button</td>
+                <td>
+                  Native type when rendered as
+                  <code class="inline-code">&lt;button&gt;</code>.
+                </td>
+              </tr>
+              <tr>
+                <td>disabled</td>
+                <td>bool</td>
+                <td>false</td>
+                <td>
+                  Disables pointer events and sets
+                  <code class="inline-code">aria-disabled</code>.
+                </td>
+              </tr>
+              <tr>
+                <td>loading</td>
+                <td>bool</td>
+                <td>false</td>
+                <td>Replaces content with the spinner + loading indicator.</td>
+              </tr>
+              <tr>
+                <td>block</td>
+                <td>bool</td>
+                <td>false</td>
+                <td>Full-width button.</td>
+              </tr>
+              <tr>
+                <td>leadingIcon</td>
+                <td>string</td>
+                <td>null</td>
+                <td>Tabler icon name rendered before the label.</td>
+              </tr>
+              <tr>
+                <td>trailingIcon</td>
+                <td>string</td>
+                <td>null</td>
+                <td>Tabler icon name rendered after the label.</td>
+              </tr>
+              <tr>
+                <td>wireModel</td>
+                <td>string</td>
+                <td>null</td>
+                <td>Binds a Livewire property.</td>
+              </tr>
+              <tr>
+                <td>unstyled</td>
+                <td>bool</td>
+                <td>false</td>
+                <td>Removes all wrapper styles.</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h2 class="mt-10 text-xl font-bold tracking-tight scroll-mt-20" id="variants-and-colors">
+            Variants &amp; colors
+          </h2>
+          <div class="docs-card mt-4">
+            <div class="mb-5 flex flex-wrap items-center gap-3">
+              <button
+                type="button"
+                class="ui-btn ui-btn--solid ui-btn--md ui-btn--primary"
+              >
+                Primary Solid
+              </button>
+              <button
+                type="button"
+                class="ui-btn ui-btn--solid ui-btn--md ui-btn--danger"
+              >
+                Danger Solid
+              </button>
+              <button
+                type="button"
+                class="ui-btn ui-btn--solid ui-btn--md ui-btn--success"
+              >
+                Success Solid
+              </button>
+              <button
+                type="button"
+                class="ui-btn ui-btn--solid ui-btn--md ui-btn--warning"
+              >
+                Warning Solid
+              </button>
+              <button
+                type="button"
+                class="ui-btn ui-btn--solid ui-btn--md ui-btn--neutral"
+              >
+                Neutral Solid
+              </button>
+            </div>
+            <div class="mb-5 flex flex-wrap items-center gap-3">
+              <button
+                type="button"
+                class="ui-btn ui-btn--soft ui-btn--md ui-btn--primary"
+              >
+                Primary Soft
+              </button>
+              <button
+                type="button"
+                class="ui-btn ui-btn--soft ui-btn--md ui-btn--danger"
+              >
+                Danger Soft
+              </button>
+              <button
+                type="button"
+                class="ui-btn ui-btn--soft ui-btn--md ui-btn--success"
+              >
+                Success Soft
+              </button>
+              <button
+                type="button"
+                class="ui-btn ui-btn--soft ui-btn--md ui-btn--warning"
+              >
+                Warning Soft
+              </button>
+              <button
+                type="button"
+                class="ui-btn ui-btn--soft ui-btn--md ui-btn--neutral"
+              >
+                Neutral Soft
+              </button>
+            </div>
+            <div class="mb-5 flex flex-wrap items-center gap-3">
+              <button
+                type="button"
+                class="ui-btn ui-btn--outline ui-btn--md ui-btn--primary"
+              >
+                Primary Outline
+              </button>
+              <button
+                type="button"
+                class="ui-btn ui-btn--outline ui-btn--md ui-btn--danger"
+              >
+                Danger Outline
+              </button>
+              <button
+                type="button"
+                class="ui-btn ui-btn--outline ui-btn--md ui-btn--success"
+              >
+                Success Outline
+              </button>
+              <button
+                type="button"
+                class="ui-btn ui-btn--outline ui-btn--md ui-btn--warning"
+              >
+                Warning Outline
+              </button>
+              <button
+                type="button"
+                class="ui-btn ui-btn--outline ui-btn--md ui-btn--neutral"
+              >
+                Neutral Outline
+              </button>
+            </div>
+            <div class="flex flex-wrap items-center gap-3">
+              <button
+                type="button"
+                class="ui-btn ui-btn--ghost ui-btn--md ui-btn--primary"
+              >
+                Primary Ghost
+              </button>
+              <button
+                type="button"
+                class="ui-btn ui-btn--ghost ui-btn--md ui-btn--danger"
+              >
+                Danger Ghost
+              </button>
+              <button
+                type="button"
+                class="ui-btn ui-btn--ghost ui-btn--md ui-btn--success"
+              >
+                Success Ghost
+              </button>
+              <button
+                type="button"
+                class="ui-btn ui-btn--ghost ui-btn--md ui-btn--warning"
+              >
+                Warning Ghost
+              </button>
+              <button
+                type="button"
+                class="ui-btn ui-btn--ghost ui-btn--md ui-btn--neutral"
+              >
+                Neutral Ghost
+              </button>
+            </div>
+          </div>
+          <pre
+            class="code-block mt-3"
+          ><code x-text="uiDocs.buttonVariants"></code></pre>
+
+          <h2 class="mt-10 text-xl font-bold tracking-tight scroll-mt-20" id="sizes">Sizes</h2>
+          <div class="docs-card mt-4">
+            <div class="flex flex-wrap items-center gap-3">
+              <button
+                type="button"
+                class="ui-btn ui-btn--solid ui-btn--xs ui-btn--primary"
+              >
+                Size XS
+              </button>
+              <button
+                type="button"
+                class="ui-btn ui-btn--solid ui-btn--sm ui-btn--primary"
+              >
+                Size SM
+              </button>
+              <button
+                type="button"
+                class="ui-btn ui-btn--solid ui-btn--md ui-btn--primary"
+              >
+                Size MD
+              </button>
+              <button
+                type="button"
+                class="ui-btn ui-btn--solid ui-btn--lg ui-btn--primary"
+              >
+                Size LG
+              </button>
+              <button
+                type="button"
+                class="ui-btn ui-btn--solid ui-btn--xl ui-btn--primary"
+              >
+                Size XL
+              </button>
+            </div>
+          </div>
+          <pre
+            class="code-block mt-3"
+          ><code x-text="uiDocs.buttonSizes"></code></pre>
+
+          <h2 class="mt-10 text-xl font-bold tracking-tight scroll-mt-20" id="icons-links-and-states">
+            Icons, links &amp; states
+          </h2>
+          <div class="docs-card mt-4" x-data="{ isLoading: false }">
+            <div class="flex flex-wrap items-center gap-3">
+              <button
+                type="button"
+                class="ui-btn ui-btn--solid ui-btn--md ui-btn--primary"
+              >
+                <i class="ti ti-mail text-base"></i> Send Email
+              </button>
+              <button
+                type="button"
+                class="ui-btn ui-btn--soft ui-btn--md ui-btn--success"
+              >
+                Check Out <i class="ti ti-arrow-right text-base"></i>
+              </button>
+              <a
+                href="https://laravel.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="ui-btn ui-btn--outline ui-btn--md ui-btn--neutral"
+              >
+                External Link <i class="ti ti-external-link text-base"></i>
+              </a>
+              <button
+                type="button"
+                disabled
+                class="ui-btn ui-btn--solid ui-btn--md ui-btn--primary ui-btn--disabled"
+              >
+                Disabled
+              </button>
+              <button
+                type="button"
+                @click="isLoading = !isLoading"
+                class="ui-btn ui-btn--solid ui-btn--md ui-btn--danger"
+                :class="{ 'ui-btn--loading': isLoading }"
+                :disabled="isLoading"
+              >
+                <template x-if="isLoading">
+                  <i
+                    class="ti ti-loader-2 ui-spinner ui-spinner--sm"
+                    style="font-size: var(--ui-icon-size-sm)"
+                  ></i>
+                </template>
+                <span
+                  x-text="isLoading ? 'Saving...' : 'Toggle Loading State'"
+                ></span>
+              </button>
+            </div>
+            <p class="mt-4 text-xs text-muted-foreground">
+              Tip: click “Toggle Loading State” to see
+              <code class="inline-code">&lt;x-button loading&gt;</code> in
+              action.
+            </p>
+          </div>
+          <pre
+            class="code-block mt-3"
+          ><code x-text="uiDocs.buttonStates"></code></pre>
+        
+</section>
+
+
+      </main>
+    </div>
+
+    <script>
+
+      window.uiDocs = {
+        buttonUsage: [
+          '<x-button>Save changes</x-button>',
+          '',
+          '<x-button variant="outline" color="success" size="lg" leadingIcon="check">',
+          '    Mark complete',
+          '</x-button>',
+          '',
+          '<x-button href="https://example.com" external>',
+          '    Visit site',
+          '</x-button>',
+          '',
+          '<x-button wireModel="submitting" loading>Processing</x-button>',
+        ].join('\n'),
+
+        buttonVariants: [
+          '<x-button variant="solid" color="primary">Primary Solid</x-button>',
+          '<x-button variant="soft" color="danger">Danger Soft</x-button>',
+          '<x-button variant="outline" color="success">Success Outline</x-button>',
+          '<x-button variant="ghost" color="neutral">Neutral Ghost</x-button>',
+        ].join('\n'),
+
+        buttonSizes: [
+          '<x-button size="xs">Size XS</x-button>',
+          '<x-button size="sm">Size SM</x-button>',
+          '<x-button size="md">Size MD</x-button>',
+          '<x-button size="lg">Size LG</x-button>',
+          '<x-button size="xl">Size XL</x-button>',
+        ].join('\n'),
+
+        buttonStates: [
+          '<x-button leadingIcon="mail">Send Email</x-button>',
+          '<x-button trailingIcon="arrow-right">Check Out</x-button>',
+          '<x-button href="https://example.com" external>External Link</x-button>',
+          '<x-button disabled>Disabled</x-button>',
+          '<x-button loading>Processing</x-button>',
+          '<x-button block>Full width</x-button>',
+        ].join('\n'),
+      }
+    </script>
+
+  </body>
+</html>

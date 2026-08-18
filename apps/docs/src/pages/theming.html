@@ -1,0 +1,151 @@
+<section>
+
+          <h1 class="text-3xl font-extrabold tracking-tight">
+            Theming &amp; Customization
+          </h1>
+          <p class="mt-2 text-muted-foreground">
+            Every visual value is a token. Change the tokens, rebrand the
+            library.
+          </p>
+
+          <div class="docs-prose mt-8">
+            <h3>Design tokens</h3>
+            <p>
+              Tokens are declared in the package CSS under
+              <code class="inline-code">@theme</code> and exposed as
+              <code class="inline-code">--ui-*</code> custom properties. They
+              group into five families:
+            </p>
+            <table class="prop-table mt-3">
+              <thead>
+                <tr>
+                  <th>Family</th>
+                  <th>Examples</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Colors</td>
+                  <td>
+                    <code class="inline-code">--ui-color-primary</code>,
+                    <code class="inline-code">--ui-color-danger</code>,
+                    <code class="inline-code">--ui-color-success</code>,
+                    <code class="inline-code">--ui-color-warning</code>,
+                    <code class="inline-code">--ui-color-neutral</code> (+
+                    <code class="inline-code">-soft</code>,
+                    <code class="inline-code">-border</code> variants)
+                  </td>
+                </tr>
+                <tr>
+                  <td>Radius</td>
+                  <td>
+                    <code class="inline-code">--ui-radius-none</code>,
+                    <code class="inline-code">-xs</code>,
+                    <code class="inline-code">-sm</code>,
+                    <code class="inline-code">-md</code>,
+                    <code class="inline-code">-lg</code>,
+                    <code class="inline-code">-full</code>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Type</td>
+                  <td>
+                    <code class="inline-code">--ui-font-sans</code>,
+                    <code class="inline-code">--ui-font-size-xs…-xl</code>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Spacing</td>
+                  <td>
+                    <code class="inline-code">--ui-space-xs…-xl</code> — used
+                    for padding and gaps
+                  </td>
+                </tr>
+                <tr>
+                  <td>Controls</td>
+                  <td>
+                    <code class="inline-code">--ui-input-height-xs…-xl</code>,
+                    <code class="inline-code">--ui-icon-size-xs…-xl</code>,
+                    <code class="inline-code">--ui-transition-fast</code>,
+                    <code class="inline-code">--ui-shadow-lg</code>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h3>Override tokens in your app</h3>
+            <p>
+              Add rules to your app stylesheet. Any element that references the
+              token picks up the new value automatically — no component changes
+              required.
+            </p>
+            <pre
+              class="code-block mt-3"
+            ><code x-text="uiDocs.themeOverride"></code></pre>
+
+            <h3>Component defaults</h3>
+            <p>
+              Set app-wide defaults for any prop in
+              <code class="inline-code">config/aegis-ui.php</code>. Resolution
+              order is
+              <strong
+                >inline prop &gt; config default &gt; package default</strong
+              >.
+            </p>
+            <pre
+              class="code-block mt-3"
+            ><code x-text="uiDocs.themeConfig"></code></pre>
+
+            <h3>Component prefix</h3>
+            <p>
+              Change <code class="inline-code">'prefix' =&gt; ''</code> to
+              <code class="inline-code">'ui'</code>
+              and every tag becomes namespaced:
+            </p>
+            <pre
+              class="code-block mt-3"
+            ><code x-text="uiDocs.themePrefix"></code></pre>
+          </div>
+        
+</section>
+
+<script>
+
+      window.uiDocs = {
+        themeOverride: [
+          ':root {',
+          '    --ui-color-primary: #0f766e;      /* brand color */',
+          '    --ui-color-primary-soft: #ccfbf1; /* soft backgrounds */',
+          '    --ui-radius-md: 0.75rem;          /* corners */',
+          '    --ui-font-sans: "Inter", system-ui, sans-serif;',
+          '    --ui-transition-fast: 120ms ease;',
+          '}',
+        ].join('\n'),
+
+        themeConfig: [
+          "'defaults' => [",
+          "    'button' => [",
+          "        'variant' => 'solid',",
+          "        'size'    => 'md',",
+          "        'color'   => 'primary',",
+          '    ],',
+          "    'datepicker' => [",
+          "        'mode'   => 'range',",
+          "        'format' => 'MM-DD-YYYY',",
+          '    ],',
+          "    'checkbox' => [",
+          "        'radius' => 'full',",
+          '    ],',
+          '],',
+        ].join('\n'),
+
+        themePrefix: [
+          '// config/aegis-ui.php',
+          "'prefix' => 'ui',",
+          '',
+          '<x-ui-button />',
+          '<x-ui-input />',
+          '<x-ui-datepicker />',
+        ].join('\n'),
+      }
+    </script>

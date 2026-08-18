@@ -1,0 +1,401 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Icon — Aegis UI Docs</title>
+    <meta name="description" content="Icon component: any Tabler icon, sizes, color and aria labels." />
+
+    <!-- Alpine.js Collapse Plugin -->
+    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
+    <!-- Alpine.js Core -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <!-- Tabler Icons CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+    <!-- Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/src/styles.css" />
+  </head>
+
+  <body x-data="{ sidebarOpen: false }" class="bg-background text-foreground antialiased">
+    <!-- ───────────────────────── Mobile sidebar overlay ───────────────────────── -->
+    <div x-show="sidebarOpen" x-cloak class="fixed inset-0 z-50 lg:hidden">
+      <div class="absolute inset-0 bg-black/40" @click="sidebarOpen = false"></div>
+      <aside class="absolute inset-y-0 left-0 flex w-72 flex-col overflow-y-auto border-r border-border bg-background">
+        
+          <div class="flex h-14 items-center gap-2 border-b border-border px-5">
+            <span class="flex h-7 w-7 items-center justify-center rounded-md bg-primary text-primary-foreground">
+              <i class="ti ti-shield text-sm"></i>
+            </span>
+            <span class="text-sm font-bold tracking-tight">Aegis UI</span>
+          </div>
+        <nav class="flex-1 overflow-y-auto px-4 py-6">
+          <p class="px-2 pb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">Getting Started</p>
+            <a href="index.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-home text-base"></i> Home</a>
+            <a href="about.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-info-circle text-base"></i> About</a>
+            <a href="installation.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-terminal text-base"></i> Installation</a>
+            <a href="theming.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-palette text-base"></i> Theming & Customization</a>
+
+            <p class="px-2 pb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground pt-6">Components</p>
+            <a href="components.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-components text-base"></i> Overview</a>
+            <a href="button.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-click text-base"></i> Button</a>
+            <a href="input.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-forms text-base"></i> Input</a>
+            <a href="checkbox.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-square-check text-base"></i> Checkbox</a>
+            <a href="datepicker.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-calendar text-base"></i> Date Picker</a>
+            <a href="alert.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-bell text-base"></i> Alert</a>
+            <a href="accordion.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-layout-accordion text-base"></i> Accordion</a>
+            <a href="spinner.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-loader-2 text-base"></i> Spinner</a>
+            <a href="icon.html" aria-current="page" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors bg-muted text-foreground font-medium"><i class="ti ti-icons text-base"></i> Icon</a>
+            <a href="form-field.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-list-check text-base"></i> Form Field</a>
+        </nav>
+      </aside>
+    </div>
+
+    <div class="lg:pl-64">
+      <!-- ───────────────────────── Desktop sidebar ───────────────────────── -->
+      <aside class="fixed inset-y-0 left-0 z-40 hidden w-64 flex-col border-r border-border bg-background lg:flex">
+        
+          <a href="index.html" class="flex h-14 items-center gap-2 border-b border-border px-5">
+            <span class="flex h-7 w-7 items-center justify-center rounded-md bg-primary text-primary-foreground">
+              <i class="ti ti-shield text-sm"></i>
+            </span>
+            <span class="text-sm font-bold tracking-tight">Aegis UI</span>
+          </a>
+        <nav class="flex-1 overflow-y-auto px-4 py-6">
+          <p class="px-2 pb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">Getting Started</p>
+            <a href="index.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-home text-base"></i> Home</a>
+            <a href="about.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-info-circle text-base"></i> About</a>
+            <a href="installation.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-terminal text-base"></i> Installation</a>
+            <a href="theming.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-palette text-base"></i> Theming & Customization</a>
+
+            <p class="px-2 pb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground pt-6">Components</p>
+            <a href="components.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-components text-base"></i> Overview</a>
+            <a href="button.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-click text-base"></i> Button</a>
+            <a href="input.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-forms text-base"></i> Input</a>
+            <a href="checkbox.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-square-check text-base"></i> Checkbox</a>
+            <a href="datepicker.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-calendar text-base"></i> Date Picker</a>
+            <a href="alert.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-bell text-base"></i> Alert</a>
+            <a href="accordion.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-layout-accordion text-base"></i> Accordion</a>
+            <a href="spinner.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-loader-2 text-base"></i> Spinner</a>
+            <a href="icon.html" aria-current="page" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors bg-muted text-foreground font-medium"><i class="ti ti-icons text-base"></i> Icon</a>
+            <a href="form-field.html" class="mb-1 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors text-muted-foreground hover:text-foreground"><i class="ti ti-list-check text-base"></i> Form Field</a>
+        </nav>
+      </aside>
+
+      <!-- ───────────────────────── Top header ───────────────────────── -->
+      <header class="sticky top-0 z-30 flex h-14 items-center justify-between border-b border-border bg-background/80 px-4 backdrop-blur sm:px-6">
+        <div class="flex items-center gap-3">
+          <button
+            type="button"
+            @click="sidebarOpen = true"
+            class="flex h-9 w-9 items-center justify-center rounded-md border border-border text-muted-foreground transition-colors hover:text-foreground lg:hidden"
+            aria-label="Open navigation"
+          >
+            <i class="ti ti-menu-2 text-lg"></i>
+          </button>
+          <span class="text-sm font-medium text-muted-foreground lg:hidden">Aegis UI</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="version-chip"><i class="ti ti-shield text-xs text-foreground"></i> v1.0.0</span>
+          <span class="hidden sm:inline-flex text-xs text-muted-foreground">Laravel 13 · Livewire 4 · Tailwind 4 · Alpine 3</span>
+        </div>
+      </header>
+
+      <!-- ───────────────────────── Main content ───────────────────────── -->
+      <main class="mx-auto w-full max-w-7xl px-4 py-10 sm:px-6">
+        <section>
+
+          <div class="flex items-center gap-3">
+            <h1 class="text-3xl font-extrabold tracking-tight">Icon</h1>
+            <span class="inline-code">&lt;x-icon /&gt;</span>
+          </div>
+          <p class="mt-2 text-muted-foreground">
+            Render any Tabler icon with size, color and accessibility handled.
+          </p>
+
+          <div class="docs-card mt-8" aria-label="On this page">
+            <span class="docs-card__label">On this page</span>
+            <nav class="flex flex-wrap gap-2">
+              <a href="#usage" class="rounded-md border border-border px-2.5 py-1 text-xs font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground">Usage</a>
+              <a href="#props" class="rounded-md border border-border px-2.5 py-1 text-xs font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground">Props</a>
+              <a href="#sizes-and-colors" class="rounded-md border border-border px-2.5 py-1 text-xs font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground">Sizes &amp; colors</a>
+              <a href="#common-icons" class="rounded-md border border-border px-2.5 py-1 text-xs font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground">Common icons</a>
+            </nav>
+          </div>
+
+          <h2 class="mt-10 text-xl font-bold tracking-tight scroll-mt-20" id="usage">Usage</h2>
+          <pre
+            class="code-block mt-3"
+          ><code x-text="uiDocs.iconUsage"></code></pre>
+
+          <h2 class="mt-10 text-xl font-bold tracking-tight scroll-mt-20" id="props">Props</h2>
+          <table class="prop-table mt-3">
+            <thead>
+              <tr>
+                <th>Prop</th>
+                <th>Type / Options</th>
+                <th>Default</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>name</td>
+                <td>string</td>
+                <td>—</td>
+                <td>
+                  Tabler icon name (with or without
+                  <code class="inline-code">tabler-</code> prefix).
+                </td>
+              </tr>
+              <tr>
+                <td>size</td>
+                <td>xs, sm, md, lg, xl</td>
+                <td>md</td>
+                <td>Scale.</td>
+              </tr>
+              <tr>
+                <td>color</td>
+                <td>string</td>
+                <td>inherit</td>
+                <td>
+                  Applies <code class="inline-code">currentColor</code> by
+                  default.
+                </td>
+              </tr>
+              <tr>
+                <td>label</td>
+                <td>string</td>
+                <td>null</td>
+                <td>
+                  Sets <code class="inline-code">aria-label</code>;
+                  <code class="inline-code">null</code> renders decorative.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h2 class="mt-10 text-xl font-bold tracking-tight scroll-mt-20" id="sizes-and-colors">
+            Sizes &amp; colors
+          </h2>
+          <div class="docs-card mt-4">
+            <div class="flex flex-wrap items-center gap-x-8 gap-y-4">
+              <div class="flex flex-col items-center gap-2">
+                <span class="text-xs font-mono text-muted-foreground">xs</span
+                ><i
+                  class="ui-icon ui-icon--xs ti ti-user"
+                  style="font-size: var(--ui-icon-size-xs)"
+                ></i>
+              </div>
+              <div class="flex flex-col items-center gap-2">
+                <span class="text-xs font-mono text-muted-foreground">sm</span
+                ><i
+                  class="ui-icon ui-icon--sm ti ti-user"
+                  style="font-size: var(--ui-icon-size-sm)"
+                ></i>
+              </div>
+              <div class="flex flex-col items-center gap-2">
+                <span class="text-xs font-mono text-muted-foreground"
+                  >md (default)</span
+                ><i
+                  class="ui-icon ui-icon--md ti ti-user"
+                  style="font-size: var(--ui-icon-size-md)"
+                ></i>
+              </div>
+              <div class="flex flex-col items-center gap-2">
+                <span class="text-xs font-mono text-muted-foreground">lg</span
+                ><i
+                  class="ui-icon ui-icon--lg ti ti-user"
+                  style="font-size: var(--ui-icon-size-lg)"
+                ></i>
+              </div>
+              <div class="flex flex-col items-center gap-2">
+                <span class="text-xs font-mono text-muted-foreground">xl</span
+                ><i
+                  class="ui-icon ui-icon--xl ti ti-user"
+                  style="font-size: var(--ui-icon-size-xl)"
+                ></i>
+              </div>
+            </div>
+          </div>
+          <pre
+            class="code-block mt-3"
+          ><code x-text="uiDocs.iconSizes"></code></pre>
+
+          <h2 class="mt-10 text-xl font-bold tracking-tight scroll-mt-20" id="common-icons">Common icons</h2>
+          <div class="docs-card mt-4">
+            <div class="grid grid-cols-4 gap-6 sm:grid-cols-6 lg:grid-cols-8">
+              <div class="flex flex-col items-center gap-2">
+                <i
+                  class="ui-icon ui-icon--md ti ti-mail"
+                  style="font-size: var(--ui-icon-size-md)"
+                ></i
+                ><span class="text-[10px] text-muted-foreground">mail</span>
+              </div>
+              <div class="flex flex-col items-center gap-2">
+                <i
+                  class="ui-icon ui-icon--md ti ti-user"
+                  style="font-size: var(--ui-icon-size-md)"
+                ></i
+                ><span class="text-[10px] text-muted-foreground">user</span>
+              </div>
+              <div class="flex flex-col items-center gap-2">
+                <i
+                  class="ui-icon ui-icon--md ti ti-lock"
+                  style="font-size: var(--ui-icon-size-md)"
+                ></i
+                ><span class="text-[10px] text-muted-foreground">lock</span>
+              </div>
+              <div class="flex flex-col items-center gap-2">
+                <i
+                  class="ui-icon ui-icon--md ti ti-search"
+                  style="font-size: var(--ui-icon-size-md)"
+                ></i
+                ><span class="text-[10px] text-muted-foreground">search</span>
+              </div>
+              <div class="flex flex-col items-center gap-2">
+                <i
+                  class="ui-icon ui-icon--md ti ti-settings"
+                  style="font-size: var(--ui-icon-size-md)"
+                ></i
+                ><span class="text-[10px] text-muted-foreground">settings</span>
+              </div>
+              <div class="flex flex-col items-center gap-2">
+                <i
+                  class="ui-icon ui-icon--md ti ti-bell"
+                  style="font-size: var(--ui-icon-size-md)"
+                ></i
+                ><span class="text-[10px] text-muted-foreground">bell</span>
+              </div>
+              <div class="flex flex-col items-center gap-2">
+                <i
+                  class="ui-icon ui-icon--md ti ti-download"
+                  style="font-size: var(--ui-icon-size-md)"
+                ></i
+                ><span class="text-[10px] text-muted-foreground">download</span>
+              </div>
+              <div class="flex flex-col items-center gap-2">
+                <i
+                  class="ui-icon ui-icon--md ti ti-upload"
+                  style="font-size: var(--ui-icon-size-md)"
+                ></i
+                ><span class="text-[10px] text-muted-foreground">upload</span>
+              </div>
+              <div class="flex flex-col items-center gap-2">
+                <i
+                  class="ui-icon ui-icon--md ti ti-trash"
+                  style="font-size: var(--ui-icon-size-md)"
+                ></i
+                ><span class="text-[10px] text-muted-foreground">trash</span>
+              </div>
+              <div class="flex flex-col items-center gap-2">
+                <i
+                  class="ui-icon ui-icon--md ti ti-edit"
+                  style="font-size: var(--ui-icon-size-md)"
+                ></i
+                ><span class="text-[10px] text-muted-foreground">edit</span>
+              </div>
+              <div class="flex flex-col items-center gap-2">
+                <i
+                  class="ui-icon ui-icon--md ti ti-check"
+                  style="font-size: var(--ui-icon-size-md)"
+                ></i
+                ><span class="text-[10px] text-muted-foreground">check</span>
+              </div>
+              <div class="flex flex-col items-center gap-2">
+                <i
+                  class="ui-icon ui-icon--md ti ti-arrow-right"
+                  style="font-size: var(--ui-icon-size-md)"
+                ></i
+                ><span class="text-[10px] text-muted-foreground"
+                  >arrow-right</span
+                >
+              </div>
+              <div class="flex flex-col items-center gap-2">
+                <i
+                  class="ui-icon ui-icon--md ti ti-chevron-down"
+                  style="font-size: var(--ui-icon-size-md)"
+                ></i
+                ><span class="text-[10px] text-muted-foreground"
+                  >chevron-down</span
+                >
+              </div>
+              <div class="flex flex-col items-center gap-2">
+                <i
+                  class="ui-icon ui-icon--md ti ti-external-link"
+                  style="font-size: var(--ui-icon-size-md)"
+                ></i
+                ><span class="text-[10px] text-muted-foreground"
+                  >external-link</span
+                >
+              </div>
+              <div class="flex flex-col items-center gap-2">
+                <i
+                  class="ui-icon ui-icon--md ti ti-help-circle"
+                  style="font-size: var(--ui-icon-size-md)"
+                ></i
+                ><span class="text-[10px] text-muted-foreground"
+                  >help-circle</span
+                >
+              </div>
+              <div class="flex flex-col items-center gap-2">
+                <i
+                  class="ui-icon ui-icon--md ti ti-clock"
+                  style="font-size: var(--ui-icon-size-md)"
+                ></i
+                ><span class="text-[10px] text-muted-foreground">clock</span>
+              </div>
+            </div>
+          </div>
+          <pre
+            class="code-block mt-3"
+          ><code x-text="uiDocs.iconLibrary"></code></pre>
+        
+</section>
+
+
+      </main>
+    </div>
+
+    <script>
+
+      window.uiDocs = {
+        iconUsage: [
+          '<x-icon name="user" />',
+          '<x-icon name="tabler-mail" size="lg" color="danger" />',
+          '<x-icon name="circle-check" label="Saved" />  {{-- aria-label, not decorative --}}',
+        ].join('\n'),
+
+        iconSizes: [
+          '<x-icon name="user" size="xs" />',
+          '<x-icon name="user" size="sm" />',
+          '<x-icon name="user" size="md" />',
+          '<x-icon name="user" size="lg" />',
+          '<x-icon name="user" size="xl" />',
+        ].join('\n'),
+
+        iconLibrary: [
+          '<x-icon name="mail" />',
+          '<x-icon name="user" />',
+          '<x-icon name="lock" />',
+          '<x-icon name="search" />',
+          '<x-icon name="settings" />',
+          '<x-icon name="bell" />',
+          '<x-icon name="download" />',
+          '<x-icon name="upload" />',
+          '<x-icon name="trash" />',
+          '<x-icon name="edit" />',
+          '<x-icon name="check" />',
+          '<x-icon name="arrow-right" />',
+          '<x-icon name="chevron-down" />',
+          '<x-icon name="external-link" />',
+          '<x-icon name="help-circle" />',
+          '<x-icon name="clock" />',
+        ].join('\n'),
+      }
+    </script>
+
+  </body>
+</html>

@@ -48,6 +48,12 @@ return [
             'color' => 'primary',
             'radius' => 'sm',
         ],
+        'datepicker' => [
+            'mode' => 'single',
+            'format' => 'M d, Y',
+            'size' => 'md',
+            'color' => 'primary',
+        ],
         'spinner' => [
             'size' => 'md',
         ],

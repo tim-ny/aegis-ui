@@ -1,0 +1,181 @@
+<section>
+
+          <div class="flex items-center gap-3">
+            <h1 class="text-3xl font-extrabold tracking-tight">Alert</h1>
+            <span class="inline-code">&lt;x-alert /&gt;</span>
+          </div>
+          <p class="mt-2 text-muted-foreground">
+            Contextual feedback with auto-resolved icons and an optional dismiss
+            button.
+          </p>
+
+          <h2 class="mt-10 text-xl font-bold tracking-tight">Usage</h2>
+          <pre
+            class="code-block mt-3"
+          ><code x-text="uiDocs.alertUsage"></code></pre>
+
+          <h2 class="mt-10 text-xl font-bold tracking-tight">Props</h2>
+          <table class="prop-table mt-3">
+            <thead>
+              <tr>
+                <th>Prop</th>
+                <th>Type / Options</th>
+                <th>Default</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>variant</td>
+                <td>soft, outline, solid, ghost</td>
+                <td>soft</td>
+                <td>Visual style.</td>
+              </tr>
+              <tr>
+                <td>size</td>
+                <td>sm, md, lg</td>
+                <td>md</td>
+                <td>Scale.</td>
+              </tr>
+              <tr>
+                <td>color</td>
+                <td>primary, danger, success, warning, neutral</td>
+                <td>primary</td>
+                <td>Theme. Picks the fallback icon &amp; ARIA role.</td>
+              </tr>
+              <tr>
+                <td>title</td>
+                <td>string</td>
+                <td>null</td>
+                <td>Bold title line.</td>
+              </tr>
+              <tr>
+                <td>icon</td>
+                <td>string</td>
+                <td>auto</td>
+                <td>
+                  Tabler icon name;
+                  <code class="inline-code">"none"</code> hides the icon.
+                </td>
+              </tr>
+              <tr>
+                <td>dismissible</td>
+                <td>bool</td>
+                <td>false</td>
+                <td>Shows the × dismiss button.</td>
+              </tr>
+              <tr>
+                <td>block</td>
+                <td>bool</td>
+                <td>false</td>
+                <td>Full-width alert.</td>
+              </tr>
+              <tr>
+                <td>unstyled</td>
+                <td>bool</td>
+                <td>false</td>
+                <td>Removes wrapper styles.</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h2 class="mt-10 text-xl font-bold tracking-tight">
+            Variants &amp; colors
+          </h2>
+          <div class="docs-card mt-4 grid gap-4">
+            <div
+              class="ui-alert ui-alert--soft ui-alert--primary ui-alert--md"
+              role="status"
+            >
+              <div class="ui-alert__icon">
+                <i class="ti ti-info-circle text-lg"></i>
+              </div>
+              <div class="ui-alert__body">
+                <h5 class="ui-alert__title">System Information</h5>
+                <div class="ui-alert__message">
+                  A new update for Aegis UI is available.
+                </div>
+              </div>
+            </div>
+            <div
+              class="ui-alert ui-alert--soft ui-alert--success ui-alert--md"
+              role="status"
+            >
+              <div class="ui-alert__icon">
+                <i class="ti ti-circle-check text-lg"></i>
+              </div>
+              <div class="ui-alert__body">
+                <h5 class="ui-alert__title">Changes Saved</h5>
+                <div class="ui-alert__message">
+                  Your profile settings have been updated successfully.
+                </div>
+              </div>
+            </div>
+            <div
+              class="ui-alert ui-alert--solid ui-alert--warning ui-alert--md"
+              role="alert"
+            >
+              <div class="ui-alert__icon">
+                <i class="ti ti-alert-triangle text-lg"></i>
+              </div>
+              <div class="ui-alert__body">
+                <h5 class="ui-alert__title">Storage Limit Warning</h5>
+                <div class="ui-alert__message">
+                  You have used 85% of your allocated disk quota.
+                </div>
+              </div>
+            </div>
+            <div
+              class="ui-alert ui-alert--outline ui-alert--danger ui-alert--md"
+              role="alert"
+              x-data="{ show: true }"
+              x-show="show"
+              x-transition.opacity
+            >
+              <div class="ui-alert__icon">
+                <i class="ti ti-alert-circle text-lg"></i>
+              </div>
+              <div class="ui-alert__body">
+                <h5 class="ui-alert__title">Payment Failed</h5>
+                <div class="ui-alert__message">
+                  Could not process your credit card. Please verify your
+                  details.
+                </div>
+              </div>
+              <button
+                type="button"
+                class="ui-alert__dismiss"
+                @click="show = false"
+                aria-label="Dismiss alert"
+              >
+                <i class="ti ti-x text-lg"></i>
+              </button>
+            </div>
+          </div>
+          <pre
+            class="code-block mt-3"
+          ><code x-text="uiDocs.alertVariants"></code></pre>
+        
+</section>
+
+<script>
+
+      window.uiDocs = {
+        alertUsage: [
+          '<x-alert title="Storage Limit Warning" color="warning">',
+          '    You have used 85% of your allocated disk quota.',
+          '</x-alert>',
+          '',
+          '<x-alert title="Payment Failed" color="danger" dismissible>',
+          '    Could not process your credit card.',
+          '</x-alert>',
+        ].join('\n'),
+
+        alertVariants: [
+          '<x-alert color="primary">A new update is available.</x-alert>',
+          '<x-alert color="success" title="Changes Saved" />',
+          '<x-alert variant="solid" color="warning" title="Storage Limit Warning" />',
+          '<x-alert variant="outline" color="danger" title="Payment Failed" dismissible />',
+        ].join('\n'),
+      }
+    </script>

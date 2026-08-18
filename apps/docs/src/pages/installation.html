@@ -1,0 +1,86 @@
+<section>
+
+          <h1 class="text-3xl font-extrabold tracking-tight">Installation</h1>
+          <p class="mt-2 text-muted-foreground">
+            Add Aegis UI to any Laravel 13 project in three steps.
+          </p>
+
+          <div class="docs-prose mt-8">
+            <h3>1 · Require the package</h3>
+            <pre
+              class="code-block mt-3"
+            ><code x-text="uiDocs.installComposer"></code></pre>
+
+            <h3>2 · Publish config &amp; assets</h3>
+            <p>
+              Publish the configuration file so you can set app-wide defaults.
+            </p>
+            <pre
+              class="code-block mt-3"
+            ><code x-text="uiDocs.installPublish"></code></pre>
+            <p>
+              If you want to customize the CSS tokens themselves, publish the
+              stylesheet instead of importing it straight from the vendor path:
+            </p>
+            <pre
+              class="code-block mt-3"
+            ><code x-text="uiDocs.installPublishCss"></code></pre>
+
+            <h3>3 · Import the stylesheet</h3>
+            <p>
+              In your main CSS entry (e.g.
+              <code class="inline-code">resources/css/app.css</code>):
+            </p>
+            <pre
+              class="code-block mt-3"
+            ><code x-text="uiDocs.installCss"></code></pre>
+
+            <h3>Component tags</h3>
+            <p>
+              All components resolve with the configured prefix (<code
+                class="inline-code"
+                >''</code
+              >
+              by default):
+            </p>
+            <pre
+              class="code-block mt-3"
+            ><code x-text="uiDocs.installTags"></code></pre>
+          </div>
+        
+</section>
+
+<script>
+
+      window.uiDocs = {
+        installComposer: ['composer require aegis/ui'].join('\n'),
+
+        installPublish: [
+          'php artisan vendor:publish --provider="Aegis\\Ui\\UiServiceProvider" --tag=aegis-ui-config',
+        ].join('\n'),
+
+        installPublishCss: [
+          'php artisan vendor:publish --provider="Aegis\\Ui\\UiServiceProvider" --tag=aegis-ui-css',
+        ].join('\n'),
+
+        installCss: [
+          '@import "@aegis/ui/resources/css/ui.css";',
+          '',
+          '@theme {',
+          '    /* override --ui-* tokens here */',
+          '}',
+        ].join('\n'),
+
+        installTags: [
+          '<x-button />',
+          '<x-input />',
+          '<x-checkbox />',
+          '<x-datepicker />',
+          '<x-alert />',
+          '<x-accordion><x-accordion-item /></x-accordion>',
+          '<x-spinner />',
+          '<x-icon />',
+          '<x-form-field />',
+        ].join('\n'),
+      }
+    </script>

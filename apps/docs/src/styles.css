@@ -1,30 +1,181 @@
 @import "tailwindcss";
 @import "@ui/resources/css/ui.css";
 
-/* Docs App Custom Styling */
+/* ---------------------------------------------------------------------------
+   Aegis UI Documentation — shadcn/ui style light theme
+--------------------------------------------------------------------------- */
+
+@theme inline {
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+    --color-card: var(--card);
+    --color-muted: var(--muted);
+    --color-muted-foreground: var(--muted-foreground);
+    --color-border: var(--border);
+    --color-primary: var(--primary);
+    --color-primary-foreground: var(--primary-foreground);
+}
+
+:root {
+    --background: oklch(1 0 0);
+    --foreground: oklch(0.145 0 0);
+    --card: oklch(1 0 0);
+    --muted: oklch(0.97 0 0);
+    --muted-foreground: oklch(0.556 0 0);
+    --border: oklch(0.922 0 0);
+    --primary: oklch(0.205 0 0);
+    --primary-foreground: oklch(0.985 0 0);
+    --radius: 0.5rem;
+}
+
+[x-cloak] { display: none !important; }
+
+html, body {
+    height: 100%;
+}
+
 body {
-    background-color: #0f172a;
-    color: #f8fafc;
-    font-family: var(--ui-font-sans);
-    min-height: 100vh;
+    font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto,
+        'Helvetica Neue', Arial, sans-serif;
+    background: var(--background);
+    color: var(--foreground);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
 }
 
+::selection {
+    background: oklch(0.205 0 0);
+    color: oklch(0.985 0 0);
+}
+
+/* ---- Demo cards (white preview surface) ---- */
 .docs-card {
-    background: rgba(30, 41, 59, 0.7);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: var(--ui-radius-lg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--card);
     padding: 1.5rem;
+    box-shadow: 0 1px 2px oklch(0 0 0 / 0.02);
 }
 
-.docs-badge {
-    display: inline-flex;
-    align-items: center;
-    padding: 0.25rem 0.625rem;
+.docs-card__label {
+    display: block;
+    margin-bottom: 1rem;
     font-size: 0.75rem;
     font-weight: 600;
-    border-radius: 9999px;
-    background: rgba(99, 102, 241, 0.15);
-    color: #818cf8;
-    border: 1px solid rgba(99, 102, 241, 0.3);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted-foreground);
 }
+
+/* ---- Code blocks (dark) ---- */
+.code-block {
+    position: relative;
+    overflow-x: auto;
+    border: 1px solid oklch(0.269 0 0);
+    border-radius: var(--radius);
+    background: oklch(0.145 0 0);
+    padding: 1rem 1.25rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;
+    font-size: 0.8125rem;
+    line-height: 1.7;
+    color: oklch(0.93 0 0);
+    tab-size: 4;
+}
+
+.code-block code { font-family: inherit; }
+
+.code-block .cb-comment { color: oklch(0.556 0 0); }
+.code-block .cb-tag { color: oklch(0.716 0.143 0.215); }
+.code-block .cb-attr { color: oklch(0.769 0.188 0.15); }
+.code-block .cb-str { color: oklch(0.78 0.155 0.077); }
+
+/* ---- Inline code ---- */
+.inline-code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;
+    font-size: 0.8125em;
+    padding: 0.15em 0.4em;
+    border-radius: 0.25rem;
+    background: var(--muted);
+    color: var(--foreground);
+    border: 1px solid var(--border);
+    white-space: nowrap;
+}
+
+/* ---- Prop tables ---- */
+.prop-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.8125rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+}
+
+.prop-table th {
+    text-align: left;
+    font-weight: 600;
+    color: var(--muted-foreground);
+    background: var(--muted);
+    padding: 0.6rem 0.875rem;
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+}
+
+.prop-table td {
+    padding: 0.6rem 0.875rem;
+    border-bottom: 1px solid var(--border);
+    color: oklch(0.373 0 0);
+    vertical-align: top;
+}
+
+.prop-table tr:last-child td { border-bottom: 0; }
+
+.prop-table td:first-child {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.75rem;
+    color: oklch(0.205 0 0);
+    white-space: nowrap;
+}
+
+/* ---- Version chip ---- */
+.version-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.125rem 0.5rem;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    line-height: 1.5;
+    border-radius: 9999px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--muted-foreground);
+}
+
+/* ---- Doc prose helpers ---- */
+.docs-prose h3 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin: 2.5rem 0 0.75rem;
+    scroll-margin-top: 6rem;
+}
+
+.docs-prose p {
+    color: oklch(0.373 0 0);
+    line-height: 1.75;
+    margin: 0.75rem 0;
+}
+
+.docs-prose ul {
+    margin: 0.75rem 0;
+    padding-left: 1.25rem;
+    list-style: disc;
+    color: oklch(0.373 0 0);
+    line-height: 1.75;
+}
+
+.docs-prose ul > li + li { margin-top: 0.375rem; }
+
+.docs-prose strong { color: var(--foreground); font-weight: 600; }
