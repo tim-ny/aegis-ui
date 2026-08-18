@@ -4,7 +4,6 @@ namespace Aegis\Ui\Tests\Feature;
 
 use Illuminate\Support\Facades\Blade;
 
-uses(TestCase::class);
 
 it('renders accordion container and item triggers', function () {
     $blade = <<<'BLADE'

@@ -29,9 +29,9 @@ class Button extends BaseComponent
     protected array $allowedVariants = ['solid', 'outline', 'ghost', 'soft'];
 
     public function __construct(
-        public string   $variant      = 'solid',
-        public string   $size         = 'md',
-        public string   $color        = 'primary',
+        string          $variant      = 'solid',
+        string          $size         = 'md',
+        string          $color        = 'primary',
         public string   $as           = 'button',
         public string   $type         = 'button',
         public ?string  $href         = null,
@@ -40,14 +40,17 @@ class Button extends BaseComponent
         public bool     $disabled     = false,
         public bool     $loading      = false,
         public bool     $block        = false,
-        public ?string  $leadingIcon  = null,
-        public ?string  $trailingIcon = null,
+        ?string         $leadingIcon  = null,
+        ?string         $trailingIcon = null,
         public bool     $unstyled     = false,
-        public ?string  $wireModel    = null,
+        ?string         $wireModel    = null,
     ) {
-        $this->size    = $this->resolveDefault('button', 'size', $size);
-        $this->variant = $this->resolveDefault('button', 'variant', $variant);
-        $this->color   = $this->resolveDefault('button', 'color', $color);
+        $this->size         = $this->resolveDefault('button', 'size', $size, 'md');
+        $this->variant      = $this->resolveDefault('button', 'variant', $variant, 'solid');
+        $this->color        = $this->resolveDefault('button', 'color', $color, 'primary');
+        $this->leadingIcon  = $leadingIcon;
+        $this->trailingIcon = $trailingIcon;
+        $this->wireModel    = $wireModel;
 
         if ($this->href !== null && $this->as === 'button') {
             $this->as = 'a';

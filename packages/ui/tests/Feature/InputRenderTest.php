@@ -4,7 +4,6 @@ namespace Aegis\Ui\Tests\Feature;
 
 use Illuminate\Support\Facades\Blade;
 
-uses(TestCase::class);
 
 it('renders input with label and feedback text', function () {
     $rendered = Blade::render('<x-input label="Email" hint="We will never share your email." />');

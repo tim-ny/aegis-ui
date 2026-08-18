@@ -25,23 +25,24 @@ class Alert extends BaseComponent
         return 'alert';
     }
 
-    protected array $allowedVariants = ['soft', 'outline', 'solid', 'ghost'];
-    protected array $allowedSizes = ['sm', 'md', 'lg'];
-
     public function __construct(
-        public string   $variant     = 'soft',
-        public string   $size        = 'md',
-        public string   $color       = 'primary',
+        string          $variant     = 'soft',
+        string          $size        = 'md',
+        string          $color       = 'primary',
         public ?string  $title       = null,
         public ?string  $icon        = null,
-        public ?string  $leadingIcon = null,
+        ?string         $leadingIcon = null,
         public bool     $dismissible = false,
         public bool     $block       = false,
         public bool     $unstyled    = false,
     ) {
-        $this->size    = $this->resolveDefault('alert', 'size', $size);
-        $this->variant = $this->resolveDefault('alert', 'variant', $variant);
-        $this->color   = $this->resolveDefault('alert', 'color', $color);
+        $this->allowedVariants = ['soft', 'outline', 'solid', 'ghost'];
+        $this->allowedSizes = ['sm', 'md', 'lg'];
+
+        $this->size        = $this->resolveDefault('alert', 'size', $size, 'md');
+        $this->variant     = $this->resolveDefault('alert', 'variant', $variant, 'soft');
+        $this->color       = $this->resolveDefault('alert', 'color', $color, 'primary');
+        $this->leadingIcon = $leadingIcon;
     }
 
     public function resolveIcon(): ?string

@@ -43,15 +43,15 @@ class DatePicker extends BaseComponent
     public function __construct(
         public string      $mode            = 'single',
         public string      $format          = 'M d, Y',
-        public string      $size            = 'md',
-        public string      $color           = 'primary',
+        string             $size            = 'md',
+        string             $color           = 'primary',
         public mixed       $value           = null,
         public ?string     $label           = null,
-        public ?string     $hint            = null,
-        public ?string     $error           = null,
-        public bool        $valid           = false,
-        public bool        $required        = false,
-        public bool        $readonly        = false,
+        ?string            $hint            = null,
+        ?string            $error           = null,
+        bool               $valid           = false,
+        bool               $required        = false,
+        bool               $readonly        = false,
         public bool        $disabled        = false,
         public bool        $weekNumbers     = false,
         public bool|array  $presets         = false,
@@ -66,17 +66,26 @@ class DatePicker extends BaseComponent
         public bool        $monthControls   = true,
         public bool        $yearControls    = true,
         public ?string     $placeholder     = null,
-        public ?string     $id              = null,
-        public ?string     $name            = null,
+        ?string            $id              = null,
+        ?string            $name            = null,
         public bool        $unstyled        = false,
-        public ?string     $wireModel       = null,
-        public ?string     $wireModelModifier = null,
+        ?string            $wireModel       = null,
+        ?string            $wireModelModifier = null,
     ) {
-        $this->mode    = $this->resolveDefault('datepicker', 'mode', $mode);
-        $this->format  = $this->resolveDefault('datepicker', 'format', $format);
-        $this->size    = $this->resolveDefault('datepicker', 'size', $size);
-        $this->color   = $this->resolveDefault('datepicker', 'color', $color);
-        $this->placeholder = $this->placeholder ?? 'Select date';
+        $this->mode              = $this->resolveDefault('datepicker', 'mode', $mode, 'single');
+        $this->format            = $this->resolveDefault('datepicker', 'format', $format, 'M d, Y');
+        $this->size              = $this->resolveDefault('datepicker', 'size', $size, 'md');
+        $this->color             = $this->resolveDefault('datepicker', 'color', $color, 'primary');
+        $this->placeholder       = $this->placeholder ?? 'Select date';
+        $this->hint              = $hint;
+        $this->error             = $error;
+        $this->valid             = $valid;
+        $this->required          = $required;
+        $this->readonly          = $readonly;
+        $this->id                = $id;
+        $this->name              = $name;
+        $this->wireModel         = $wireModel;
+        $this->wireModelModifier = $wireModelModifier;
         $this->bootHasValidation();
     }
 
@@ -225,7 +234,7 @@ class DatePicker extends BaseComponent
             return ['start' => $values[0] ?? null, 'end' => $values[1] ?? null];
         }
 
-        $parts = preg_split('/\s*(?:-|to)\s*/i', (string) $value);
+        $parts = preg_split('/\s+(?:-|to)\s+/i', (string) $value);
 
         return [
             'start' => isset($parts[0]) && $parts[0] !== '' ? trim($parts[0]) : null,

@@ -11,7 +11,7 @@ it('resolves correct size classes for spinner', function () {
 });
 
 it('throws exception on invalid spinner size', function () {
-    expect(fn () => new Spinner(size: 'invalid'))->toThrow(InvalidArgumentException::class);
+    expect(fn () => (new Spinner(size: 'invalid'))->sizeClass())->toThrow(InvalidArgumentException::class);
 });
 
 it('resolves default loading icon from config', function () {

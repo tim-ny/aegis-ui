@@ -16,14 +16,17 @@
 ])
 
 @php
-    $resolvedIcon = $component->resolveIcon();
+    $c = $component ?? null;
+    $resolvedIcon = $c ? $c->resolveIcon() : ($icon ?? $leadingIcon ?? 'info-circle');
+    $alertRole = $c ? $c->resolveRole() : (in_array($color, ['danger', 'warning'], true) ? 'alert' : 'status');
+    $alertClasses = $unstyled ? '' : ($c ? $c->classes() : "ui-alert ui-alert--{$variant} ui-alert--{$size} ui-alert--{$color}");
 @endphp
 
 <div
     @if($dismissible) x-data="{ show: true }" x-show="show" x-transition.opacity @endif
     {{ $attributes->merge([
-        'class' => $unstyled ? '' : $component->classes(),
-        'role'  => $component->resolveRole(),
+        'class' => $alertClasses,
+        'role'  => $alertRole,
     ]) }}
 >
     @if($resolvedIcon)

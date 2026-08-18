@@ -6,16 +6,23 @@
 @props(['size' => 'md', 'color' => null, 'label' => 'Loading', 'icon' => null])
 
 @php
-    $spinnerClasses = 'ui-spinner ' . $component->sizeClass() . ($component->color ? " text-{$component->color}" : '');
+    $c = $component ?? null;
+    $spinnerSizeClass = $c ? $c->sizeClass() : 'ui-spinner--' . ($size ?? 'md');
+    $spinnerClasses = 'ui-spinner ' . $spinnerSizeClass . ($color ? " text-{$color}" : '');
+    $usesTabler = $c ? $c->usesTablerIcon() : config('aegis-ui.features.icons', true);
+    $configIcon = config('aegis-ui.loading.icon');
+    $rawIcon = ($configIcon && is_string($configIcon)) ? $configIcon : 'loader';
+    $resolvedIcon = $c ? $c->resolveIcon() : trim(preg_replace('/^(ti-|tabler-)/i', '', $icon ?? $rawIcon));
+    $spinnerLabel = $c ? $c->label : ($label ?? 'Loading');
 @endphp
 
-@if($component->usesTablerIcon())
+@if($usesTabler)
     <x-dynamic-component
-        :component="'tabler-' . $component->resolveIcon()"
+        :component="'tabler-' . $resolvedIcon"
         {{ $attributes->merge([
             'class'      => $spinnerClasses,
             'role'       => 'status',
-            'aria-label' => $component->label,
+            'aria-label' => $spinnerLabel,
         ]) }}
     />
 @else
@@ -23,7 +30,7 @@
         {{ $attributes->merge([
             'class'      => $spinnerClasses,
             'role'       => 'status',
-            'aria-label' => $component->label,
+            'aria-label' => $spinnerLabel,
         ]) }}
         xmlns="http://www.w3.org/2000/svg"
         fill="none"

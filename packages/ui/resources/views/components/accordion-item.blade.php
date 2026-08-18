@@ -12,12 +12,14 @@
 ])
 
 @php
-    $itemId = $component->id;
+    $c = $component ?? null;
+    $itemId = $c ? $c->id : ($id ?? ($title ? 'ui-acc-' . \Illuminate\Support\Str::slug($title) : 'ui-acc-' . uniqid()));
+    $itemClasses = $unstyled ? '' : ($c ? $c->classes() : 'ui-accordion__item' . ($disabled ? ' ui-accordion__item--disabled' : ''));
 @endphp
 
 <div
     {{ $attributes->merge([
-        'class' => $unstyled ? '' : $component->classes(),
+        'class' => $itemClasses,
     ]) }}
 >
     <button

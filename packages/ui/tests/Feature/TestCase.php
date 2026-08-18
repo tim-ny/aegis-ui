@@ -10,6 +10,8 @@ abstract class TestCase extends Orchestra
     protected function getPackageProviders($app): array
     {
         return [
+            \BladeUI\Icons\BladeIconsServiceProvider::class,
+            \secondnetwork\TablerIcons\BladeTablerIconsServiceProvider::class,
             UiServiceProvider::class,
         ];
     }

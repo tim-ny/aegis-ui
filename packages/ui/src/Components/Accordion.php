@@ -24,21 +24,21 @@ class Accordion extends BaseComponent
         return 'accordion';
     }
 
-    protected array $allowedVariants = ['outline', 'soft', 'ghost', 'flush'];
-    protected array $allowedSizes = ['sm', 'md', 'lg'];
-
     public function __construct(
         public bool     $multiple    = false,
-        public string   $variant     = 'outline',
-        public string   $size        = 'md',
-        public string   $color       = 'neutral',
+        string          $variant     = 'outline',
+        string          $size        = 'md',
+        string          $color       = 'neutral',
         public mixed    $defaultOpen = null,
         public bool     $block       = false,
         public bool     $unstyled    = false,
     ) {
-        $this->size    = $this->resolveDefault('accordion', 'size', $size);
-        $this->variant = $this->resolveDefault('accordion', 'variant', $variant);
-        $this->color   = $this->resolveDefault('accordion', 'color', $color);
+        $this->allowedVariants = ['outline', 'soft', 'ghost', 'flush'];
+        $this->allowedSizes = ['sm', 'md', 'lg'];
+
+        $this->size    = $this->resolveDefault('accordion', 'size', $size, 'md');
+        $this->variant = $this->resolveDefault('accordion', 'variant', $variant, 'outline');
+        $this->color   = $this->resolveDefault('accordion', 'color', $color, 'neutral');
     }
 
     public function classes(): string

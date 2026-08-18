@@ -1,0 +1,363 @@
+<section>
+
+          <div class="flex items-center gap-3">
+            <h1 class="text-3xl font-extrabold tracking-tight">Dropdown</h1>
+            <span class="inline-code">&lt;x-dropdown /&gt;</span>
+          </div>
+          <p class="mt-2 text-muted-foreground">
+            Contextual menus with items, headers, dividers, checkboxes, radio groups and nested
+            submenus — powered by Alpine.js, zero JavaScript required.
+          </p>
+
+          <h2 class="mt-10 text-xl font-bold tracking-tight">Usage</h2>
+          <pre class="code-block mt-3"><code x-text="uiDocs.dropdownUsage"></code></pre>
+
+          <h2 class="mt-10 text-xl font-bold tracking-tight">Props — x-dropdown</h2>
+          <table class="prop-table mt-3">
+            <thead>
+              <tr>
+                <th>Prop</th>
+                <th>Type / Options</th>
+                <th>Default</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>trigger</td>
+                <td>string</td>
+                <td>Open</td>
+                <td>Trigger button label (used when no <code class="inline-code">$trigger</code> slot is provided).</td>
+              </tr>
+              <tr>
+                <td>align</td>
+                <td>left, right, center</td>
+                <td>left</td>
+                <td>Horizontal alignment of the menu relative to the trigger.</td>
+              </tr>
+              <tr>
+                <td>size</td>
+                <td>sm, md, lg</td>
+                <td>md</td>
+                <td>Menu and item padding scale.</td>
+              </tr>
+              <tr>
+                <td>variant</td>
+                <td>solid, soft, outline, ghost</td>
+                <td>solid</td>
+                <td>Trigger button style.</td>
+              </tr>
+              <tr>
+                <td>color</td>
+                <td>primary, neutral, danger, success, warning</td>
+                <td>primary</td>
+                <td>Trigger button accent color.</td>
+              </tr>
+              <tr>
+                <td>unstyled</td>
+                <td>bool</td>
+                <td>false</td>
+                <td>Strip all Aegis classes from the trigger and menu wrapper.</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h2 class="mt-10 text-xl font-bold tracking-tight">Sub-components</h2>
+          <table class="prop-table mt-3">
+            <thead>
+              <tr>
+                <th>Tag</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code class="inline-code">&lt;x-dropdown-item&gt;</code></td>
+                <td>A clickable link or button row. Accepts <code class="inline-code">href</code>, <code class="inline-code">icon</code>, <code class="inline-code">shortcut</code>, <code class="inline-code">disabled</code>, and <code class="inline-code">danger</code> props.</td>
+              </tr>
+              <tr>
+                <td><code class="inline-code">&lt;x-dropdown-header&gt;</code></td>
+                <td>A non-interactive label that groups items visually.</td>
+              </tr>
+              <tr>
+                <td><code class="inline-code">&lt;x-dropdown-divider&gt;</code></td>
+                <td>A horizontal rule separating groups of items.</td>
+              </tr>
+              <tr>
+                <td><code class="inline-code">&lt;x-dropdown-checkbox&gt;</code></td>
+                <td>A toggle item with a checkmark. Accepts <code class="inline-code">label</code>, <code class="inline-code">name</code>, <code class="inline-code">checked</code>, and wire:model.</td>
+              </tr>
+              <tr>
+                <td><code class="inline-code">&lt;x-dropdown-submenu&gt;</code></td>
+                <td>A nested flyout menu. Pass the nested items as the default slot.</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h2 class="mt-10 text-xl font-bold tracking-tight">Basic menu</h2>
+          <div class="docs-card mt-4">
+            <div
+              x-data="{ open: false }"
+              class="relative inline-block"
+            >
+              <button
+                @click="open = !open"
+                @keydown.escape.window="open = false"
+                class="inline-flex items-center gap-2 rounded-lg border border-border bg-background px-4 py-2 text-sm font-medium shadow-sm transition-colors hover:bg-muted focus:outline-none focus:ring-2 focus:ring-primary/30"
+              >
+                <i class="ti ti-menu-2 text-base"></i>
+                Actions
+                <i class="ti ti-chevron-down text-xs" :class="open && 'rotate-180'" style="transition:transform 0.15s"></i>
+              </button>
+
+              <div
+                x-show="open"
+                @click.away="open = false"
+                x-transition:enter="transition ease-out duration-100"
+                x-transition:enter-start="opacity-0 scale-95"
+                x-transition:enter-end="opacity-100 scale-100"
+                x-transition:leave="transition ease-in duration-75"
+                x-transition:leave-start="opacity-100 scale-100"
+                x-transition:leave-end="opacity-0 scale-95"
+                class="absolute left-0 z-50 mt-1 w-52 origin-top-left rounded-lg border border-border bg-background p-1 shadow-lg"
+                x-cloak
+              >
+                <p class="px-2 py-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground">Account</p>
+                <a href="#" class="flex items-center gap-2.5 rounded-md px-2.5 py-1.5 text-sm text-foreground transition-colors hover:bg-muted" @click="open=false">
+                  <i class="ti ti-user text-base text-muted-foreground"></i>
+                  Profile
+                  <span class="ml-auto font-mono text-xs text-muted-foreground">&#8679;P</span>
+                </a>
+                <a href="#" class="flex items-center gap-2.5 rounded-md px-2.5 py-1.5 text-sm text-foreground transition-colors hover:bg-muted" @click="open=false">
+                  <i class="ti ti-settings text-base text-muted-foreground"></i>
+                  Settings
+                  <span class="ml-auto font-mono text-xs text-muted-foreground">&#8984;,</span>
+                </a>
+                <hr class="my-1 border-border" />
+                <a href="#" class="flex items-center gap-2.5 rounded-md px-2.5 py-1.5 text-sm text-red-500 dark:text-red-400 transition-colors hover:bg-red-50 dark:hover:bg-red-500/10" @click="open=false">
+                  <i class="ti ti-logout text-base"></i>
+                  Sign out
+                </a>
+              </div>
+            </div>
+          </div>
+          <pre class="code-block mt-3"><code x-text="uiDocs.dropdownBasic"></code></pre>
+
+          <h2 class="mt-10 text-xl font-bold tracking-tight">With checkboxes</h2>
+          <div class="docs-card mt-4">
+            <div
+              x-data="{
+                open: false,
+                showBookmarks: true,
+                showFullUrls: false,
+                showPreview: true
+              }"
+              class="relative inline-block"
+            >
+              <button
+                @click="open = !open"
+                @keydown.escape.window="open = false"
+                class="inline-flex items-center gap-2 rounded-lg border border-border bg-background px-4 py-2 text-sm font-medium shadow-sm transition-colors hover:bg-muted focus:outline-none focus:ring-2 focus:ring-primary/30"
+              >
+                <i class="ti ti-adjustments-horizontal text-base"></i>
+                View options
+              </button>
+
+              <div
+                x-show="open"
+                @click.away="open = false"
+                x-transition:enter="transition ease-out duration-100"
+                x-transition:enter-start="opacity-0 scale-95"
+                x-transition:enter-end="opacity-100 scale-100"
+                x-transition:leave="transition ease-in duration-75"
+                x-transition:leave-start="opacity-100 scale-100"
+                x-transition:leave-end="opacity-0 scale-95"
+                class="absolute left-0 z-50 mt-1 w-56 origin-top-left rounded-lg border border-border bg-background p-1 shadow-lg"
+                x-cloak
+              >
+                <p class="px-2 py-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground">Appearance</p>
+                <button @click.stop="showBookmarks = !showBookmarks" class="flex w-full items-center gap-2.5 rounded-md px-2.5 py-1.5 text-sm text-foreground transition-colors hover:bg-muted">
+                  <span class="relative flex w-4 h-4 shrink-0 items-center justify-center">
+                    <i class="ti ti-square-check-filled text-base text-primary" x-show="showBookmarks"></i>
+                    <i class="ti ti-square text-base text-muted-foreground" x-show="!showBookmarks"></i>
+                  </span>
+                  Show bookmarks bar
+                </button>
+                <button @click.stop="showFullUrls = !showFullUrls" class="flex w-full items-center gap-2.5 rounded-md px-2.5 py-1.5 text-sm text-foreground transition-colors hover:bg-muted">
+                  <span class="relative flex w-4 h-4 shrink-0 items-center justify-center">
+                    <i class="ti ti-square-check-filled text-base text-primary" x-show="showFullUrls"></i>
+                    <i class="ti ti-square text-base text-muted-foreground" x-show="!showFullUrls"></i>
+                  </span>
+                  Show full URLs
+                </button>
+                <button @click.stop="showPreview = !showPreview" class="flex w-full items-center gap-2.5 rounded-md px-2.5 py-1.5 text-sm text-foreground transition-colors hover:bg-muted">
+                  <span class="relative flex w-4 h-4 shrink-0 items-center justify-center">
+                    <i class="ti ti-square-check-filled text-base text-primary" x-show="showPreview"></i>
+                    <i class="ti ti-square text-base text-muted-foreground" x-show="!showPreview"></i>
+                  </span>
+                  Show preview pane
+                </button>
+              </div>
+            </div>
+          </div>
+          <pre class="code-block mt-3"><code x-text="uiDocs.dropdownCheckboxes"></code></pre>
+
+          <h2 class="mt-10 text-xl font-bold tracking-tight">Danger item &amp; disabled item</h2>
+          <div class="docs-card mt-4">
+            <div
+              x-data="{ open: false }"
+              class="relative inline-block"
+            >
+              <button
+                @click="open = !open"
+                @keydown.escape.window="open = false"
+                class="inline-flex items-center gap-2 rounded-lg border border-border bg-background px-4 py-2 text-sm font-medium shadow-sm transition-colors hover:bg-muted focus:outline-none focus:ring-2 focus:ring-primary/30"
+              >
+                <i class="ti ti-dots-vertical text-base"></i>
+                More
+              </button>
+
+              <div
+                x-show="open"
+                @click.away="open = false"
+                x-transition:enter="transition ease-out duration-100"
+                x-transition:enter-start="opacity-0 scale-95"
+                x-transition:enter-end="opacity-100 scale-100"
+                x-transition:leave="transition ease-in duration-75"
+                x-transition:leave-start="opacity-100 scale-100"
+                x-transition:leave-end="opacity-0 scale-95"
+                class="absolute left-0 z-50 mt-1 w-52 origin-top-left rounded-lg border border-border bg-background p-1 shadow-lg"
+                x-cloak
+              >
+                <a href="#" class="flex items-center gap-2.5 rounded-md px-2.5 py-1.5 text-sm text-foreground transition-colors hover:bg-muted" @click="open=false">
+                  <i class="ti ti-edit text-base text-muted-foreground"></i> Edit
+                </a>
+                <a href="#" class="flex items-center gap-2.5 rounded-md px-2.5 py-1.5 text-sm text-foreground transition-colors hover:bg-muted" @click="open=false">
+                  <i class="ti ti-copy text-base text-muted-foreground"></i> Duplicate
+                </a>
+                <button class="flex w-full cursor-not-allowed items-center gap-2.5 rounded-md px-2.5 py-1.5 text-sm opacity-40" disabled>
+                  <i class="ti ti-archive text-base text-muted-foreground"></i> Archive
+                </button>
+                <hr class="my-1 border-border" />
+                <button class="flex w-full items-center gap-2.5 rounded-md px-2.5 py-1.5 text-sm text-red-500 dark:text-red-400 transition-colors hover:bg-red-50 dark:hover:bg-red-500/10" @click="open=false">
+                  <i class="ti ti-trash text-base"></i> Delete
+                </button>
+              </div>
+            </div>
+          </div>
+          <pre class="code-block mt-3"><code x-text="uiDocs.dropdownDanger"></code></pre>
+
+          <h2 class="mt-10 text-xl font-bold tracking-tight">Submenu</h2>
+          <div class="docs-card mt-4">
+            <div
+              x-data="{ open: false, shareOpen: false }"
+              class="relative inline-block"
+            >
+              <button
+                @click="open = !open"
+                @keydown.escape.window="open = false; shareOpen = false"
+                class="inline-flex items-center gap-2 rounded-lg border border-border bg-background px-4 py-2 text-sm font-medium shadow-sm transition-colors hover:bg-muted focus:outline-none focus:ring-2 focus:ring-primary/30"
+              >
+                <i class="ti ti-share text-base"></i>
+                Share
+              </button>
+
+              <div
+                x-show="open"
+                @click.away="open = false; shareOpen = false"
+                x-transition:enter="transition ease-out duration-100"
+                x-transition:enter-start="opacity-0 scale-95"
+                x-transition:enter-end="opacity-100 scale-100"
+                x-transition:leave="transition ease-in duration-75"
+                x-transition:leave-start="opacity-100 scale-100"
+                x-transition:leave-end="opacity-0 scale-95"
+                class="absolute left-0 z-50 mt-1 w-52 origin-top-left rounded-lg border border-border bg-background p-1 shadow-lg"
+                x-cloak
+              >
+                <a href="#" class="flex items-center gap-2.5 rounded-md px-2.5 py-1.5 text-sm text-foreground transition-colors hover:bg-muted" @click="open=false">
+                  <i class="ti ti-link text-base text-muted-foreground"></i> Copy link
+                </a>
+                <div class="relative" @mouseenter="shareOpen = true" @mouseleave="shareOpen = false">
+                  <button class="flex w-full items-center gap-2.5 rounded-md px-2.5 py-1.5 text-sm text-foreground transition-colors hover:bg-muted">
+                    <i class="ti ti-share-2 text-base text-muted-foreground"></i>
+                    Share via&hellip;
+                    <i class="ti ti-chevron-right ml-auto text-xs text-muted-foreground"></i>
+                  </button>
+                  <div
+                    x-show="shareOpen"
+                    x-transition:enter="transition ease-out duration-100"
+                    x-transition:enter-start="opacity-0 -translate-x-1"
+                    x-transition:enter-end="opacity-100 translate-x-0"
+                    class="absolute left-full top-0 ml-1 w-44 rounded-lg border border-border bg-background p-1 shadow-lg"
+                  >
+                    <a href="#" class="flex items-center gap-2.5 rounded-md px-2.5 py-1.5 text-sm text-foreground transition-colors hover:bg-muted" @click="open=false;shareOpen=false">
+                      <i class="ti ti-brand-x text-base text-muted-foreground"></i> Twitter / X
+                    </a>
+                    <a href="#" class="flex items-center gap-2.5 rounded-md px-2.5 py-1.5 text-sm text-foreground transition-colors hover:bg-muted" @click="open=false;shareOpen=false">
+                      <i class="ti ti-brand-linkedin text-base text-muted-foreground"></i> LinkedIn
+                    </a>
+                    <a href="#" class="flex items-center gap-2.5 rounded-md px-2.5 py-1.5 text-sm text-foreground transition-colors hover:bg-muted" @click="open=false;shareOpen=false">
+                      <i class="ti ti-mail text-base text-muted-foreground"></i> Email
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <pre class="code-block mt-3"><code x-text="uiDocs.dropdownSubmenu"></code></pre>
+
+</section>
+
+<script>
+      window.uiDocs = {
+        dropdownUsage: [
+          '<x-dropdown trigger="Actions">',
+          '    <x-dropdown-header>Account</x-dropdown-header>',
+          '    <x-dropdown-item href="/profile"   icon="user"     shortcut="&#8679;P">Profile</x-dropdown-item>',
+          '    <x-dropdown-item href="/settings"  icon="settings" shortcut="&#8984;,">Settings</x-dropdown-item>',
+          '    <x-dropdown-divider />',
+          '    <x-dropdown-item href="/logout"    icon="logout"   danger>Sign out</x-dropdown-item>',
+          '</x-dropdown>',
+        ].join('\n'),
+
+        dropdownBasic: [
+          '<x-dropdown trigger="Actions">',
+          '    <x-dropdown-header>Account</x-dropdown-header>',
+          '    <x-dropdown-item href="/profile"   icon="user"     shortcut="&#8679;P">Profile</x-dropdown-item>',
+          '    <x-dropdown-item href="/settings"  icon="settings" shortcut="&#8984;,">Settings</x-dropdown-item>',
+          '    <x-dropdown-divider />',
+          '    <x-dropdown-item href="/logout"    icon="logout"   danger>Sign out</x-dropdown-item>',
+          '</x-dropdown>',
+        ].join('\n'),
+
+        dropdownCheckboxes: [
+          '<x-dropdown trigger="View options">',
+          '    <x-dropdown-header>Appearance</x-dropdown-header>',
+          '    <x-dropdown-checkbox name="bookmarks" :checked="true">Show bookmarks bar</x-dropdown-checkbox>',
+          '    <x-dropdown-checkbox name="urls"      :checked="false">Show full URLs</x-dropdown-checkbox>',
+          '    <x-dropdown-checkbox name="preview"   :checked="true">Show preview pane</x-dropdown-checkbox>',
+          '</x-dropdown>',
+        ].join('\n'),
+
+        dropdownDanger: [
+          '<x-dropdown trigger="More">',
+          '    <x-dropdown-item icon="edit">Edit</x-dropdown-item>',
+          '    <x-dropdown-item icon="copy">Duplicate</x-dropdown-item>',
+          '    <x-dropdown-item icon="archive" disabled>Archive</x-dropdown-item>',
+          '    <x-dropdown-divider />',
+          '    <x-dropdown-item icon="trash" danger>Delete</x-dropdown-item>',
+          '</x-dropdown>',
+        ].join('\n'),
+
+        dropdownSubmenu: [
+          '<x-dropdown trigger="Share">',
+          '    <x-dropdown-item icon="link">Copy link</x-dropdown-item>',
+          '    <x-dropdown-submenu label="Share via..." icon="share-2">',
+          '        <x-dropdown-item icon="brand-x">Twitter / X</x-dropdown-item>',
+          '        <x-dropdown-item icon="brand-linkedin">LinkedIn</x-dropdown-item>',
+          '        <x-dropdown-item icon="mail">Email</x-dropdown-item>',
+          '    </x-dropdown-submenu>',
+          '</x-dropdown>',
+        ].join('\n'),
+      }
+    </script>

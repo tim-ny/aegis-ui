@@ -11,14 +11,18 @@
 ])
 
 @php
-    $ariaAttrs = $component->isDecorative()
+    $c = $component ?? null;
+    $iconName = $c ? $c->name : (preg_replace('/^(ti-|tabler-)/i', '', $name ?? ''));
+    $isDecorative = $c ? $c->isDecorative() : (empty($label) || $label === 'none');
+    $sizeClass = $c ? $c->sizeClass() : 'ui-icon--' . ($size ?? 'md');
+    $ariaAttrs = $isDecorative
         ? ['aria-hidden' => 'true', 'focusable' => 'false']
         : ['aria-label'  => $label,  'role'       => 'img'];
 @endphp
 
 <x-dynamic-component
-    :component="'tabler-' . $component->name"
+    :component="'tabler-' . $iconName"
     {{ $attributes->merge(array_merge($ariaAttrs, [
-        'class' => 'ui-icon ' . $component->sizeClass() . ($color ? " text-{$color}" : ''),
+        'class' => 'ui-icon ' . $sizeClass . ($color ? " text-{$color}" : ''),
     ])) }}
 />

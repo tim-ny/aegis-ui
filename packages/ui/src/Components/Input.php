@@ -27,37 +27,48 @@ class Input extends BaseComponent
         return 'input';
     }
 
-    protected array $allowedVariants = ['outline', 'soft', 'subtle', 'ghost', 'none'];
-
     public function __construct(
         public string   $type         = 'text',
-        public string   $variant      = 'outline',
-        public string   $size         = 'md',
-        public string   $color        = 'primary',
-        public ?string  $leadingIcon  = null,
-        public ?string  $trailingIcon = null,
+        string          $variant      = 'outline',
+        string          $size         = 'md',
+        string          $color        = 'primary',
+        ?string         $leadingIcon  = null,
+        ?string         $trailingIcon = null,
         public ?string  $label        = null,
-        public ?string  $hint         = null,
-        public ?string  $error        = null,
-        public bool     $valid        = false,
-        public bool     $required     = false,
-        public bool     $readonly     = false,
+        ?string         $hint         = null,
+        ?string         $error        = null,
+        bool            $valid        = false,
+        bool            $required     = false,
+        bool            $readonly     = false,
         public bool     $disabled     = false,
         public bool     $loading      = false,
         public bool     $block        = false,
-        public ?string  $id           = null,
-        public ?string  $name         = null,
+        ?string         $id           = null,
+        ?string         $name         = null,
         public ?string  $placeholder  = null,
         public ?string  $autocomplete = null,
         public bool     $autofocus    = false,
         public ?int     $maxlength    = null,
         public bool     $unstyled     = false,
-        public ?string  $wireModel    = null,
-        public ?string  $wireModelModifier = null,
+        ?string         $wireModel        = null,
+        ?string         $wireModelModifier = null,
     ) {
-        $this->size    = $this->resolveDefault('input', 'size', $size);
-        $this->variant = $this->resolveDefault('input', 'variant', $variant);
-        $this->color   = $this->resolveDefault('input', 'color', $color);
+        $this->allowedVariants = ['outline', 'soft', 'subtle', 'ghost', 'none'];
+
+        $this->size              = $this->resolveDefault('input', 'size', $size, 'md');
+        $this->variant           = $this->resolveDefault('input', 'variant', $variant, 'outline');
+        $this->color             = $this->resolveDefault('input', 'color', $color, 'primary');
+        $this->leadingIcon       = $leadingIcon;
+        $this->trailingIcon      = $trailingIcon;
+        $this->hint              = $hint;
+        $this->error             = $error;
+        $this->valid             = $valid;
+        $this->required          = $required;
+        $this->readonly          = $readonly;
+        $this->id                = $id;
+        $this->name              = $name;
+        $this->wireModel         = $wireModel;
+        $this->wireModelModifier = $wireModelModifier;
         $this->bootHasValidation();
     }
 

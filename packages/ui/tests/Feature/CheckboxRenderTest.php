@@ -4,7 +4,6 @@ namespace Aegis\Ui\Tests\Feature;
 
 use Illuminate\Support\Facades\Blade;
 
-uses(TestCase::class);
 
 it('renders checkbox with label and default classes', function () {
     $rendered = Blade::render('<x-checkbox label="Accept Terms" />');

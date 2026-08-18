@@ -26,11 +26,24 @@
     'wireModel'    => null,
 ])
 
-<div class="{{ $unstyled ? '' : 'ui-form-field ' . $component->validationClass() }}">
+@php
+    $c = $component ?? null;
+    $inputId = $c ? $c->id : ($id ?? ($label ? 'ui-' . \Illuminate\Support\Str::slug($label) : 'ui-' . uniqid()));
+    $inputName = $c ? $c->name : ($name ?? $inputId);
+    $hasErr = $c ? $c->hasError() : !empty($error);
+    $isVld = $c ? $c->isValid() : ($valid && !$hasErr);
+    $feedbackTxt = $c ? $c->feedbackText() : ($error ?? $hint ?? null);
+    $validationCls = $c ? $c->validationClass() : ($hasErr ? 'ui-field--error' : ($isVld ? 'ui-field--valid' : ($readonly ? 'ui-field--readonly' : '')));
+    $feedbackCls = $c ? $c->feedbackClass() : ($hasErr ? 'ui-field__feedback--error' : 'ui-field__feedback--hint');
+    $describedBy = $c ? $c->describedById() : ($feedbackTxt ? "{$inputId}-feedback" : null);
+    $inputClasses = $unstyled ? '' : ($c ? $c->classes() : 'ui-input ui-input--outline ui-input--md ui-input--primary');
+@endphp
+
+<div class="{{ $unstyled ? '' : 'ui-form-field ' . $validationCls }}">
 
     {{-- Label --}}
     @if($label ?? false)
-        <label for="{{ $component->id }}" class="ui-form-field__label">
+        <label for="{{ $inputId }}" class="ui-form-field__label">
             {{ $label }}
             @if($required)
                 <span class="ui-form-field__required" aria-hidden="true">*</span>
@@ -52,8 +65,8 @@
         <input
             @if($type === 'password') :type="showPassword ? 'text' : 'password'" @else type="{{ $type }}" @endif
             {{ $attributes->merge([
-                'id'            => $component->id,
-                'name'          => $component->name,
+                'id'            => $inputId,
+                'name'          => $inputName,
                 'placeholder'   => $placeholder,
                 'autocomplete'  => $autocomplete,
                 'autofocus'     => $autofocus ? 'autofocus' : null,
@@ -62,13 +75,13 @@
                 'disabled'      => ($disabled || $loading) ? 'disabled' : null,
                 'required'      => $required ? 'required' : null,
                 'aria-required' => $required ? 'true' : null,
-                'aria-invalid'  => $component->hasError() ? 'true' : null,
+                'aria-invalid'  => $hasErr ? 'true' : null,
                 'aria-busy'     => $loading ? 'true' : null,
-                'aria-describedby' => $component->describedById(),
-                'class'         => $unstyled ? '' : $component->classes(),
+                'aria-describedby' => $describedBy,
+                'class'         => $inputClasses,
             ]) }}
             @if($wireModel)
-                {{ $component->wireModelAttribute() }}
+                {{ $c ? $c->wireModelAttribute() : "wire:model.lazy=\"{$wireModel}\"" }}
                 wire:loading.attr="aria-busy"
                 wire:target="{{ $wireModel }}"
             @endif
@@ -83,9 +96,9 @@
                     <x-spinner size="xs" aria-hidden="true" />
                 </span>
                 <span wire:loading.remove wire:target="{{ $wireModel }}">
-                    @if($component->hasError())
+                    @if($hasErr)
                         <x-icon name="alert-circle" size="sm" class="ui-input__trailing-icon--error" aria-hidden="true" />
-                    @elseif($component->isValid())
+                    @elseif($isVld)
                         <x-icon name="circle-check" size="sm" class="ui-input__trailing-icon--valid" aria-hidden="true" />
                     @elseif($type === 'password')
                         <button
@@ -107,9 +120,9 @@
                     @endif
                 </span>
             @else
-                @if($component->hasError())
+                @if($hasErr)
                     <x-icon name="alert-circle" size="sm" class="ui-input__trailing-icon--error" aria-hidden="true" />
-                @elseif($component->isValid())
+                @elseif($isVld)
                     <x-icon name="circle-check" size="sm" class="ui-input__trailing-icon--valid" aria-hidden="true" />
                 @elseif($type === 'password')
                     <button
@@ -134,13 +147,13 @@
     </div>
 
     {{-- Feedback (error or hint) --}}
-    @if($component->feedbackText())
+    @if($feedbackTxt)
         <p
-            id="{{ $component->id }}-feedback"
-            class="ui-form-field__feedback {{ $component->feedbackClass() }}"
-            @if($component->hasError()) role="alert" aria-live="polite" @endif
+            id="{{ $inputId }}-feedback"
+            class="ui-form-field__feedback {{ $feedbackCls }}"
+            @if($hasErr) role="alert" aria-live="polite" @endif
         >
-            {{ $component->feedbackText() }}
+            {{ $feedbackTxt }}
         </p>
     @endif
 

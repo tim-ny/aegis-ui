@@ -18,9 +18,18 @@ abstract class BaseComponent extends Component
      * 2. published config/aegis-ui.php
      * 3. package fallback
      */
-    protected function resolveDefault(string $component, string $prop, mixed $fallback): mixed
+    protected function resolveDefault(string $component, string $prop, mixed $value, mixed $packageDefault = null): mixed
     {
-        return config("aegis-ui.defaults.{$component}.{$prop}", $fallback);
+        $packageDefault = $packageDefault ?? $value;
+
+        if (function_exists('config') && function_exists('app') && app()->bound('config')) {
+            $configDefault = config("aegis-ui.defaults.{$component}.{$prop}");
+            if ($configDefault !== null && $value === $packageDefault) {
+                return $configDefault;
+            }
+        }
+
+        return $value;
     }
 
     /**

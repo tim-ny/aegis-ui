@@ -36,32 +36,41 @@
 ])
 
 @php
+    $c = $component ?? null;
     $datepicker = [
-        'mode'            => $component->mode,
-        'format'          => $component->format,
-        'granularity'     => $component->granularity(),
-        'selectType'      => $component->selectType(),
-        'weekNumbers'     => $component->weekNumbers,
-        'firstDayOfWeek'  => (int) $component->firstDayOfWeek,
-        'numberOfMonths'  => (int) $component->numberOfMonths,
-        'fixedWeeks'      => $component->fixedWeeks,
-        'viewControl'     => $component->viewControl,
-        'monthControls'   => $component->monthControls,
-        'yearControls'    => $component->yearControls,
-        'clearable'       => $component->clearable,
-        'min'             => $component->min,
-        'max'             => $component->max,
-        'disabledDates'   => array_values($component->disabledDates),
-        'presets'         => $component->presetsConfig(),
-        'readonly'        => $component->readonly,
-        'disabled'        => $component->disabled,
+        'mode'            => $c ? $c->mode : $mode,
+        'format'          => $c ? $c->format : $format,
+        'granularity'     => $c ? $c->granularity() : (in_array($mode, ['month', 'month-range']) ? 'month' : (in_array($mode, ['year', 'year-range']) ? 'year' : 'day')),
+        'selectType'      => $c ? $c->selectType() : (in_array($mode, ['range', 'month-range', 'year-range']) ? 'range' : ($mode === 'multiple' ? 'multiple' : 'single')),
+        'weekNumbers'     => $c ? $c->weekNumbers : $weekNumbers,
+        'firstDayOfWeek'  => (int) ($c ? $c->firstDayOfWeek : $firstDayOfWeek),
+        'numberOfMonths'  => (int) ($c ? $c->numberOfMonths : $numberOfMonths),
+        'fixedWeeks'      => $c ? $c->fixedWeeks : $fixedWeeks,
+        'viewControl'     => $c ? $c->viewControl : $viewControl,
+        'monthControls'   => $c ? $c->monthControls : $monthControls,
+        'yearControls'    => $c ? $c->yearControls : $yearControls,
+        'clearable'       => $c ? $c->clearable : $clearable,
+        'min'             => $c ? $c->min : $min,
+        'max'             => $c ? $c->max : $max,
+        'disabledDates'   => array_values($c ? $c->disabledDates : $disabledDates),
+        'presets'         => $c ? $c->presetsConfig() : [],
+        'readonly'        => $c ? $c->readonly : $readonly,
+        'disabled'        => $c ? $c->disabled : $disabled,
     ];
+    $pickerId = $c ? $c->id : ($id ?? ($label ? 'ui-' . \Illuminate\Support\Str::slug($label) : 'ui-' . uniqid()));
+    $pickerName = $c ? $c->name : ($name ?? $pickerId);
+    $validationCls = $c ? $c->validationClass() : '';
+    $pickerClasses = $unstyled ? '' : ($c ? $c->classes() : "ui-datepicker ui-datepicker--{$size} ui-datepicker--{$color} ui-datepicker--{$mode}");
+    $initialView = $c ? $c->initialView() : $datepicker['granularity'];
+    $initialViewMonth = $c ? $c->initialViewMonth() : ((int) now()->format('n') - 1);
+    $initialViewYear = $c ? $c->initialViewYear() : ((int) now()->format('Y'));
+    $initialSelected = $c ? $c->initialSelected() : $value;
 @endphp
 
-<div class="{{ $unstyled ? '' : 'ui-form-field ' . $component->validationClass() }}">
+<div class="{{ $unstyled ? '' : 'ui-form-field ' . $validationCls }}">
 
     @if($label ?? false)
-        <label for="{{ $component->id }}" class="ui-form-field__label">
+        <label for="{{ $pickerId }}" class="ui-form-field__label">
             {{ $label }}
             @if($required)
                 <span class="ui-form-field__required" aria-hidden="true">*</span>
@@ -70,15 +79,15 @@
     @endif
 
     <div
-        class="{{ $unstyled ? '' : $component->classes() }}"
+        class="{{ $pickerClasses }}"
         {{ $attributes->merge(['class' => $unstyled ? '' : '']) }}
         x-data="{
             ...@js($datepicker),
             open: false,
-            view: @js($component->initialView()),
-            viewMonth: @js($component->initialViewMonth()),
-            viewYear: @js($component->initialViewYear()),
-            selected: @js($component->initialSelected()),
+            view: @js($initialView),
+            viewMonth: @js($initialViewMonth),
+            viewYear: @js($initialViewYear),
+            selected: @js($initialSelected),
             monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
             shortMonths: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
             weekDayNames: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
@@ -534,13 +543,18 @@
         </div>
     </div>
 
-    @if($component->feedbackText())
+    @php
+        $feedbackTxt = $c ? $c->feedbackText() : ($error ?? $hint ?? null);
+        $feedbackCls = $c ? $c->feedbackClass() : (!empty($error) ? 'ui-field__feedback--error' : 'ui-field__feedback--hint');
+        $hasErr = $c ? $c->hasError() : !empty($error);
+    @endphp
+    @if($feedbackTxt)
         <p
-            id="{{ $component->id }}-feedback"
-            class="ui-form-field__feedback {{ $component->feedbackClass() }}"
-            @if($component->hasError()) role="alert" aria-live="polite" @endif
+            id="{{ $pickerId }}-feedback"
+            class="ui-form-field__feedback {{ $feedbackCls }}"
+            @if($hasErr) role="alert" aria-live="polite" @endif
         >
-            {{ $component->feedbackText() }}
+            {{ $feedbackTxt }}
         </p>
     @endif
 

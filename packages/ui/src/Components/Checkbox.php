@@ -39,23 +39,32 @@ class Checkbox extends BaseComponent
         public bool     $disabled         = false,
         public bool     $block            = false,
         public bool     $unstyled         = false,
-        public string   $size             = 'md',
-        public string   $color            = 'primary',
+        string   $size             = 'md',
+        string   $color            = 'primary',
         public string   $radius           = 'sm',
         public ?string  $label            = null,
-        public ?string  $hint             = null,
-        public ?string  $error            = null,
-        public bool     $valid            = false,
-        public bool     $readonly         = false,
-        public bool     $required         = false,
-        public ?string  $id               = null,
-        public ?string  $name             = null,
-        public ?string  $wireModel        = null,
-        public ?string  $wireModelModifier = null,
+        ?string  $hint             = null,
+        ?string  $error            = null,
+        bool     $valid            = false,
+        bool     $readonly         = false,
+        bool     $required         = false,
+        ?string  $id               = null,
+        ?string  $name             = null,
+        ?string  $wireModel        = null,
+        ?string  $wireModelModifier = null,
     ) {
-        $this->size   = $this->resolveDefault('checkbox', 'size', $size);
-        $this->color  = $this->resolveDefault('checkbox', 'color', $color);
-        $this->radius = $this->resolveDefault('checkbox', 'radius', $radius);
+        $this->size              = $this->resolveDefault('checkbox', 'size', $size, 'md');
+        $this->color             = $this->resolveDefault('checkbox', 'color', $color, 'primary');
+        $this->radius            = $this->resolveDefault('checkbox', 'radius', $radius, 'sm');
+        $this->hint              = $hint;
+        $this->error             = $error;
+        $this->valid             = $valid;
+        $this->readonly          = $readonly;
+        $this->required          = $required;
+        $this->id                = $id;
+        $this->name              = $name;
+        $this->wireModel         = $wireModel;
+        $this->wireModelModifier = $wireModelModifier;
         $this->bootHasValidation();
     }
 

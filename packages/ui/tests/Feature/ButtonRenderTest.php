@@ -4,7 +4,6 @@ namespace Aegis\Ui\Tests\Feature;
 
 use Illuminate\Support\Facades\Blade;
 
-uses(TestCase::class);
 
 it('renders button element with default classes', function () {
     $rendered = Blade::render('<x-button>Click Me</x-button>');

@@ -48,7 +48,9 @@ class Spinner extends BaseComponent
 
     public function resolveIcon(): string
     {
-        $icon = trim(preg_replace('/^(ti-|tabler-)/i', '', $this->icon ?? config('aegis-ui.loading.icon', 'loader')) ?? 'loader');
+        $configIcon = config('aegis-ui.loading.icon');
+        $rawIcon = ($configIcon && is_string($configIcon)) ? $configIcon : 'loader';
+        $icon = trim(preg_replace('/^(ti-|tabler-)/i', '', $this->icon ?? $rawIcon));
 
         if ($icon === '') {
             throw new \InvalidArgumentException('Spinner icon must be a non-empty Tabler icon name.');

@@ -4,7 +4,6 @@ namespace Aegis\Ui\Tests\Feature;
 
 use Illuminate\Support\Facades\Blade;
 
-uses(TestCase::class);
 
 it('renders the default tabler loader icon with status semantics', function () {
     $rendered = Blade::render('<x-spinner />');

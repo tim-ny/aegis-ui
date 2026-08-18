@@ -4,7 +4,6 @@ namespace Aegis\Ui\Tests\Feature;
 
 use Illuminate\Support\Facades\Blade;
 
-uses(TestCase::class);
 
 it('renders alert headline and body with default role', function () {
     $rendered = Blade::render('<x-alert title="Notification" color="primary">Alert body text</x-alert>');
