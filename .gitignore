@@ -1,0 +1,31 @@
+# Vendor dependencies
+/vendor/
+/packages/*/vendor/
+
+# Node dependencies
+/node_modules/
+/apps/*/node_modules/
+/packages/*/node_modules/
+
+# Build & distribution output
+/dist/
+/apps/*/dist/
+/packages/*/dist/
+/.vite/
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# OS & Editor metadata
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Testing Caches
+.phpunit.cache/
+.pest/
